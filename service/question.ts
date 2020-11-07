@@ -1,21 +1,11 @@
-import request from "umi-request";
+import { fsp } from "./utils"
 
-export async function getQuestionsByCategory(cat:string){
-    return request.get('http://localhost:1337/questions?category.title_containss='+cat)
-}
-
-export async function getQuestionCountByCategory(cat:string){
-    return request.get('http://localhost:1337/questions/count?category.title_containss='+cat)
-}
-
-export async function getQuestionByCategoryWithLimit(cat:string, start = 0, limit = 10){
-    return request.get(`http://localhost:1337/questions?_start=${start}&_limit=${limit}&category.title_containss=${cat}`);
-}
-
-export async function getQuestionsById(id:string){
-    return request.get('http://localhost:1337/questions/'+id)
-}
-
-export async function getQuestionsByTitle(title:string){
-    return request.get('http://localhost:1337/questions?title='+title)
+// 根据分类获取所有post
+export async function getQuestionByCategory(category:string){
+    try{
+        const questions = await fsp.readdir('./posts/'+category);
+        console.log(questions)
+    }catch(err){
+        console.error('获取题目失败，哦豁')
+    }
 }

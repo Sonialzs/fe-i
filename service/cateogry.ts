@@ -1,9 +1,21 @@
-import request, { extend } from "umi-request";
+import { fsp } from "./utils"
 
-export async function getAllCateogires(){
-    return request.get('http://localhost:1337/categories')
+// 获取所有分类
+export async function getCategories(){
+    try{
+        const categories = await fsp.readdir('./posts/');
+        categories.forEach((category)=>category.toLowerCase())
+        return categories;
+    } catch(err){
+        console.error('读取posts文件夹错误')
+    }
 }
 
-export async function getCategory(title:string){
-    return request.get('http://localhost:1337/categories?title_containss='+title)
+export async function getCategoryIndex(category:string){
+    try{
+        return fsp.readFile(`./posts/${category}/index.mdx`)
+    }catch(err){
+        console.error(`${category}目录下index.mdx文件缺失`)
+    }
 }
+

@@ -1,18 +1,18 @@
 import { GetStaticProps } from "next";
 import React, { ReactElement } from "react";
 import Link from "next/link";
-import { getAllCateogires } from "service/cateogry";
+import { getCategories } from "service/cateogry";
 
 interface Props {
-  categories: Array<any>;
+  categories: Array<string>;
 }
 
 export default function index({ categories }: Props): ReactElement {
   return (
     <ul>
       {categories.map((category) => (
-        <Link href={`/${category.title.toLowerCase()}`} key={category.title}>
-          <a>{category.title}</a>
+        <Link href={`/${category}`} key={category}>
+          <a>{category}</a>
         </Link>
       ))}
     </ul>
@@ -20,8 +20,9 @@ export default function index({ categories }: Props): ReactElement {
 }
 
 export const getStaticProps: GetStaticProps = async (context) => {
-  const categories = await getAllCateogires();
+  const categories = await getCategories();
   console.log(categories);
+
   return {
     props: {
       categories,
