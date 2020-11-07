@@ -1,13 +1,30 @@
-import Header from "@components/Header";
-import { IndexLayout } from "@layouts/index.layout";
-import { Button } from "antd";
-import React from "react";
+import { GetStaticProps } from "next";
+import React, { ReactElement } from "react";
+import Link from "next/link";
+import { getAllCateogires } from "service/cateogry";
 
-export default function Home() {
+interface Props {
+  categories: Array<any>;
+}
+
+export default function index({ categories }: Props): ReactElement {
   return (
-    <IndexLayout>
-      <h1>hello</h1>
-      <Button>123</Button>
-    </IndexLayout>
+    <ul>
+      {categories.map((category) => (
+        <Link href={`/${category.title.toLowerCase()}`} key={category.title}>
+          <a>{category.title}</a>
+        </Link>
+      ))}
+    </ul>
   );
 }
+
+export const getStaticProps: GetStaticProps = async (context) => {
+  const categories = await getAllCateogires();
+  console.log(categories);
+  return {
+    props: {
+      categories,
+    },
+  };
+};
