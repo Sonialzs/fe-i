@@ -1,23 +1,51 @@
-import { createGlobalStyle, ThemeProvider } from "styled-components";
-import React from "react";
-import '../styles/antd.less'
-import { Reset } from "styled-reset";
-import {MDXProvider} from '@mdx-js/react'
-import { Button } from "antd";
+import React from 'react';
+import { MDXProvider } from '@mdx-js/react';
+import theme from 'theme';
+import { ColorModeProvider, CSSReset,ThemeProvider,useColorMode, } from '@chakra-ui/core';
+import { Global, css } from '@emotion/core';
+import MDXComponents from '@components/MDXComponents';
 
-export const components = {
-  Button
-}
+
+
+const GlobalStyle = ({ children }) => {
+	const { colorMode } = useColorMode();
+  
+	return (
+	  <>
+		<CSSReset />
+		<Global
+		  styles={css`
+
+			::selection {
+			  background-color: #47a3f3;
+			  color: #fefefe;
+			}
+			html {
+			  min-width: 360px;
+			  scroll-behavior: smooth;
+			}
+			#__next {
+			  display: flex;
+			  flex-direction: column;
+			  min-height: 100vh;
+			  background: ${colorMode === 'light' ? 'white' : '#171923'};
+			}
+		  `}
+		/>
+		{children}
+	  </>
+	);
+  };
 
 export default function App({ Component, pageProps }) {
-    return (
-      <ThemeProvider theme={{}}>
-        <MDXProvider components={components}>
-        <Reset/>
-        <Component {...pageProps} />
-        </MDXProvider>
-      </ThemeProvider>
-    );
-  }
-
-  
+	return (
+		<ThemeProvider theme={theme}>
+			<MDXProvider components={MDXComponents}>
+				<ColorModeProvider value="light">
+					<GlobalStyle/>
+					<Component {...pageProps} />
+				</ColorModeProvider>
+			</MDXProvider>
+		</ThemeProvider>
+	);
+}

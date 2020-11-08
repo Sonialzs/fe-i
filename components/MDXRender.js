@@ -1,9 +1,9 @@
 import React from 'react'
 import MDX from '@mdx-js/runtime'
-import { components } from '@pages/_app'
+import MDXComponents from './MDXComponents'
 
 export default function MDXRender(props) {
     return (
-        <MDX components={components}>{props.mdx}</MDX>
+        <MDX components={MDXComponents}>{props.mdx}</MDX>
     )
 }
