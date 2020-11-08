@@ -1,3 +1,4 @@
+// antd 自定义主题
 const lessToJS = require("less-vars-to-js");
 const fs = require("fs");
 const path = require("path");
@@ -41,9 +42,18 @@ const plugins = [
             use: "null-loader",
           });
         }
+
+        // 解决@mdx/runtime can't resolve 'fs'问题
+        if (!isServer) {
+          config.node = {
+            fs: 'empty'
+          }
+        }
+  
         return config;
       },
+      
     })
-  ),
+  )
 ];
 module.exports = withPlugins(plugins);

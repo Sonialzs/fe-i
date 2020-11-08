@@ -1,21 +1,30 @@
+import MDXRender from "@components/MDXRender";
 import { GetStaticProps } from "next";
 import React, { ReactElement } from "react";
 import { getCategories, getCategoryIndex } from "service/cateogry";
-import { getQuestionByCategory } from "service/question";
 
-interface Props {}
+interface Props {
+  attributes: Object;
+  body: string;
+}
 
-export default function Category({}: Props): ReactElement {
-  return <div></div>;
+export default function Category({ attributes, body }: Props): ReactElement {
+  return (
+    <div>
+      <MDXRender mdx={body} />
+    </div>
+  );
 }
 
 export const getStaticProps: GetStaticProps = async (context) => {
   const category = context.params!.category as string;
-  const file = await getCategoryIndex(category);
-  console.log(file);
+  const fm = await getCategoryIndex(category);
 
   return {
-    props: {},
+    props: {
+      attributes: fm?.attributes,
+      body: fm?.body,
+    },
   };
 };
 
