@@ -10,7 +10,7 @@ export default function Header({ categories }: Props): ReactElement {
 	return (
 		<Flex as="header">
 			{categories?.map((category) => (
-				<Link href={`/${category}`} key={category}>
+				<Link href={`/${category}/page/1`} key={category}>
 					<NavLink>{category}</NavLink>
 				</Link>
 			))}

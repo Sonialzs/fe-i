@@ -33,3 +33,19 @@ export function getQuestionTitle(question: string, category: string) {
 	);
 	return questionFile;
 }
+
+// 根据题目获取答案
+export function getQuestionAnswer(question: string, category: string) {
+	const answerFile = fs.readFileSync(
+		`./content/${category}/${question}/answer.mdx`,
+		'utf8'
+	);
+	return answerFile;
+}
+
+// 根据题目获取完整题目和答案
+export function getQuestionWithAnswer(question: string, category: string) {
+	const questionFile = getQuestionTitle(question, category);
+	const answerFile = getQuestionAnswer(question, category);
+	return { question: questionFile, answer: answerFile };
+}

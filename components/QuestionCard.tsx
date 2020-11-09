@@ -1,42 +1,85 @@
-import { Box, Button, Collapse } from '@chakra-ui/core';
+import {
+	Badge,
+	Box,
+	Collapse,
+	Divider,
+	Flex,
+	IconButton,
+	PseudoBox,
+} from '@chakra-ui/core';
+import Link from 'next/link';
 import React, { ReactElement } from 'react';
-import { Question } from 'service/types';
+import { Answer, Question } from 'service/types';
 import MDXRender from './MDXRender';
 
 interface Props {
 	question: Question;
-	answer?: string;
+	answer?: Answer;
+	href?: string;
+	key?: string;
 }
 
 export default function QuestionCard({
 	question,
 	answer,
+	href,
+	key,
 	...props
-}: Props & React.HTMLAttributes<HTMLDivElement>): ReactElement {
+}: Props): ReactElement {
 	const [show, setShow] = React.useState(false);
+
 	const handleToggle = () => setShow(!show);
 
 	return (
-		<Box
-			borderWidth="1px"
-			rounded="lg"
-			width={['300px', '500px', '700px', '800px']}
-			p={4}
-			as="section"
-			{...props}
-		>
-			<Box>
-				<MDXRender mdx={question.body} />
-			</Box>
-			<Collapse startingHeight={0} isOpen={show}>
-				Anim pariatur cliche reprehenderit, enim eiusmod high life
-				accusamus terry richardson ad squid. Nihil anim keffiyeh
-				helvetica, craft beer labore wes anderson cred nesciunt sapiente
-				ea proident.
-			</Collapse>
-			<Button size="sm" onClick={handleToggle} mt="1rem">
-				Show {show ? 'Less' : 'More'}
-			</Button>
-		</Box>
+		<>
+			<PseudoBox
+				borderWidth="1px"
+				rounded="lg"
+				width={['100%', '100%', '100%', '800px']}
+				p={3}
+				_hover={{ borderColor: '#fcdada' }}
+				{...props}
+			>
+				<Flex direction={['column', 'column', 'row', 'row']}>
+					{href ? (
+						<Link href={href || '#'} key={key}>
+							<a target="_blank">
+								<Box cursor="pointer">
+									<MDXRender mdx={question?.body} />
+								</Box>
+							</a>
+						</Link>
+					) : (
+						<Box>
+							<MDXRender mdx={question?.body} />
+						</Box>
+					)}
+
+					<Box ml={[null, null, 'auto', 'auto']}>
+						{question?.attributes?.tags?.map((tag) => (
+							<Badge key={tag} mr="2" variantColor="red">
+								{tag}
+							</Badge>
+						))}
+					</Box>
+				</Flex>
+				{answer && (
+					<>
+						<Divider />
+						<IconButton
+							onClick={handleToggle}
+							w="100%"
+							size="sm"
+							icon={show ? 'triangle-up' : 'triangle-down'}
+							aria-label="Show Or Hide Answer"
+						/>
+
+						<Collapse mt={4} isOpen={show}>
+							<MDXRender mdx={answer.body} />
+						</Collapse>
+					</>
+				)}
+			</PseudoBox>
+		</>
 	);
 }

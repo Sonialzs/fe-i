@@ -1,8 +1,8 @@
-import React, { ReactElement } from 'react';
-import NextLink from 'next/link';
-import { useColorMode, Button, Flex, Box, IconButton } from '@chakra-ui/core';
-import styled from '@emotion/styled';
+import { Box, Button, Flex, IconButton, useColorMode } from '@chakra-ui/core';
 import Footer from '@components/Footer';
+import styled from '@emotion/styled';
+import NextLink from 'next/link';
+import React, { ReactElement } from 'react';
 
 const StickyNav = styled(Flex)`
 	position: sticky;
@@ -13,7 +13,7 @@ const StickyNav = styled(Flex)`
 `;
 
 interface Props {
-	categories: string[];
+	categories?: string[];
 }
 
 export default function PageLayout({
@@ -56,8 +56,12 @@ export default function PageLayout({
 					onClick={toggleColorMode}
 				/>
 				<Box>
-					{categories.map((category) => (
-						<NextLink href={`/${category}/1`} passHref>
+					{categories?.map((category) => (
+						<NextLink
+							href={`/${category}/page/1`}
+							passHref
+							key={category}
+						>
 							<Button as="a" variant="ghost" p={[1, 4]}>
 								{category}
 							</Button>
@@ -71,9 +75,10 @@ export default function PageLayout({
 				flexDirection="column"
 				bg={bgColor[colorMode]}
 				color={primarytextColor[colorMode]}
-				px={8}
+				px={2}
 			>
 				{children}
+
 				<Footer />
 			</Flex>
 		</>

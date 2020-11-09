@@ -1,5 +1,4 @@
-import { Box, Flex, Stack } from '@chakra-ui/core';
-import MDXRender from '@components/MDXRender';
+import { Flex, Stack } from '@chakra-ui/core';
 import QuestionCard from '@components/QuestionCard';
 import PageLayout from '@layouts/page.layout';
 import fm from 'front-matter';
@@ -12,11 +11,16 @@ import { Question } from 'service/types';
 const questionPerPage = parseInt(process.env.QUESTION_PER_PAGE!);
 
 interface Props {
-	questions: Question[];
+	questions?: Question[];
 	categories: string[];
+	category: string;
 }
 
-export default function Page({ questions, categories }: Props): ReactElement {
+export default function Page({
+	questions,
+	categories,
+	category,
+}: Props): ReactElement {
 	return (
 		<PageLayout categories={categories}>
 			<Flex
@@ -26,13 +30,18 @@ export default function Page({ questions, categories }: Props): ReactElement {
 				maxWidth="900px"
 				mx="auto"
 			>
-				<Stack spacing={8}>
-					{questions?.map((question) => (
-						<QuestionCard
-							question={question}
-							key={question.attributes.title}
-						/>
-					))}
+				{(!questions || questions.length === 0) && (
+					<div>一滴都没了</div>
+				)}
+				<Stack spacing={4}>
+					{questions &&
+						questions.map((question) => (
+							<QuestionCard
+								question={question}
+								href={`/${category}/question/${question.index}`}
+								key={question.index?.toString()}
+							/>
+						))}
 				</Stack>
 			</Flex>
 		</PageLayout>
@@ -54,18 +63,22 @@ export const getStaticProps: GetStaticProps = async (context) => {
 
 	const offset = getOffsetByPage(parseInt(page as string));
 
-	const questions = getQuestionByCategory(
+	const questionsFile = getQuestionByCategory(
 		category as string,
 		offset,
 		questionPerPage,
 		true
 	);
 
-	const result = questions.map((question) => {
-		const foo = fm(question);
+	const result = questionsFile?.map((questionFile, index) => {
+		const questionFm = fm(questionFile);
+		// 题库从1开始，所以+1
+		const fileIndex = offset + index + 1;
+
 		return {
-			attributes: foo.attributes,
-			body: foo.body,
+			index: fileIndex,
+			attributes: questionFm.attributes,
+			body: questionFm.body,
 		};
 	});
 
@@ -75,16 +88,18 @@ export const getStaticProps: GetStaticProps = async (context) => {
 		props: {
 			questions: result,
 			categories,
+			category,
 		},
 	};
 };
 
+// 获取路径，/[category]/page/[page]
 export const getStaticPaths = () => {
 	const categories = getCategories();
 	const routes = categories?.map((category) => {
 		const questions = getQuestionByCategory(category);
 		const totalPages = Math.ceil(questions!.length / questionPerPage);
-		const result = [];
+		const result: any[] = [];
 
 		for (let index = 1; index <= totalPages; index++) {
 			result.push({

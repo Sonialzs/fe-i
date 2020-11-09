@@ -1,4 +1,4 @@
-import { Code, Heading, Text } from '@chakra-ui/core';
+import { Button, Code, Heading, Text } from '@chakra-ui/core';
 const h1 = (props) => <Heading size="xl">{props.children}</Heading>;
 const h2 = (props) => <Heading size="lg">{props.children}</Heading>;
 const h3 = (props) => <Heading size="md">{props.children}</Heading>;
@@ -38,4 +38,5 @@ export default {
 	samp,
 	sub,
 	sup,
+	Button: Button,
 };
