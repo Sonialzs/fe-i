@@ -37,15 +37,18 @@ export default function CodeBlock({
 					rounded="md"
 					mt="2"
 					mb="2"
+					pl="2"
 				>
 					{tokens.map((line, i) => (
 						<div key={i} {...getLineProps({ line, key: i })}>
-							{line.map((token, key) => (
-								<span
-									key={key}
-									{...getTokenProps({ token, key })}
-								/>
-							))}
+							{line.map((token, key) => {
+								return (
+									<span
+										key={key}
+										{...getTokenProps({ token, key })}
+									/>
+								);
+							})}
 						</div>
 					))}
 				</Box>

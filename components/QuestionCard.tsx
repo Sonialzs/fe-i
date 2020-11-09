@@ -29,6 +29,7 @@ export default function QuestionCard({
 	const [show, setShow] = React.useState(false);
 
 	const handleToggle = () => setShow(!show);
+	const finalUrl = href || question.attributes.sourceUrl || undefined;
 
 	return (
 		<>
@@ -41,8 +42,8 @@ export default function QuestionCard({
 				{...props}
 			>
 				<Flex direction={['column', 'column', 'row', 'row']}>
-					{href ? (
-						<Link href={href || '#'} key={key}>
+					{finalUrl ? (
+						<Link href={finalUrl || '#'} key={key}>
 							<a target="_blank">
 								<Box cursor="pointer">
 									<MDXRender mdx={question?.body} />
@@ -72,6 +73,7 @@ export default function QuestionCard({
 							size="sm"
 							icon={show ? 'triangle-up' : 'triangle-down'}
 							aria-label="Show Or Hide Answer"
+							_focus={undefined}
 						/>
 
 						<Collapse mt={4} isOpen={show}>
