@@ -1,4 +1,3 @@
-import MDXRender from '@components/MDXRender';
 import PageLayout from '@layouts/page.layout';
 import { GetStaticProps } from 'next';
 import React, { ReactElement } from 'react';
@@ -12,9 +11,6 @@ export default function index({ categories }: Props): ReactElement {
 	return (
 		<>
 			<PageLayout categories={categories}></PageLayout>
-			{categories.map((category) => (
-				<MDXRender mdx={`## 测试${category}`} />
-			))}
 		</>
 	);
 }
