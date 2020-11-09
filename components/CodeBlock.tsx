@@ -1,12 +1,11 @@
 import { Box, useColorMode } from '@chakra-ui/core';
 import Highlight, { defaultProps } from 'prism-react-renderer';
-import github from 'prism-react-renderer/themes/github';
-import palenight from 'prism-react-renderer/themes/palenight';
 import React, { ReactElement } from 'react';
+import { prismDarkTheme, prismLightTheme } from 'styles/prism';
 
 const theme = {
-	light: github,
-	dark: palenight,
+	light: prismLightTheme,
+	dark: prismDarkTheme,
 };
 
 interface Props {
@@ -27,13 +26,13 @@ export default function CodeBlock({
 			{...defaultProps}
 			code={children}
 			language={language}
-			theme={theme[colorMode]}
+			theme={undefined}
 		>
 			{({ className, style, tokens, getLineProps, getTokenProps }) => (
 				<Box
 					as="pre"
 					className={className}
-					style={{ ...style }}
+					// style={{ ...style }}
 					rounded="md"
 					mt="2"
 					mb="2"
