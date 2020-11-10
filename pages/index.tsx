@@ -1,7 +1,6 @@
 import PageLayout from '@layouts/page.layout';
-import { GetStaticProps } from 'next';
 import React, { ReactElement } from 'react';
-import { getCategories } from 'service/cateogry';
+import CategoriesConfig from 'site.config';
 
 interface Props {
 	categories: Array<string>;

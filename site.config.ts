@@ -7,11 +7,13 @@ export interface CategoryType {
 	routeName: string;
 	// 是否在导航栏中隐藏
 	hide?: boolean;
+	// 是否渲染路由
+	available?: boolean;
 	icon?;
 }
 
 // 由于文件夹中文名和排序问题，使用配置文件生成nav
-const categories: CategoryType[] = [
+const allCategories: CategoryType[] = [
 	{
 		title: 'HTML',
 		folder: 'HTML',
@@ -26,6 +28,7 @@ const categories: CategoryType[] = [
 		title: 'JavaScript',
 		folder: 'JavaScript',
 		routeName: 'js',
+		available: true,
 	},
 	{
 		title: 'TypeScript',
@@ -73,7 +76,7 @@ const categories: CategoryType[] = [
 // 根据路由名称获取文件夹名
 export function getFolderNameByRoute(routeName: string) {
 	let result = routeName;
-	const cateogry = categories.filter(
+	const cateogry = allCategories.filter(
 		(category) => category.routeName == routeName
 	);
 	if (cateogry[0]) {
@@ -82,4 +85,13 @@ export function getFolderNameByRoute(routeName: string) {
 	return result;
 }
 
-export default categories;
+export function getAvailableCategories() {
+	return allCategories.filter((category) => category.available === true);
+}
+
+const CategoriesConfig = {
+	all: allCategories,
+	available: getAvailableCategories(),
+};
+
+export default CategoriesConfig;

@@ -4,7 +4,7 @@ import Footer from '@components/Footer';
 import styled from '@emotion/styled';
 import NextLink from 'next/link';
 import React, { ReactElement } from 'react';
-import categories from 'site.config';
+import CategoriesConfig from 'site.config';
 
 const StickyNav = styled(Flex)`
 	position: sticky;
@@ -50,7 +50,7 @@ export default function PageLayout({
 				mx="auto"
 			>
 				<Box>
-					{categories
+					{CategoriesConfig.available
 						?.filter((cateogry) => cateogry.hide !== true)
 						.map((category) => (
 							<NextLink

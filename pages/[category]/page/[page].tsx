@@ -6,7 +6,7 @@ import { GetStaticProps } from 'next';
 import React, { ReactElement } from 'react';
 import { getQuestionByCategory } from 'service/question';
 import { Question } from 'service/types';
-import categories from 'site.config';
+import CategoriesConfig from 'site.config';
 
 const questionPerPage = parseInt(process.env.QUESTION_PER_PAGE!);
 
@@ -88,7 +88,7 @@ export const getStaticProps: GetStaticProps = async (context) => {
 
 // 获取路径，/[category]/page/[page]
 export const getStaticPaths = () => {
-	const routes = categories?.map((category) => {
+	const routes = CategoriesConfig.available.map((category) => {
 		const questions = getQuestionByCategory(category.folder);
 		const totalPages = Math.ceil(questions!.length / questionPerPage);
 		const result: any[] = [];

@@ -6,6 +6,7 @@ import { GetStaticProps } from 'next';
 import React, { ReactElement } from 'react';
 import { getQuestionByCategory, getQuestionWithAnswer } from 'service/question';
 import { Answer, Question } from 'service/types';
+import CategoriesConfig from 'site.config';
 import categories from 'site.config';
 
 interface Props {
@@ -54,7 +55,7 @@ export const getStaticProps: GetStaticProps = async (context) => {
 
 // 获取路径，/[category]/question/[question]
 export const getStaticPaths = () => {
-	const routes = categories?.map((category) => {
+	const routes = CategoriesConfig.available.map((category) => {
 		const questions = getQuestionByCategory(category.folder);
 		const result: any[] = [];
 

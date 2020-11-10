@@ -1,8 +1,8 @@
 import { Box, Flex } from '@chakra-ui/core';
 import styled from '@emotion/styled';
-import React, { ReactElement, useEffect, useRef, useState } from 'react';
 import { motion } from 'framer-motion';
 import _ from 'lodash';
+import React, { ReactElement, useEffect, useRef, useState } from 'react';
 
 const Fixed = styled(Flex)`
 	position: fixed;

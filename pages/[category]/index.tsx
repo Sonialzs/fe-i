@@ -2,7 +2,7 @@ import MDXRender from '@components/MDXRender';
 import { GetStaticProps } from 'next';
 import React, { ReactElement } from 'react';
 import { getCategoryIndex } from 'service/cateogry';
-import categories from 'site.config';
+import CategoriesConfig from 'site.config';
 
 interface Props {
 	attributes: Object;
@@ -31,7 +31,9 @@ export const getStaticProps: GetStaticProps = async (context) => {
 };
 
 export async function getStaticPaths() {
-	const paths = categories?.map((category) => ({ params: { category } }));
+	const paths = CategoriesConfig.available.map((category) => ({
+		params: { category: category.routeName },
+	}));
 	return {
 		paths: paths,
 		fallback: false,
