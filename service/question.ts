@@ -1,4 +1,5 @@
 import fs from 'fs';
+import { getFolderNameByRoute } from 'site.config';
 
 // 根据分类获取所有题目
 export function getQuestionByCategory(
@@ -7,8 +8,9 @@ export function getQuestionByCategory(
 	limit = 0,
 	withTitleDetail = false
 ) {
+	const categoryFolder = getFolderNameByRoute(category);
 	const questions = fs
-		.readdirSync('./content/' + category, { withFileTypes: true })
+		.readdirSync('./content/' + categoryFolder, { withFileTypes: true })
 		.filter((dirent) => dirent.isDirectory())
 		.map((dirent) => dirent.name);
 	// 根据标题排序
@@ -27,8 +29,9 @@ export function getQuestionByCategory(
 
 // 根据题目获取完整题目
 export function getQuestionTitle(question: string, category: string) {
+	const categoryFolder = getFolderNameByRoute(category);
 	const questionFile = fs.readFileSync(
-		`./content/${category}/${question}/question.mdx`,
+		`./content/${categoryFolder}/${question}/question.mdx`,
 		'utf8'
 	);
 	return questionFile;
@@ -36,8 +39,9 @@ export function getQuestionTitle(question: string, category: string) {
 
 // 根据题目获取答案
 export function getQuestionAnswer(question: string, category: string) {
+	const categoryFolder = getFolderNameByRoute(category);
 	const answerFile = fs.readFileSync(
-		`./content/${category}/${question}/answer.mdx`,
+		`./content/${categoryFolder}/${question}/answer.mdx`,
 		'utf8'
 	);
 	return answerFile;

@@ -4,23 +4,21 @@ import PageLayout from '@layouts/page.layout';
 import fm from 'front-matter';
 import { GetStaticProps } from 'next';
 import React, { ReactElement } from 'react';
-import { getCategories } from 'service/cateogry';
 import { getQuestionByCategory, getQuestionWithAnswer } from 'service/question';
 import { Answer, Question } from 'service/types';
+import categories from 'site.config';
 
 interface Props {
 	question: Question;
 	answer: Answer;
-	categories: string[];
 }
 
 export default function QuestionDetail({
 	question,
 	answer,
-	categories,
 }: Props): ReactElement {
 	return (
-		<PageLayout categories={categories}>
+		<PageLayout>
 			<Flex
 				justifyContent="center"
 				alignItems="center"
@@ -46,28 +44,24 @@ export const getStaticProps: GetStaticProps = async (context) => {
 	const questionFm = fm(questionFile);
 	const answerFm = fm(answerFile);
 
-	const categories = getCategories();
-
 	return {
 		props: {
 			question: questionFm,
 			answer: answerFm,
-			categories,
 		},
 	};
 };
 
 // 获取路径，/[category]/question/[question]
 export const getStaticPaths = () => {
-	const categories = getCategories();
 	const routes = categories?.map((category) => {
-		const questions = getQuestionByCategory(category);
+		const questions = getQuestionByCategory(category.folder);
 		const result: any[] = [];
 
 		for (let index = 0; index < questions.length; index++) {
 			result.push({
 				params: {
-					category,
+					category: category.routeName,
 					question: questions[index],
 				},
 			});

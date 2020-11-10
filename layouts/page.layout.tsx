@@ -1,8 +1,10 @@
 import { Box, Button, Flex, IconButton, useColorMode } from '@chakra-ui/core';
+import FixedLogo from '@components/FixedLogo';
 import Footer from '@components/Footer';
 import styled from '@emotion/styled';
 import NextLink from 'next/link';
 import React, { ReactElement } from 'react';
+import categories from 'site.config';
 
 const StickyNav = styled(Flex)`
 	position: sticky;
@@ -12,12 +14,9 @@ const StickyNav = styled(Flex)`
 	transition: background-color 0.1 ease-in-out;
 `;
 
-interface Props {
-	categories?: string[];
-}
+interface Props {}
 
 export default function PageLayout({
-	categories,
 	children,
 }: Props & React.HTMLAttributes<HTMLDivElement>): ReactElement {
 	const { colorMode, toggleColorMode } = useColorMode();
@@ -41,7 +40,7 @@ export default function PageLayout({
 				flexDirection="row"
 				justifyContent="space-between"
 				alignItems="center"
-				maxWidth="900px"
+				// maxWidth="900px"
 				width="100%"
 				bg={navBgColor[colorMode]}
 				as="nav"
@@ -50,24 +49,26 @@ export default function PageLayout({
 				mb={[2, 8, 8, 8]}
 				mx="auto"
 			>
+				<Box>
+					{categories
+						?.filter((cateogry) => cateogry.hide !== true)
+						.map((category) => (
+							<NextLink
+								href={`/${category.routeName}/page/1`}
+								passHref
+								key={category.routeName}
+							>
+								<Button as="a" variant="ghost" p={[1, 4]}>
+									{category.title}
+								</Button>
+							</NextLink>
+						))}
+				</Box>
 				<IconButton
 					aria-label="Toggle dark mode"
 					icon={colorMode === 'dark' ? 'sun' : 'moon'}
 					onClick={toggleColorMode}
 				/>
-				<Box>
-					{categories?.map((category) => (
-						<NextLink
-							href={`/${category}/page/1`}
-							passHref
-							key={category}
-						>
-							<Button as="a" variant="ghost" p={[1, 4]}>
-								{category}
-							</Button>
-						</NextLink>
-					))}
-				</Box>
 			</StickyNav>
 			<Flex
 				as="main"
@@ -78,7 +79,7 @@ export default function PageLayout({
 				px={2}
 			>
 				{children}
-
+				<FixedLogo />
 				<Footer />
 			</Flex>
 		</>

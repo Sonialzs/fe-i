@@ -4,9 +4,9 @@ import PageLayout from '@layouts/page.layout';
 import fm from 'front-matter';
 import { GetStaticProps } from 'next';
 import React, { ReactElement } from 'react';
-import { getCategories } from 'service/cateogry';
 import { getQuestionByCategory } from 'service/question';
 import { Question } from 'service/types';
+import categories from 'site.config';
 
 const questionPerPage = parseInt(process.env.QUESTION_PER_PAGE!);
 
@@ -16,13 +16,9 @@ interface Props {
 	category: string;
 }
 
-export default function Page({
-	questions,
-	categories,
-	category,
-}: Props): ReactElement {
+export default function Page({ questions, category }: Props): ReactElement {
 	return (
-		<PageLayout categories={categories}>
+		<PageLayout>
 			<Flex
 				justifyContent="center"
 				alignItems="center"
@@ -82,12 +78,9 @@ export const getStaticProps: GetStaticProps = async (context) => {
 		};
 	});
 
-	const categories = getCategories();
-
 	return {
 		props: {
 			questions: result,
-			categories,
 			category,
 		},
 	};
@@ -95,16 +88,15 @@ export const getStaticProps: GetStaticProps = async (context) => {
 
 // 获取路径，/[category]/page/[page]
 export const getStaticPaths = () => {
-	const categories = getCategories();
 	const routes = categories?.map((category) => {
-		const questions = getQuestionByCategory(category);
+		const questions = getQuestionByCategory(category.folder);
 		const totalPages = Math.ceil(questions!.length / questionPerPage);
 		const result: any[] = [];
 
 		for (let index = 1; index <= totalPages; index++) {
 			result.push({
 				params: {
-					category,
+					category: category.routeName,
 					page: index.toString(),
 				},
 			});

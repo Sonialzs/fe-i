@@ -10,17 +10,7 @@ interface Props {
 export default function index({ categories }: Props): ReactElement {
 	return (
 		<>
-			<PageLayout categories={categories}></PageLayout>
+			<PageLayout></PageLayout>
 		</>
 	);
 }
-
-export const getStaticProps: GetStaticProps = async (context) => {
-	const categories = await getCategories();
-
-	return {
-		props: {
-			categories,
-		},
-	};
-};
