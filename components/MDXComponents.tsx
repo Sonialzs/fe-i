@@ -1,6 +1,7 @@
 import { Button, Code, Heading, Text } from '@chakra-ui/core';
 import React from 'react';
 import CodeBlock from './CodeBlock';
+
 const h1 = (props) => <Heading size="xl">{props.children}</Heading>;
 const h2 = (props) => <Heading size="lg">{props.children}</Heading>;
 const h3 = (props) => <Heading size="md">{props.children}</Heading>;
@@ -30,6 +31,7 @@ export default {
 	inlineCode: (props) => (
 		<Code variantColor="yellow" fontSize="0.84em" {...props} />
 	),
+
 	i,
 	u,
 	abbr,

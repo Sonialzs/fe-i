@@ -1,12 +1,5 @@
-import { Box, useColorMode } from '@chakra-ui/core';
 import Highlight, { defaultProps } from 'prism-react-renderer';
 import React, { ReactElement } from 'react';
-import { prismDarkTheme, prismLightTheme } from 'styles/prism';
-
-const theme = {
-	light: prismLightTheme,
-	dark: prismDarkTheme,
-};
 
 interface Props {
 	children;
@@ -19,7 +12,6 @@ export default function CodeBlock({
 	...props
 }: Props): ReactElement {
 	const language = className?.replace(/language-/, '');
-	const { colorMode } = useColorMode();
 
 	return (
 		<Highlight
@@ -29,15 +21,7 @@ export default function CodeBlock({
 			theme={undefined}
 		>
 			{({ className, style, tokens, getLineProps, getTokenProps }) => (
-				<Box
-					as="pre"
-					className={className}
-					// style={{ ...style }}
-					rounded="md"
-					mt="2"
-					mb="2"
-					pl="2"
-				>
+				<pre className={className} style={style}>
 					{tokens.map((line, i) => (
 						<div key={i} {...getLineProps({ line, key: i })}>
 							{line.map((token, key) => {
@@ -50,7 +34,7 @@ export default function CodeBlock({
 							})}
 						</div>
 					))}
-				</Box>
+				</pre>
 			)}
 		</Highlight>
 	);

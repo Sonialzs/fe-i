@@ -1,4 +1,4 @@
-const remarkCapitalize = require('remark-capitalize');
+import remarkCapitalize from 'remark-capitalize';
 
 const excludedWords = [
 	'1Password',

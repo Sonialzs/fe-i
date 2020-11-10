@@ -8,7 +8,8 @@ import MDXComponents from '@components/MDXComponents';
 import { css, Global } from '@emotion/core';
 import { MDXProvider } from '@mdx-js/react';
 import React from 'react';
-import theme from 'theme';
+import { prismDarkTheme, prismLightTheme } from 'styles/prism';
+import theme from 'styles/theme';
 
 const GlobalStyle = ({ children }) => {
 	const { colorMode } = useColorMode();
@@ -18,6 +19,7 @@ const GlobalStyle = ({ children }) => {
 			<CSSReset />
 			<Global
 				styles={css`
+					${colorMode === 'light' ? prismLightTheme : prismDarkTheme};
 					::selection {
 						background-color: #47a3f3;
 						color: #fefefe;

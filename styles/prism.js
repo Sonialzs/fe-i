@@ -31,7 +31,7 @@ const prismBaseTheme = css`
 		padding-bottom: ${theme.space[4]};
 		padding-left: ${theme.space[4]};
 		padding-right: ${theme.space[4]};
-		margin: ${theme.space[6]} 0;
+		/* margin: ${theme.space[6]} 0; */
 		overflow: auto;
 		min-width: 100%;
 		font-size: 0.9rem;
@@ -41,7 +41,7 @@ const prismBaseTheme = css`
 	pre[class*='language-'] {
 		background: ${theme.colors.gray[50]};
 		border: 1px solid ${theme.colors.gray[200]};
-		border-radius: ${theme.radii.lg};
+		/* border-radius: ${theme.radii.lg}; */
 	}
 	/* Inline code */
 	:not(pre) > code[class*='language-'] {
