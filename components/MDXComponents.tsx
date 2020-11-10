@@ -5,15 +5,13 @@ import {
 	Code,
 	Divider,
 	Heading,
-	Kbd,
 	Link,
-	PseudoBox,
 	Text,
 	useColorMode,
 } from '@chakra-ui/core';
+import NextLink from 'next/link';
 import React from 'react';
 import CodeBlock from './CodeBlock';
-import NextLink from 'next/link';
 
 const Table = (props) => (
 	<Box overflowX="scroll" w="full">
