@@ -1,3 +1,4 @@
+import { Box } from '@chakra-ui/core';
 import Highlight, { defaultProps } from 'prism-react-renderer';
 import React, { ReactElement } from 'react';
 
@@ -21,20 +22,43 @@ export default function CodeBlock({
 			theme={undefined}
 		>
 			{({ className, style, tokens, getLineProps, getTokenProps }) => (
-				<pre className={className} style={style}>
+				<Box
+					as="pre"
+					textAlign="left"
+					// m="1em 0"
+					p="0.5em"
+					overflow="scroll"
+					className={className}
+					style={style}
+				>
 					{tokens.map((line, i) => (
-						<div key={i} {...getLineProps({ line, key: i })}>
-							{line.map((token, key) => {
-								return (
+						<Box
+							as="div"
+							display="table-row"
+							key={i}
+							{...getLineProps({ line, key: i })}
+						>
+							<Box
+								as="span"
+								display="table-cell"
+								textAlign="right"
+								paddingRight="1em"
+								userSelect="none"
+								opacity={0.5}
+							>
+								{i + 1}
+							</Box>
+							<Box as="span" display="table-cell">
+								{line.map((token, key) => (
 									<span
 										key={key}
 										{...getTokenProps({ token, key })}
 									/>
-								);
-							})}
-						</div>
+								))}
+							</Box>
+						</Box>
 					))}
-				</pre>
+				</Box>
 			)}
 		</Highlight>
 	);

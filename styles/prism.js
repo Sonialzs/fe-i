@@ -27,10 +27,10 @@ const prismBaseTheme = css`
 	}
 	/* Code blocks */
 	pre[class*='language-'] {
-		padding-top: ${theme.space[4]};
-		padding-bottom: ${theme.space[4]};
-		padding-left: ${theme.space[4]};
-		padding-right: ${theme.space[4]};
+		/* padding-top: ${theme.space[4]}; */
+		/* padding-bottom: ${theme.space[4]}; */
+		padding-left: ${theme.space[4] / 2};
+		padding-right: ${theme.space[4] / 2};
 		/* margin: ${theme.space[6]} 0; */
 		overflow: auto;
 		min-width: 100%;
@@ -42,6 +42,8 @@ const prismBaseTheme = css`
 		background: ${theme.colors.gray[50]};
 		border: 1px solid ${theme.colors.gray[200]};
 		/* border-radius: ${theme.radii.lg}; */
+		border-bottom-left-radius: ${theme.radii.lg};
+		border-bottom-right-radius: ${theme.radii.lg};
 	}
 	/* Inline code */
 	:not(pre) > code[class*='language-'] {

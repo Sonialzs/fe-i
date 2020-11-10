@@ -38,7 +38,7 @@ export default function QuestionCard({
 				rounded="lg"
 				width={['100%', '100%', '100%', '800px']}
 				p={3}
-				_hover={{ borderColor: '#fcdada' }}
+				_hover={{ borderColor: '#EDF2F7' }}
 				{...props}
 			>
 				<Flex direction={['column', 'column', 'row', 'row']}>
@@ -56,7 +56,7 @@ export default function QuestionCard({
 						</Box>
 					)}
 
-					<Box ml={[null, null, 'auto', 'auto']}>
+					<Box mt="0.3em" ml={[null, null, 'auto', 'auto']}>
 						{question?.attributes?.tags?.map((tag) => (
 							<Badge key={tag} mr="2" variantColor="red">
 								{tag}

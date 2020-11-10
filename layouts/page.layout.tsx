@@ -47,7 +47,7 @@ export default function PageLayout({
 				as="nav"
 				p={8}
 				mt={[0, 0]}
-				mb={8}
+				mb={[2, 8, 8, 8]}
 				mx="auto"
 			>
 				<IconButton
