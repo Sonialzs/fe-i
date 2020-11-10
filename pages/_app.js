@@ -4,7 +4,6 @@ import {
 	ThemeProvider,
 	useColorMode,
 } from '@chakra-ui/core';
-import FixedLogo from '@components/FixedLogo';
 import MDXComponents from '@components/MDXComponents';
 import { css, Global } from '@emotion/core';
 import { MDXProvider } from '@mdx-js/react';

@@ -1,10 +1,14 @@
 import { Box, Button, Flex, IconButton, useColorMode } from '@chakra-ui/core';
-import FixedLogo from '@components/FixedLogo';
 import Footer from '@components/Footer';
 import styled from '@emotion/styled';
 import NextLink from 'next/link';
 import React, { ReactElement } from 'react';
 import CategoriesConfig from 'site.config';
+import dynamic from 'next/dynamic';
+
+const FixedLogo = dynamic(() => import('@components/FixedLogo'), {
+	ssr: false,
+});
 
 const StickyNav = styled(Flex)`
 	position: sticky;
