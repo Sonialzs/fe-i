@@ -42,12 +42,12 @@ export const getStaticProps: GetStaticProps = async (context) => {
 	} = getQuestionWithAnswer(question as string, category as string);
 
 	const questionFm = fm(questionFile);
-	const answerFm = fm(answerFile);
+	const answerFm = answerFile && fm(answerFile);
 
 	return {
 		props: {
 			question: questionFm,
-			answer: answerFm,
+			answer: answerFm || null,
 		},
 	};
 };

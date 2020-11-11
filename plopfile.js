@@ -41,9 +41,8 @@ module.exports = function (
 				title: data.title,
 				date,
 				tags,
-				index: getCategoryIndex(data.category),
+				// index: getCategoryIndex(data.category),
 			};
-			console.log(parameters);
 
 			const actions = [
 				{
