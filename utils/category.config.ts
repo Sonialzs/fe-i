@@ -89,9 +89,14 @@ export function getAvailableCategories() {
 	return allCategories.filter((category) => category.available === true);
 }
 
+export function getAllTitles() {
+	return allCategories.map((category) => category.title);
+}
+
 const CategoriesConfig = {
 	all: allCategories,
 	available: getAvailableCategories(),
+	titles: getAllTitles(),
 };
 
 export default CategoriesConfig;

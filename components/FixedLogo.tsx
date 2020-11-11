@@ -17,7 +17,7 @@ const Fixed = styled(Flex)`
 const Drag = styled(motion.div)`
 	width: 80px;
 	height: 30px;
-	& > img {
+	& img {
 		pointer-events: none;
 	}
 `;

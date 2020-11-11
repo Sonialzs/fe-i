@@ -1,7 +1,7 @@
 import React from 'react';
 import dynamic from 'next/dynamic';
 const MDX = dynamic(() => import('@mdx-js/runtime'));
-const MDXProvider = dynamic(() => import('./MDXProvider'));
+const MDXProvider = dynamic(() => import('../MDXProvider'));
 
 export default function MDXRender(props) {
 	return (

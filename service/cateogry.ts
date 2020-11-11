@@ -1,6 +1,6 @@
 import fm from 'front-matter';
 import fs from 'fs';
-import { getFolderNameByRoute } from 'site.config';
+import { getFolderNameByRoute } from '@utils/category.config';
 
 // 获取所有分类
 export function getCategories() {
@@ -9,6 +9,7 @@ export function getCategories() {
 	return categories;
 }
 
+// 获取分类的index.mdx文件
 export function getCategoryIndex(category: string) {
 	try {
 		const folder = getFolderNameByRoute(category);

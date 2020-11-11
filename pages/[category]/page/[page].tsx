@@ -6,7 +6,7 @@ import { GetStaticProps } from 'next';
 import React, { ReactElement } from 'react';
 import { getQuestionByCategory } from 'service/question';
 import { Question } from 'service/types';
-import CategoriesConfig from 'site.config';
+import CategoriesConfig from '@utils/category.config';
 
 const questionPerPage = parseInt(process.env.QUESTION_PER_PAGE!);
 

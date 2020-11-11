@@ -1,5 +1,4 @@
 import {
-	Badge,
 	Box,
 	Collapse,
 	Divider,
@@ -10,7 +9,8 @@ import {
 import Link from 'next/link';
 import React, { ReactElement } from 'react';
 import { Answer, Question } from 'service/types';
-import MDXRender from './MDXRender';
+import { MDXRenderAsync } from './MDXRender/async';
+import { TagsAsync } from './Tags/async';
 
 interface Props {
 	question: Question;
@@ -42,26 +42,24 @@ export default function QuestionCard({
 				{...props}
 			>
 				<Flex direction={['column', 'column', 'row', 'row']}>
-					{finalUrl ? (
-						<Link href={finalUrl || '#'} key={key}>
-							<a target="_blank">
-								<Box cursor="pointer">
-									<MDXRender mdx={question?.body} />
-								</Box>
-							</a>
-						</Link>
-					) : (
-						<Box>
-							<MDXRender mdx={question?.body} />
-						</Box>
-					)}
+					<Box mr={[null, null, 4, 4]}>
+						{finalUrl ? (
+							<Link href={finalUrl || '#'} key={key}>
+								<a target="_blank">
+									<Box cursor="pointer">
+										<MDXRenderAsync mdx={question?.body} />
+									</Box>
+								</a>
+							</Link>
+						) : (
+							<Box>
+								<MDXRenderAsync mdx={question?.body} />
+							</Box>
+						)}
+					</Box>
 
 					<Box mt="0.3em" ml={[null, null, 'auto', 'auto']}>
-						{question?.attributes?.tags?.map((tag) => (
-							<Badge key={tag} mr="2" variantColor="red">
-								{tag}
-							</Badge>
-						))}
+						<TagsAsync tags={question?.attributes?.tags} />
 					</Box>
 				</Flex>
 				{answer && (
@@ -77,7 +75,7 @@ export default function QuestionCard({
 						/>
 
 						<Collapse mt={4} isOpen={show}>
-							<MDXRender mdx={answer.body} />
+							<MDXRenderAsync mdx={answer.body} />
 						</Collapse>
 					</>
 				)}

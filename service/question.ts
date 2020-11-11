@@ -1,5 +1,5 @@
 import fs from 'fs';
-import { getFolderNameByRoute } from 'site.config';
+import { getFolderNameByRoute } from '@utils/category.config';
 
 // 根据分类获取所有题目
 export function getQuestionByCategory(

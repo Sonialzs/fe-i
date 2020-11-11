@@ -1,6 +1,6 @@
 import PageLayout from '@layouts/page.layout';
 import React, { ReactElement } from 'react';
-import CategoriesConfig from 'site.config';
+import CategoriesConfig from '@utils/category.config';
 
 interface Props {
 	categories: Array<string>;

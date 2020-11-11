@@ -6,8 +6,7 @@ import { GetStaticProps } from 'next';
 import React, { ReactElement } from 'react';
 import { getQuestionByCategory, getQuestionWithAnswer } from 'service/question';
 import { Answer, Question } from 'service/types';
-import CategoriesConfig from 'site.config';
-import categories from 'site.config';
+import CategoriesConfig from '@utils/category.config';
 
 interface Props {
 	question: Question;
