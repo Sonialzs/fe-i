@@ -1,4 +1,3 @@
-import MDXRender from '@components/MDXRender';
 import { GetStaticProps } from 'next';
 import React, { ReactElement } from 'react';
 import { getCategoryIndex } from 'service/cateogry';
@@ -10,11 +9,7 @@ interface Props {
 }
 
 export default function Category({ attributes, body }: Props): ReactElement {
-	return (
-		<div>
-			<MDXRender mdx={body} />
-		</div>
-	);
+	return <div>{/* <MDXRender mdx={body} /> */}</div>;
 }
 
 // TODO 分类介绍页暂时无内容，先忽略
