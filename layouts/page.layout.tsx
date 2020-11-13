@@ -3,7 +3,7 @@ import Footer from '@components/Footer';
 import styled from '@emotion/styled';
 import NextLink from 'next/link';
 import React, { ReactElement } from 'react';
-import CategoriesConfig from '@utils/category.config';
+import CategoriesConfig from 'service/category.config';
 import dynamic from 'next/dynamic';
 
 const FixedLogo = dynamic(() => import('@components/FixedLogo'), {

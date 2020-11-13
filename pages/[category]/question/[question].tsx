@@ -1,12 +1,11 @@
 import { Flex } from '@chakra-ui/core';
 import QuestionCard from '@components/QuestionCard';
 import PageLayout from '@layouts/page.layout';
-import fm from 'front-matter';
 import { GetStaticProps } from 'next';
 import React, { ReactElement } from 'react';
-import { getQuestionByCategory, getQuestionWithAnswer } from 'service/question';
+import CategoriesConfig from 'service/category.config';
+import { getFoldersByCategory, getQuestionAndAnswer } from 'service/question';
 import { Answer, Question } from 'service/types';
-import CategoriesConfig from '@utils/category.config';
 
 interface Props {
 	question: Question;
@@ -36,18 +35,12 @@ export default function QuestionDetail({
 
 export const getStaticProps: GetStaticProps = async (context) => {
 	const { category, question } = context.params!;
-	const {
-		question: questionFile,
-		answer: answerFile,
-	} = getQuestionWithAnswer(question as string, category as string);
 
-	const questionFm = fm(questionFile);
-	const answerFm = answerFile && fm(answerFile);
+	const result = getQuestionAndAnswer(category as string, question as string);
 
 	return {
 		props: {
-			question: questionFm,
-			answer: answerFm || null,
+			...result,
 		},
 	};
 };
@@ -55,14 +48,14 @@ export const getStaticProps: GetStaticProps = async (context) => {
 // 获取路径，/[category]/question/[question]
 export const getStaticPaths = () => {
 	const routes = CategoriesConfig.available.map((category) => {
-		const questions = getQuestionByCategory(category.folder);
+		const questions = getFoldersByCategory(category.routeName);
 		const result: any[] = [];
 
 		for (let index = 0; index < questions.length; index++) {
 			result.push({
 				params: {
 					category: category.routeName,
-					question: questions[index],
+					question: questions[index].toString(),
 				},
 			});
 		}

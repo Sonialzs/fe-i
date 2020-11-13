@@ -1,72 +1,111 @@
+import { FrontMatterResult } from 'front-matter';
 import fs from 'fs';
-import { getFolderNameByRoute } from '@utils/category.config';
-import fm from 'front-matter';
+import { getFolderNameByRoute } from 'service/category.config';
+import { buildPath, getMDXByPath, isDraft } from './utils';
 
-// 根据分类获取所有题目
-export function getQuestionByCategory(
+const basePath = process.env.BASE_PATH;
+
+/**
+ * 获取某个分类下的所有文件夹
+ * @param category 分类的*路由*名称
+ * @returns 排序后的文件夹名
+ */
+export function getFoldersByCategory(
+	category: string,
+	draftOnly = true
+): number[] {
+	// 根据配置将路由名转换为文件名
+	const categoryFolder = getFolderNameByRoute(category);
+
+	const path = basePath + categoryFolder;
+
+	const folders = fs
+		// 筛选出文件夹，忽略index.mdx
+		.readdirSync(path, {
+			withFileTypes: true,
+		})
+		.filter((dirent) => dirent.isDirectory())
+		// 获取文件夹名称
+		.map((dirent) => parseInt(dirent.name))
+		// 排序
+		.sort((a, b) => a - b);
+	if (draftOnly) {
+		return folders.filter(
+			(folder) => !isDraft(buildPath(categoryFolder, folder))
+		);
+	}
+	return folders;
+}
+
+/**
+ * 查询分类中的文件夹，支持分页，不检查draft状态
+ * @param category 分类的*路由*名称
+ * @param offset 开始的索引
+ * @param limit 数量限制
+ * @returns 筛选排序后的文件夹名
+ */
+export function getQuestionsByCategory(
 	category: string,
 	offset = 0,
 	limit = 0,
-	withTitleDetail = false
+	draftOnly = true
+): number[] {
+	const folders = getFoldersByCategory(category, draftOnly);
+	if (offset && limit) {
+		return folders.slice(offset, offset + limit);
+	}
+
+	return folders;
+}
+
+/**
+ * 根据文件夹名称获取问题
+ * @param category 分类的*路由*名称
+ * @param questionFolder 文件夹名称
+ * @param draftOnly 是否只查询草稿
+ * @returns frontmatter解析后的文件
+ */
+export function getQuestion(
+	category: string,
+	questionFolder: number | string,
+	draftOnly = true
+): FrontMatterResult<any> | null {
+	const path = buildPath(category, questionFolder) + '/question.mdx';
+	return getMDXByPath(path, draftOnly);
+}
+
+/**
+ * 根据文件夹名称获取答案
+ * @param category 分类的*路由*名称
+ * @param questionFolder 文件夹名称
+ * @param draftOnly 是否只查询草稿
+ * @returns frontmatter解析后的文件
+ */
+export function getAnswer(
+	category: string,
+	questionFolder: number | string,
+	draftOnly = true
+): FrontMatterResult<any> | null {
+	const path = buildPath(category, questionFolder) + '/answer.mdx';
+	return getMDXByPath(path, draftOnly);
+}
+
+/**
+ * 根据文件夹名称获取问题和答案
+ * @param category 分类的*路由*名称
+ * @param questionFolder 文件夹名称
+ * @param draftOnly 是否只查询草稿
+ * @returns frontmatter解析后的文件
+ */
+export function getQuestionAndAnswer(
+	category,
+	questionFolder,
+	draftOnly = true
 ) {
-	const categoryFolder = getFolderNameByRoute(category);
-
-	// 筛选出需要渲染的文件夹
-	const questions = fs
-		.readdirSync('./content/' + categoryFolder, { withFileTypes: true })
-		.filter((dirent) => dirent.isDirectory())
-		.map((dirent) => dirent.name)
-		.filter((folder) => isValidQuestion(categoryFolder, folder));
-	// 根据标题排序
-	questions.sort((a, b) => parseInt(a) - parseInt(b));
-	let result = questions;
-
-	if (offset !== 0 || limit !== 0) {
-		result = questions.slice(offset, offset + limit);
-	}
-
-	if (withTitleDetail) {
-		return result.map((question) => getQuestionTitle(question, category));
-	} else {
-		return result;
-	}
-}
-
-// 根据题目获取完整题目
-export function getQuestionTitle(question: string, category: string) {
-	const categoryFolder = getFolderNameByRoute(category);
-	const questionFile = fs.readFileSync(
-		`./content/${categoryFolder}/${question}/question.mdx`,
-		'utf8'
-	);
-	return questionFile;
-}
-
-// 根据题目获取答案
-export function getQuestionAnswer(question: string, category: string) {
-	const categoryFolder = getFolderNameByRoute(category);
-	const answerFile = fs.readFileSync(
-		`./content/${categoryFolder}/${question}/answer.mdx`,
-		'utf8'
-	);
-	// @ts-ignore
-	if (fm(answerFile).attributes.draft == false) {
-		return answerFile;
-	}
-}
-
-// 根据题目获取完整题目和答案
-export function getQuestionWithAnswer(question: string, category: string) {
-	const questionFile = getQuestionTitle(question, category);
-	const answerFile = getQuestionAnswer(question, category);
-	return { question: questionFile, answer: answerFile };
-}
-
-export function isValidQuestion(category, folder) {
-	const path = `./content/${category}/${folder}/question.mdx`;
-	const file = fs.readFileSync(path, 'utf8');
-	const matter = fm(file);
-
-	// @ts-ignore
-	return !matter.attributes.draft;
+	const question = getQuestion(category, questionFolder, draftOnly);
+	const answer = getAnswer(category, questionFolder, draftOnly);
+	return {
+		question,
+		answer,
+	};
 }

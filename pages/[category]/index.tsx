@@ -1,7 +1,7 @@
 import { GetStaticProps } from 'next';
 import React, { ReactElement } from 'react';
 import { getCategoryIndex } from 'service/cateogry';
-import CategoriesConfig from '@utils/category.config';
+import CategoriesConfig from 'service/category.config';
 
 interface Props {
 	attributes: Object;

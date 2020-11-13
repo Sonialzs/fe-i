@@ -1,5 +1,6 @@
 const fs = require('fs');
 const open = require('open');
+const { slugify } = require('transliteration');
 const BASE_PATH = './content/';
 
 const categories = getAllCategories();
@@ -41,31 +42,40 @@ module.exports = function (
 				title: data.title,
 				date,
 				tags,
-				// index: getCategoryIndex(data.category),
+				slug: slugify(data.title),
+				index: getCategoryIndex(data.category) + 1,
 			};
 
 			const actions = [
 				{
 					type: 'add',
-					path: getPath(data.category, 'question.mdx', true),
+					path: getPathForNewFile(
+						data.category,
+						'question.mdx',
+						true
+					),
 					templateFile: './templates/question.hbs',
 					data: parameters,
 				},
 				{
 					type: 'add',
-					path: getPath(data.category, 'answer.mdx', true),
+					path: getPathForNewFile(data.category, 'answer.mdx', true),
 					templateFile: './templates/answer.hbs',
 					data: parameters,
 				},
 			];
 
 			actions.push(function (data) {
-				const f = open(getPath(data.category, 'question.mdx'), {
-					// ⚠️仅支持vscode打开
-					app: 'visual studio code',
-				});
+				const f = open(
+					getPathForNewFile(data.category, 'question.mdx'),
+					{
+						// ⚠️仅支持vscode打开
+						// ! windows下不支持自动打开
+						app: 'visual studio code',
+					}
+				);
 				if (data.withAnswer) {
-					open(getPath(data.category, 'answer.mdx'), {
+					open(getPathForNewFile(data.category, 'answer.mdx'), {
 						// ⚠️仅支持vscode打开
 						app: 'visual studio code',
 					});
@@ -95,7 +105,7 @@ function getCategoryIndex(category) {
 		.sort((a, b) => a - b)
 		.slice(-1)
 		.pop();
-	return parseInt(index);
+	return parseInt(index || 0);
 }
 
 function getCurrentDate() {
@@ -107,7 +117,7 @@ function getCurrentDate() {
 }
 
 // 是否获取索引+1的路径
-function getPath(category, fileName, increment = false) {
+function getPathForNewFile(category, fileName, increment = false) {
 	const index = getCategoryIndex('JavaScript');
 	return (
 		BASE_PATH + `${category}/${increment ? index + 1 : index}/${fileName}`

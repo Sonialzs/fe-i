@@ -85,6 +85,18 @@ export function getFolderNameByRoute(routeName: string) {
 	return result;
 }
 
+// 根据文件夹名获取路由名
+export function getRouterNameByFolder(folder: string) {
+	let result = folder;
+	const cateogry = allCategories.filter(
+		(category) => category.folder == folder
+	);
+	if (cateogry[0]) {
+		result = cateogry[0].routeName;
+	}
+	return result;
+}
+
 export function getAvailableCategories() {
 	return allCategories.filter((category) => category.available === true);
 }

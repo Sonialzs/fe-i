@@ -1,12 +1,11 @@
 import { Flex, Stack } from '@chakra-ui/core';
 import QuestionCard from '@components/QuestionCard';
 import PageLayout from '@layouts/page.layout';
-import fm from 'front-matter';
 import { GetStaticProps } from 'next';
 import React, { ReactElement } from 'react';
-import { getQuestionByCategory } from 'service/question';
+import CategoriesConfig from 'service/category.config';
+import { getQuestion, getQuestionsByCategory } from 'service/question';
 import { Question } from 'service/types';
-import CategoriesConfig from '@utils/category.config';
 
 const questionPerPage = parseInt(process.env.QUESTION_PER_PAGE!);
 
@@ -34,8 +33,8 @@ export default function Page({ questions, category }: Props): ReactElement {
 						questions.map((question) => (
 							<QuestionCard
 								question={question}
-								href={`/${category}/question/${question.index}`}
-								key={question.index?.toString()}
+								href={`/${category}/question/${question.attributes.index}`}
+								key={question.attributes.slug}
 							/>
 						))}
 				</Stack>
@@ -59,22 +58,19 @@ export const getStaticProps: GetStaticProps = async (context) => {
 
 	const offset = getOffsetByPage(parseInt(page as string));
 
-	const questionsFile = getQuestionByCategory(
+	const questionFolders = getQuestionsByCategory(
 		category as string,
 		offset,
 		questionPerPage,
 		true
 	);
 
-	const result = questionsFile?.map((questionFile, index) => {
-		const questionFm = fm(questionFile);
-		// 题库从1开始，所以+1
-		const fileIndex = offset + index + 1;
+	const result = questionFolders?.map((questionFolder) => {
+		const questionFm = getQuestion(category as string, questionFolder);
 
 		return {
-			index: fileIndex,
-			attributes: questionFm.attributes,
-			body: questionFm.body,
+			attributes: questionFm!.attributes,
+			body: questionFm!.body,
 		};
 	});
 
@@ -89,8 +85,8 @@ export const getStaticProps: GetStaticProps = async (context) => {
 // 获取路径，/[category]/page/[page]
 export const getStaticPaths = () => {
 	const routes = CategoriesConfig.available.map((category) => {
-		const questions = getQuestionByCategory(category.folder);
-		const totalPages = Math.ceil(questions!.length / questionPerPage);
+		const questionFolders = getQuestionsByCategory(category.routeName);
+		const totalPages = Math.ceil(questionFolders!.length / questionPerPage);
 		const result: any[] = [];
 
 		for (let index = 1; index <= totalPages; index++) {

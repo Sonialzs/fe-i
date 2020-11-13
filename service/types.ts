@@ -1,6 +1,11 @@
 export interface Question {
-	index?: number;
-	attributes: { title?: string; tags?: string[]; sourceUrl?: string };
+	attributes: {
+		title: string;
+		tags?: string[];
+		source?: string;
+		slug: string;
+		index: number;
+	};
 	body?: string;
 }
 

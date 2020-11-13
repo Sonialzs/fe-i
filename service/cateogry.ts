@@ -1,11 +1,18 @@
 import fm from 'front-matter';
 import fs from 'fs';
-import { getFolderNameByRoute } from '@utils/category.config';
+import {
+	getFolderNameByRoute,
+	getRouterNameByFolder,
+} from 'service/category.config';
+const basePath = process.env.BASE_PATH;
+if (!basePath) {
+	console.error('请设置basePath，例如："./content/"');
+}
 
 // 获取所有分类
 export function getCategories() {
-	const categories = fs.readdirSync('./content/');
-	categories.forEach((category) => category.toLowerCase());
+	const categories = fs.readdirSync(basePath!);
+	categories.forEach((category) => getRouterNameByFolder(category));
 	return categories;
 }
 
