@@ -1,4 +1,4 @@
-import { Flex } from '@chakra-ui/core';
+import { Flex } from '@chakra-ui/react';
 import QuestionCard from '@components/QuestionCard';
 import QuestionSEO from '@components/QuestionSEO';
 import PageLayout from '@layouts/page.layout';

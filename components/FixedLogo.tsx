@@ -1,4 +1,4 @@
-import { Box, Flex } from '@chakra-ui/core';
+import { Flex } from '@chakra-ui/react';
 import styled from '@emotion/styled';
 import { motion } from 'framer-motion';
 import _ from 'lodash';

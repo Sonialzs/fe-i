@@ -1,4 +1,4 @@
-import { Badge } from '@chakra-ui/core';
+import { Badge } from '@chakra-ui/react';
 import React, { ReactElement } from 'react';
 
 export interface Tag {
@@ -21,5 +21,3 @@ export default function Tags({ tags }: Props): ReactElement {
 		</>
 	);
 }
-
-

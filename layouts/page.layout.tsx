@@ -1,10 +1,12 @@
-import { Box, Button, Flex, IconButton, useColorMode } from '@chakra-ui/core';
+import { Box, Button, Flex, IconButton, useColorMode } from '@chakra-ui/react';
 import Footer from '@components/Footer';
+import { IconJavaScript } from '@components/Icons';
 import styled from '@emotion/styled';
+import dynamic from 'next/dynamic';
 import NextLink from 'next/link';
 import React, { ReactElement } from 'react';
+import { BiMoon, BiSun } from 'react-icons/bi';
 import CategoriesConfig from 'service/category.config';
-import dynamic from 'next/dynamic';
 
 const FixedLogo = dynamic(() => import('@components/FixedLogo'), {
 	ssr: false,
@@ -62,7 +64,15 @@ export default function PageLayout({
 								passHref
 								key={category.routeName}
 							>
-								<Button as="a" variant="ghost" p={[1, 4]}>
+								<Button
+									as="a"
+									variant="ghost"
+									p={[1, 4]}
+									leftIcon={
+										category.icon &&
+										React.createElement(category.icon)
+									}
+								>
 									{category.title}
 								</Button>
 							</NextLink>
@@ -70,7 +80,7 @@ export default function PageLayout({
 				</Box>
 				<IconButton
 					aria-label="Toggle dark mode"
-					icon={colorMode === 'dark' ? 'sun' : 'moon'}
+					icon={colorMode === 'dark' ? <BiSun /> : <BiMoon />}
 					onClick={toggleColorMode}
 				/>
 			</StickyNav>

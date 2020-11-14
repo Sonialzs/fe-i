@@ -1,4 +1,4 @@
-import { Flex, Stack } from '@chakra-ui/core';
+import { Flex, Stack } from '@chakra-ui/react';
 import QuestionCard from '@components/QuestionCard';
 import PageLayout from '@layouts/page.layout';
 import { GetStaticProps } from 'next';

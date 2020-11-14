@@ -1,4 +1,4 @@
-import { Skeleton } from '@chakra-ui/core';
+import { Skeleton } from '@chakra-ui/react';
 import dynamic from 'next/dynamic';
 import React from 'react';
 

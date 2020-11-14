@@ -1,17 +1,11 @@
-import {
-	Box,
-	Collapse,
-	Divider,
-	Flex,
-	IconButton,
-	PseudoBox,
-} from '@chakra-ui/core';
+import { Box, Collapse, Divider, Flex, IconButton } from '@chakra-ui/react';
 import Link from 'next/link';
 import React, { ReactElement } from 'react';
 import { Answer, Question } from 'service/types';
 import { MDXRenderAsync } from './MDXRender/async';
 import { TagsAsync } from './Tags/async';
 import { ViewCounterAsync } from './ViewCounter/async';
+import { AiFillCaretDown, AiFillCaretUp } from 'react-icons/ai';
 
 interface Props {
 	question: Question;
@@ -34,7 +28,7 @@ export default function QuestionCard({
 
 	return (
 		<>
-			<PseudoBox
+			<Box
 				borderWidth="1px"
 				rounded="lg"
 				width={['100%', '100%', '100%', '800px']}
@@ -73,17 +67,21 @@ export default function QuestionCard({
 							onClick={handleToggle}
 							w="100%"
 							size="sm"
-							icon={show ? 'triangle-up' : 'triangle-down'}
+							icon={
+								show ? <AiFillCaretUp /> : <AiFillCaretDown />
+							}
 							aria-label="Show Or Hide Answer"
 							_focus={undefined}
 						/>
 
-						<Collapse mt={4} isOpen={show}>
-							<MDXRenderAsync mdx={answer.body} />
+						<Collapse in={show}>
+							<Box mt="4">
+								<MDXRenderAsync mdx={answer.body} />
+							</Box>
 						</Collapse>
 					</>
 				)}
-			</PseudoBox>
+			</Box>
 		</>
 	);
 }

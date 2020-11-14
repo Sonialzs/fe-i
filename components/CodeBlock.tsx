@@ -1,4 +1,4 @@
-import { Box } from '@chakra-ui/core';
+import { Box } from '@chakra-ui/react';
 import Highlight, { defaultProps } from 'prism-react-renderer';
 import React, { ReactElement } from 'react';
 

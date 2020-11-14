@@ -9,9 +9,6 @@ export default function ViewCounter({ slug }: Props): ReactElement {
 	// views+1
 	const { data, run } = useRequest(`/api/views/set?id=${slug}`, {
 		manual: true,
-		onSuccess() {
-			console.log(data);
-		},
 	});
 
 	useEffect(() => {

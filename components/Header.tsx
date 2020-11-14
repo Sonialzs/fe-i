@@ -1,4 +1,4 @@
-import { Flex, Link as NavLink } from '@chakra-ui/core';
+import { Flex, Link as NavLink } from '@chakra-ui/react';
 import Link from 'next/link';
 import React, { ReactElement } from 'react';
 

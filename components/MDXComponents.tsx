@@ -1,14 +1,13 @@
 import {
 	Box,
 	Button,
-	Callout,
 	Code,
 	Divider,
 	Heading,
 	Link,
 	Text,
 	useColorMode,
-} from '@chakra-ui/core';
+} from '@chakra-ui/react';
 import NextLink from 'next/link';
 import React from 'react';
 import CodeBlock from './CodeBlock';
@@ -72,30 +71,31 @@ const CustomLink = (props) => {
 	return <Link color={color[colorMode]} isExternal {...props} />;
 };
 
-const Quote = (props) => {
-	const { colorMode } = useColorMode();
-	const bgColor = {
-		light: 'blue.50',
-		dark: 'blue.900',
-	};
+// TODO  ! chakra-ui 1.0移除了callout
+// const Quote = (props) => {
+// 	const { colorMode } = useColorMode();
+// 	const bgColor = {
+// 		light: 'blue.50',
+// 		dark: 'blue.900',
+// 	};
 
-	return (
-		<Callout
-			mt={4}
-			w="98%"
-			bg={bgColor[colorMode]}
-			variant="left-accent"
-			status="info"
-			css={{
-				'> *:first-of-type': {
-					marginTop: 0,
-					marginLeft: 8,
-				},
-			}}
-			{...props}
-		/>
-	);
-};
+// 	return (
+// 		<Callout
+// 			mt={4}
+// 			w="98%"
+// 			bg={bgColor[colorMode]}
+// 			variant="left-accent"
+// 			status="info"
+// 			css={{
+// 				'> *:first-of-type': {
+// 					marginTop: 0,
+// 					marginLeft: 8,
+// 				},
+// 			}}
+// 			{...props}
+// 		/>
+// 	);
+// };
 
 const DocsHeading = (props) => (
 	<Heading
@@ -105,41 +105,12 @@ const DocsHeading = (props) => (
 			'&[id]': {
 				pointerEvents: 'none',
 			},
-			// '&[id]:before': {
-			// 	display: 'block',
-			// 	height: ' 6rem',
-			// 	marginTop: '-6rem',
-			// 	visibility: 'hidden',
-			// 	content: `""`,
-			// },
 			'&[id]:hover a': { opacity: 1 },
 		}}
 		{...props}
 		mb="0.5em"
 		mt="0.3em"
-	>
-		{/* <Box pointerEvents="auto">
-			{props.children}
-			{props.id && (
-				<PseudoBox
-					aria-label="anchor"
-					as="a"
-					color="blue.500"
-					fontWeight="normal"
-					outline="none"
-					_focus={{
-						opacity: 1,
-						boxShadow: 'outline',
-					}}
-					opacity={0}
-					ml="0.375rem"
-					// href={`#${props.id}`}
-				>
-					#
-				</PseudoBox>
-			)}
-		</Box> */}
-	</Heading>
+	></Heading>
 );
 const Hr = () => {
 	const { colorMode } = useColorMode();
@@ -175,7 +146,7 @@ export default {
 	),
 	code: CodeBlock,
 	inlineCode: (props) => (
-		<Code variantColor="yellow" fontSize="0.84em" {...props} />
+		<Code colorScheme="yellow" fontSize="0.84em" {...props} />
 	),
 	i,
 	u,
@@ -202,7 +173,7 @@ export default {
 	ul: (props) => <Box as="ul" pt={2} pl={4} ml={2} {...props} />,
 	ol: (props) => <Box as="ol" pt={2} pl={4} ml={2} {...props} />,
 	li: (props) => <Box as="li" pb={1} {...props} />,
-	blockquote: Quote,
+	// blockquote: Quote,
 };
 
 export { CustomLink };
