@@ -31,33 +31,39 @@ export default function CodeBlock({
 					className={className}
 					style={style}
 				>
-					{tokens.map((line, i) => (
-						<Box
-							as="div"
-							display="table-row"
-							key={i}
-							{...getLineProps({ line, key: i })}
-						>
+					{tokens.map((line, i) => {
+						// 解决最后一行幽灵节点问题
+						if (i === tokens.length - 1 && tokens[i][0].empty) {
+							return;
+						}
+						return (
 							<Box
-								as="span"
-								display="table-cell"
-								textAlign="right"
-								paddingRight="1em"
-								userSelect="none"
-								opacity={0.5}
+								as="div"
+								display="table-row"
+								key={i}
+								{...getLineProps({ line, key: i })}
 							>
-								{i + 1}
+								<Box
+									as="span"
+									display="table-cell"
+									textAlign="right"
+									paddingRight="1em"
+									userSelect="none"
+									opacity={0.5}
+								>
+									{i + 1}
+								</Box>
+								<Box as="span" display="table-cell">
+									{line.map((token, key) => (
+										<span
+											key={key}
+											{...getTokenProps({ token, key })}
+										/>
+									))}
+								</Box>
 							</Box>
-							<Box as="span" display="table-cell">
-								{line.map((token, key) => (
-									<span
-										key={key}
-										{...getTokenProps({ token, key })}
-									/>
-								))}
-							</Box>
-						</Box>
-					))}
+						);
+					})}
 				</Box>
 			)}
 		</Highlight>

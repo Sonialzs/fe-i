@@ -4,6 +4,7 @@ import {
 	Code,
 	Divider,
 	Heading,
+	Kbd,
 	Link,
 	Text,
 	useColorMode,
@@ -12,8 +13,9 @@ import NextLink from 'next/link';
 import React from 'react';
 import CodeBlock from './CodeBlock';
 
+// 滚动条深色适配
 const Table = (props) => (
-	<Box overflowX="scroll" w="full">
+	<Box overflowX="auto" w="full">
 		<Box as="table" textAlign="left" mt="32px" w="full" {...props} />
 	</Box>
 );
@@ -72,30 +74,30 @@ const CustomLink = (props) => {
 };
 
 // TODO  ! chakra-ui 1.0移除了callout
-// const Quote = (props) => {
-// 	const { colorMode } = useColorMode();
-// 	const bgColor = {
-// 		light: 'blue.50',
-// 		dark: 'blue.900',
-// 	};
+const Quote = (props) => {
+	const { colorMode } = useColorMode();
+	const bgColor = {
+		light: 'blue.50',
+		dark: 'blue.900',
+	};
 
-// 	return (
-// 		<Callout
-// 			mt={4}
-// 			w="98%"
-// 			bg={bgColor[colorMode]}
-// 			variant="left-accent"
-// 			status="info"
-// 			css={{
-// 				'> *:first-of-type': {
-// 					marginTop: 0,
-// 					marginLeft: 8,
-// 				},
-// 			}}
-// 			{...props}
-// 		/>
-// 	);
-// };
+	return (
+		<Box
+			mt={4}
+			w="98%"
+			bg={bgColor[colorMode]}
+			variant="left-accent"
+			status="info"
+			css={{
+				'> *:first-of-type': {
+					marginTop: 0,
+					marginLeft: 8,
+				},
+			}}
+			{...props}
+		/>
+	);
+};
 
 const DocsHeading = (props) => (
 	<Heading
@@ -161,8 +163,9 @@ export default {
 	samp,
 	sub,
 	sup,
-	Button: Button,
-	// kbd: Kbd,
+
+	// @ts-ignore
+	kbd,
 	br: (props) => <Box height="24px" {...props} />,
 	hr: Hr,
 	table: Table,
@@ -173,7 +176,8 @@ export default {
 	ul: (props) => <Box as="ul" pt={2} pl={4} ml={2} {...props} />,
 	ol: (props) => <Box as="ol" pt={2} pl={4} ml={2} {...props} />,
 	li: (props) => <Box as="li" pb={1} {...props} />,
-	// blockquote: Quote,
+	blockquote: Quote,
+	Button,
 };
 
 export { CustomLink };

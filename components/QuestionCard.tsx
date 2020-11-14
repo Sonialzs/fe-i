@@ -11,14 +11,12 @@ interface Props {
 	question: Question;
 	answer?: Answer;
 	href?: string;
-	key?: string;
 }
 
 export default function QuestionCard({
 	question,
 	answer,
 	href,
-	key,
 	...props
 }: Props): ReactElement {
 	const [show, setShow] = React.useState(false);
@@ -39,7 +37,7 @@ export default function QuestionCard({
 				<Flex direction={['column', 'column', 'row', 'row']}>
 					<Box mr={[null, null, 4, 4]}>
 						{finalUrl ? (
-							<Link href={finalUrl || '#'} key={key}>
+							<Link href={finalUrl || '#'}>
 								<a target="_blank">
 									<Box cursor="pointer">
 										<MDXRenderAsync mdx={question?.body} />

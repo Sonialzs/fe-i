@@ -22,6 +22,7 @@ const StickyNav = styled(Flex)`
 
 interface Props {}
 
+// 普通页面的模板
 export default function PageLayout({
 	children,
 }: Props & React.HTMLAttributes<HTMLDivElement>): ReactElement {

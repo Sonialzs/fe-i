@@ -14,7 +14,7 @@ export default function Tags({ tags }: Props): ReactElement {
 	return (
 		<>
 			{tags?.map((tag) => (
-				<Badge key={tag} mr="2" variantColor="red">
+				<Badge key={tag} mr="2" colorScheme="red">
 					{tag}
 				</Badge>
 			))}

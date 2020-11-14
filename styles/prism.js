@@ -139,6 +139,12 @@ const prismBaseTheme = css`
 			margin-top: 0;
 		}
 	}
+
+	/** ! remark-code-title插件会把标题元素生成在pre之外 */
+	.remark-code-title + pre {
+		margin-top: 0 !important;
+		width: 100%;
+	}
 `;
 
 export const prismLightTheme = css`
