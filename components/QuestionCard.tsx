@@ -29,7 +29,7 @@ export default function QuestionCard({
 	const [show, setShow] = React.useState(false);
 
 	const handleToggle = () => setShow(!show);
-	const finalUrl = href || question.attributes.sourceUrl || undefined;
+	const finalUrl = href || question.attributes.source || undefined;
 
 	return (
 		<>
