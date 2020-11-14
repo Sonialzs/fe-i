@@ -4,12 +4,11 @@ import {
 	ThemeProvider,
 	useColorMode,
 } from '@chakra-ui/core';
-// import MDXComponents from '@components/MDXComponents';
 import { css, Global } from '@emotion/core';
-// import { MDXProvider } from '@mdx-js/react';
 import React from 'react';
 import { prismDarkTheme, prismLightTheme } from 'styles/prism';
 import theme from 'styles/theme';
+import Head from 'next/head';
 
 const GlobalStyle = ({ children }) => {
 	const { colorMode } = useColorMode();
@@ -45,13 +44,29 @@ const GlobalStyle = ({ children }) => {
 
 export default function App({ Component, pageProps }) {
 	return (
-		<ThemeProvider theme={theme}>
-			{/* <MDXProvider components={MDXComponents}> */}
-			<ColorModeProvider value="light">
-				<GlobalStyle />
-				<Component {...pageProps} />
-			</ColorModeProvider>
-			{/* </MDXProvider> */}
-		</ThemeProvider>
+		<>
+			<Head>
+				<title>FEI - 前端知识库</title>
+				<script
+					dangerouslySetInnerHTML={{
+						__html: `
+							var _hmt = _hmt || [];
+							(function() {
+							var hm = document.createElement("script");
+							hm.src = "https://hm.baidu.com/hm.js?${process.env.BAIDU_KEY}";
+							var s = document.getElementsByTagName("script")[0]; 
+							s.parentNode.insertBefore(hm, s);
+							})();
+        `,
+					}}
+				/>
+			</Head>
+			<ThemeProvider theme={theme}>
+				<ColorModeProvider value="light">
+					<GlobalStyle />
+					<Component {...pageProps} />
+				</ColorModeProvider>
+			</ThemeProvider>
+		</>
 	);
 }
