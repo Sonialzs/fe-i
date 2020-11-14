@@ -5,6 +5,7 @@ export interface Question {
 		source?: string;
 		slug: string;
 		index: number;
+		date: string;
 	};
 	body?: string;
 }

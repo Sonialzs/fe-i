@@ -1,7 +1,9 @@
 import { Flex } from '@chakra-ui/core';
 import QuestionCard from '@components/QuestionCard';
+import QuestionSEO from '@components/QuestionSEO';
 import PageLayout from '@layouts/page.layout';
 import { GetStaticProps } from 'next';
+import { useRouter } from 'next/router';
 import React, { ReactElement } from 'react';
 import CategoriesConfig from 'service/category.config';
 import { getFoldersByCategory, getQuestionAndAnswer } from 'service/question';
@@ -16,8 +18,15 @@ export default function QuestionDetail({
 	question,
 	answer,
 }: Props): ReactElement {
+	const router = useRouter();
+
 	return (
 		<PageLayout>
+			<QuestionSEO
+				title={question.attributes.title}
+				date={question.attributes.date}
+				url={router.asPath}
+			/>
 			<Flex
 				justifyContent="center"
 				alignItems="center"
