@@ -2,7 +2,7 @@ import { Flex, Heading, Stack, Text, useColorMode } from '@chakra-ui/react';
 import MDXProvider from '@components/MDXProvider';
 import { ViewCounterAsync } from '@components/ViewCounter/async';
 import React, { ReactElement } from 'react';
-import PageLayout from './page.layout';
+import PageLayout from './page';
 
 interface Props {
 	children?: any;

@@ -12,7 +12,7 @@ import { MDXRenderAsync } from '@components/MDXRender/async';
 import QuestionSEO from '@components/QuestionSEO';
 import { TagsAsync } from '@components/Tags/async';
 import { ViewCounterAsync } from '@components/ViewCounter/async';
-import PageLayout from '@layouts/page.layout';
+import PageLayout from '@layouts/page';
 import { GetStaticProps } from 'next';
 import { useRouter } from 'next/router';
 import React, { ReactElement } from 'react';

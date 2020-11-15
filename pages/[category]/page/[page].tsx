@@ -1,6 +1,6 @@
 import { Flex, Stack } from '@chakra-ui/react';
 import { QuestionCardAsync } from '@components/QuestionCard/async';
-import PageLayout from '@layouts/page.layout';
+import PageLayout from '@layouts/page';
 import { GetStaticProps } from 'next';
 import React, { ReactElement } from 'react';
 import CategoriesConfig from 'service/category.config';
