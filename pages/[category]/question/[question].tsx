@@ -46,7 +46,7 @@ export default function QuestionDetail({
 				maxWidth="900px"
 				mx="auto"
 			>
-				<Box as="article" width={['100%', '100%', '100%', '800px']}>
+				<Box as="article" width={['20em', '30em', '40em', '50em']}>
 					<MDXRenderAsync mdx={question.body} />
 					<Flex mt={'1em'} justify={'space-between'}>
 						<Flex fontSize="xs" color="gray.500">
