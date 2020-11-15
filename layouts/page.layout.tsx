@@ -1,6 +1,5 @@
 import { Box, Button, Flex, IconButton, useColorMode } from '@chakra-ui/react';
 import Footer from '@components/Footer';
-import { IconJavaScript } from '@components/Icons';
 import styled from '@emotion/styled';
 import dynamic from 'next/dynamic';
 import NextLink from 'next/link';
