@@ -1,3 +1,4 @@
+import { Text, TextProps } from '@chakra-ui/react';
 import { useRequest } from 'ahooks';
 import React, { ReactElement, useEffect } from 'react';
 
@@ -5,7 +6,10 @@ interface Props {
 	slug: string;
 }
 
-export default function ViewCounter({ slug }: Props): ReactElement {
+export default function ViewCounter({
+	slug,
+	...props
+}: Props & TextProps): ReactElement {
 	// views+1
 	const { data, run } = useRequest(`/api/views/set?id=${slug}`, {
 		manual: true,
@@ -15,5 +19,9 @@ export default function ViewCounter({ slug }: Props): ReactElement {
 		run();
 	}, [slug]);
 
-	return <div>{data?.total || '-'} 次浏览</div>;
+	return (
+		<Text as="span" fontSize="sm" color="gray.500" {...props}>
+			{data?.total || '-'} 次浏览
+		</Text>
+	);
 }

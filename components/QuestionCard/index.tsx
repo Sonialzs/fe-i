@@ -1,27 +1,21 @@
-import { Box, Collapse, Divider, Flex, IconButton } from '@chakra-ui/react';
+import { Box, Flex } from '@chakra-ui/react';
 import Link from 'next/link';
 import React, { ReactElement } from 'react';
-import { Answer, Question } from 'service/types';
-import { MDXRenderAsync } from './MDXRender/async';
-import { TagsAsync } from './Tags/async';
-import { ViewCounterAsync } from './ViewCounter/async';
-import { AiFillCaretDown, AiFillCaretUp } from 'react-icons/ai';
+import { Question } from 'service/types';
+import { MDXRenderAsync } from '../MDXRender/async';
+import { TagsAsync } from '../Tags/async';
+import { ViewCounterAsync } from '../ViewCounter/async';
 
 interface Props {
 	question: Question;
-	answer?: Answer;
 	href?: string;
 }
 
 export default function QuestionCard({
 	question,
-	answer,
 	href,
 	...props
 }: Props): ReactElement {
-	const [show, setShow] = React.useState(false);
-
-	const handleToggle = () => setShow(!show);
 	const finalUrl = href || question.attributes.source || undefined;
 
 	return (
@@ -58,27 +52,6 @@ export default function QuestionCard({
 						<ViewCounterAsync slug={question.attributes.slug} />
 					</Box>
 				</Flex>
-				{answer && (
-					<>
-						<Divider />
-						<IconButton
-							onClick={handleToggle}
-							w="100%"
-							size="sm"
-							icon={
-								show ? <AiFillCaretUp /> : <AiFillCaretDown />
-							}
-							aria-label="Show Or Hide Answer"
-							_focus={undefined}
-						/>
-
-						<Collapse in={show}>
-							<Box mt="4">
-								<MDXRenderAsync mdx={answer.body} />
-							</Box>
-						</Collapse>
-					</>
-				)}
 			</Box>
 		</>
 	);

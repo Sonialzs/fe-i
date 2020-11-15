@@ -10,7 +10,7 @@ const prismBaseTheme = css`
 		color: ${theme.colors.gray[800]};
 		background: none;
 		font-family: ${theme.fonts.mono};
-		font-size: ${theme.fontSizes[2]};
+
 		text-align: left;
 		word-spacing: normal;
 		word-break: normal;
@@ -29,19 +29,19 @@ const prismBaseTheme = css`
 	pre[class*='language-'] {
 		/* padding-top: ${theme.space[4]}; */
 		/* padding-bottom: ${theme.space[4]}; */
-		padding-left: ${theme.space[4] / 2};
-		padding-right: ${theme.space[4] / 2};
+		padding-left: ${theme.space[4]};
+		padding-right: ${theme.space[4]};
 		/* margin: ${theme.space[6]} 0; */
 		overflow: auto;
 		min-width: 100%;
 		font-size: 0.9rem;
-		white-space: nowrap;
+		white-space: pre;
 	}
 	:not(pre) > code[class*='language-'],
 	pre[class*='language-'] {
 		background: ${theme.colors.gray[50]};
 		border: 1px solid ${theme.colors.gray[200]};
-		/* border-radius: ${theme.radii.lg}; */
+		border-radius: ${theme.radii.lg};
 		border-bottom-left-radius: ${theme.radii.lg};
 		border-bottom-right-radius: ${theme.radii.lg};
 	}
@@ -134,16 +134,14 @@ const prismBaseTheme = css`
 		margin-bottom: 0;
 		width: 100%;
 		+ pre {
-			border-top-left-radius: 0;
-			border-top-right-radius: 0;
-			margin-top: 0;
-		}
-	}
+			margin-top: 0 !important;
+			width: 100%;
 
-	/** ! remark-code-title插件会把标题元素生成在pre之外 */
-	.remark-code-title + pre {
-		margin-top: 0 !important;
-		width: 100%;
+			> pre {
+				border-top-left-radius: 0;
+				border-top-right-radius: 0;
+			}
+		}
 	}
 `;
 

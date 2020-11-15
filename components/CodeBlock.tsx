@@ -1,18 +1,25 @@
 import { Box } from '@chakra-ui/react';
 import Highlight, { defaultProps } from 'prism-react-renderer';
 import React, { ReactElement } from 'react';
+import { LiveAsync } from './Live/async';
 
 interface Props {
-	children;
-	className;
+	children: any;
+	className?;
+	live?: boolean;
 }
 
 export default function CodeBlock({
 	children,
 	className,
+	live,
 	...props
 }: Props): ReactElement {
 	const language = className?.replace(/language-/, '');
+
+	if (live) {
+		return <LiveAsync>{children}</LiveAsync>;
+	}
 
 	return (
 		<Highlight
@@ -33,7 +40,7 @@ export default function CodeBlock({
 				>
 					{tokens.map((line, i) => {
 						// 解决最后一行幽灵节点问题
-						if (i === tokens.length - 1 && tokens[i][0].empty) {
+						if (i === tokens.length - 1 && line[0].empty) {
 							return;
 						}
 						return (

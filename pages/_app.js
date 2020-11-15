@@ -1,19 +1,15 @@
 import {
 	ChakraProvider,
-	ColorModeProvider,
-	cookieStorageManager,
 	localStorageManager,
-	ThemeProvider,
 	useColorMode,
 } from '@chakra-ui/react';
 import { css, Global } from '@emotion/react';
+import { DefaultSeo } from 'next-seo';
+import SEO from 'next-seo.config';
+import Head from 'next/head';
 import React from 'react';
 import { prismDarkTheme, prismLightTheme } from 'styles/prism';
 import theme from 'styles/theme';
-import Head from 'next/head';
-import SEO from 'next-seo.config';
-import { DefaultSeo } from 'next-seo';
-import {} from '@chakra-ui/react';
 
 const GlobalStyle = ({ children }) => {
 	const { colorMode } = useColorMode();

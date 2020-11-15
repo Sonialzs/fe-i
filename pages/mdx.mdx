@@ -1,8 +1,44 @@
 ---
 title: 'mdx-enhanced测试'
 draft: false
-layout: 'category.layout'
+layout: 'blog.layout'
 ---
+
+## live code
+
+```jsx:hello.jsx live
+class Counter extends React.Component {
+	constructor() {
+		super();
+		this.state = { count: 0 };
+	}
+
+	componentDidMount() {
+		this.interval = setInterval(() => {
+			this.setState((state) => ({ count: state.count + 1 }));
+		}, 1000);
+	}
+
+	componentWillUnmount() {
+		clearInterval(this.interval);
+	}
+
+	render() {
+		return (
+			<center>
+				<h3>{this.state.count}</h3>
+			</center>
+		);
+	}
+}
+```
+
+## diff
+
+```diff
+- 1
++ 2
+```
 
 ## hello
 
@@ -10,7 +46,34 @@ layout: 'category.layout'
 -   2
 -   3
 
-```js:index.js
+```jsx:hello.jsx
+class Counter extends React.Component {
+	constructor() {
+		super();
+		this.state = { count: 0 };
+	}
+
+	componentDidMount() {
+		this.interval = setInterval(() => {
+			this.setState((state) => ({ count: state.count + 1 }));
+		}, 1000);
+	}
+
+	componentWillUnmount() {
+		clearInterval(this.interval);
+	}
+
+	render() {
+		return (
+			<center>
+				<h3>{this.state.count}</h3>
+			</center>
+		);
+	}
+}
+```
+
+```js
 console.log(123);
 ```
 

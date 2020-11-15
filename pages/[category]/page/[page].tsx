@@ -1,5 +1,5 @@
 import { Flex, Stack } from '@chakra-ui/react';
-import QuestionCard from '@components/QuestionCard';
+import { QuestionCardAsync } from '@components/QuestionCard/async';
 import PageLayout from '@layouts/page.layout';
 import { GetStaticProps } from 'next';
 import React, { ReactElement } from 'react';
@@ -31,7 +31,7 @@ export default function Page({ questions, category }: Props): ReactElement {
 				<Stack spacing={4}>
 					{questions &&
 						questions.map((question) => (
-							<QuestionCard
+							<QuestionCardAsync
 								question={question}
 								href={`/${category}/question/${question.attributes.index}`}
 								key={question.attributes.slug}

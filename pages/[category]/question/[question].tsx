@@ -1,10 +1,22 @@
-import { Flex } from '@chakra-ui/react';
-import QuestionCard from '@components/QuestionCard';
+import {
+	Box,
+	Collapse,
+	Container,
+	Divider,
+	Flex,
+	IconButton,
+	Stack,
+} from '@chakra-ui/react';
+import { AnswerRenderAsync } from '@components/Answer/async';
+import { MDXRenderAsync } from '@components/MDXRender/async';
 import QuestionSEO from '@components/QuestionSEO';
+import { TagsAsync } from '@components/Tags/async';
+import { ViewCounterAsync } from '@components/ViewCounter/async';
 import PageLayout from '@layouts/page.layout';
 import { GetStaticProps } from 'next';
 import { useRouter } from 'next/router';
 import React, { ReactElement } from 'react';
+import { AiFillCaretUp, AiFillCaretDown } from 'react-icons/ai';
 import CategoriesConfig from 'service/category.config';
 import { getFoldersByCategory, getQuestionAndAnswer } from 'service/question';
 import { Answer, Question } from 'service/types';
@@ -34,9 +46,23 @@ export default function QuestionDetail({
 				maxWidth="900px"
 				mx="auto"
 			>
-				{question && (
-					<QuestionCard question={question} answer={answer} />
-				)}
+				<Box as="article" width={['100%', '100%', '100%', '800px']}>
+					<MDXRenderAsync mdx={question.body} />
+					<Flex mt={'1em'} justify={'space-between'}>
+						<Flex fontSize="xs" color="gray.500">
+							{question.attributes.date} /
+							<ViewCounterAsync
+								fontSize="xs"
+								ml="0.5em"
+								slug={question.attributes.slug}
+							/>
+						</Flex>
+						<Box>
+							<TagsAsync tags={question.attributes.tags} />
+						</Box>
+					</Flex>
+					<AnswerRenderAsync answer={answer} />
+				</Box>
 			</Flex>
 		</PageLayout>
 	);

@@ -13,7 +13,7 @@ import NextLink from 'next/link';
 import React from 'react';
 import CodeBlock from './CodeBlock';
 
-// 滚动条深色适配
+// TODO 滚动条深色适配
 const Table = (props) => (
 	<Box overflowX="auto" w="full">
 		<Box as="table" textAlign="left" mt="32px" w="full" {...props} />
@@ -73,7 +73,6 @@ const CustomLink = (props) => {
 	return <Link color={color[colorMode]} isExternal {...props} />;
 };
 
-// TODO  ! chakra-ui 1.0移除了callout
 const Quote = (props) => {
 	const { colorMode } = useColorMode();
 	const bgColor = {
@@ -84,7 +83,9 @@ const Quote = (props) => {
 	return (
 		<Box
 			mt={4}
-			w="98%"
+			// w="98%"
+			pt={4}
+			pb={4}
 			bg={bgColor[colorMode]}
 			variant="left-accent"
 			status="info"
@@ -164,8 +165,8 @@ export default {
 	sub,
 	sup,
 
-	// @ts-ignore
-	kbd,
+	// @ts-ignore 大小写不敏感，会报错
+	kbd: Kbd,
 	br: (props) => <Box height="24px" {...props} />,
 	hr: Hr,
 	table: Table,

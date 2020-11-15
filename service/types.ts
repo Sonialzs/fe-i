@@ -11,23 +11,16 @@ export interface Question {
 }
 
 export interface Answer {
-	attributes: { title?: string; tags?: string[] };
-	body?: string;
-}
-
-export interface Blog {
 	attributes: {
-		title: string;
+		title?: string;
 		tags?: string[];
-		slug: string;
-		publishAt: string;
-		updatedAt: string;
-		draft: boolean;
+		authors?: string[];
+		authorsLink?: string[];
 	};
 	body?: string;
 }
 
-export interface Category {
+export interface Blog {
 	attributes: {
 		title: string;
 		tags?: string[];
