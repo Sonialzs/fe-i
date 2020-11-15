@@ -23,7 +23,7 @@ export default function QuestionCard({
 			<Box
 				borderWidth="1px"
 				rounded="lg"
-				width={['100%', '100%', '100%', '800px']}
+				width={['20em', '25em', '32em', '50em']}
 				p={3}
 				_hover={{ borderColor: '#EDF2F7' }}
 				{...props}
