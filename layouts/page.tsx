@@ -1,5 +1,5 @@
 import { Flex, useColorMode } from '@chakra-ui/react';
-import Footer from '@components/Footer';
+import { FooterAsync } from '@components/Footer/async';
 import { NavbarAsync } from '@components/Nav/async';
 import dynamic from 'next/dynamic';
 import React, { ReactElement } from 'react';
@@ -38,7 +38,7 @@ export default function PageLayout({
 			>
 				{children}
 				<FixedLogo />
-				<Footer />
+				<FooterAsync />
 			</Flex>
 		</>
 	);

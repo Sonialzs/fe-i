@@ -25,6 +25,7 @@ export interface Answer {
 export interface Blog {
 	attributes: {
 		title: string;
+		summary: string;
 		tags?: string[];
 		slug: string;
 		publishAt: string;
