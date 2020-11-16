@@ -54,7 +54,7 @@ const allCategories: CategoryType[] = [
 	},
 	{
 		title: 'Node.js',
-		folder: 'node',
+		folder: 'Node',
 		routeName: 'node',
 		icon: IconNode,
 	},
