@@ -10,7 +10,7 @@ interface Props {
 export default function EditLink({ category, index }: Props): ReactElement {
 	return (
 		<Link
-			href={`https://github.com/Xwil/fe-i/blob/master/content/${category}/${index}/answer.mdx`}
+			href={`https://github.com/Xwil/fe-i/edit/master/content/${category}/${index}/answer.mdx`}
 			isExternal
 		>
 			欢迎在Github上编辑
