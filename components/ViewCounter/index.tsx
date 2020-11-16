@@ -16,7 +16,10 @@ export default function ViewCounter({
 	});
 
 	useEffect(() => {
-		run();
+		// 开发模式下不计算浏览次数
+		if (process.env.NODE_ENV !== 'development') {
+			run();
+		}
 	}, [slug]);
 
 	return (

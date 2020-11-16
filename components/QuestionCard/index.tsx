@@ -4,7 +4,6 @@ import React, { ReactElement } from 'react';
 import { Question } from 'service/types';
 import { MDXRenderAsync } from '../MDXRender/async';
 import { TagsAsync } from '../Tags/async';
-import { ViewCounterAsync } from '../ViewCounter/async';
 
 interface Props {
 	question: Question;
@@ -49,7 +48,6 @@ export default function QuestionCard({
 						{question?.attributes?.tags && (
 							<TagsAsync tags={question?.attributes?.tags} />
 						)}
-						<ViewCounterAsync slug={question.attributes.slug} />
 					</Box>
 				</Flex>
 			</Box>

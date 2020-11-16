@@ -38,7 +38,6 @@ const allCategories: CategoryType[] = [
 		folder: 'CSS',
 		routeName: 'css',
 		icon: IconCSS,
-		
 	},
 	{
 		title: 'JavaScript',

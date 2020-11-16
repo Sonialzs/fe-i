@@ -10,7 +10,7 @@ interface Props {
 export default function QuestionSEO({ title, date, url }: Props): ReactElement {
 	return (
 		<>
-			<NextSeo title={`${title} - FE.I 前端面试集锦`} canonical={url} />
+			<NextSeo title={`${title} - FE.I 前端知识库`} canonical={url} />
 			<ArticleJsonLd
 				authorName="cuvii"
 				dateModified={date}
@@ -18,7 +18,7 @@ export default function QuestionSEO({ title, date, url }: Props): ReactElement {
 				publisherName="cuvii"
 				title={title}
 				url={url}
-				description="FE.I 前端面试集锦"
+				description="FE.I 前端知识库"
 				// @ts-ignore
 				images={[]}
 				publisherLogo={'/favicon.ico'}

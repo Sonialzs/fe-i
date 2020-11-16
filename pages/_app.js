@@ -53,7 +53,7 @@ export default function App({ Component, pageProps }) {
 					<Head>
 						<title>FEI - 前端知识库</title>
 						<meta
-							http-equiv="Content-Type"
+							httpEquiv="Content-Type"
 							content="text/html; charset=UTF-8"
 						/>
 						<meta content="IE=edge" httpEquiv="X-UA-Compatible" />
