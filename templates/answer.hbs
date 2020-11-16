@@ -1,5 +1,15 @@
 ---
 date: "{{date}}"
+category: "{{category}}"
+index: {{index}}
+authors:
+{{#each authors}}
+- {{this}}
+{{/each}}
+authorsUrl:
+{{#each authorsUrl}}
+- {{this}}
+{{/each}}
 tags:
 {{#each tags}}
 - {{this}}
@@ -8,3 +18,6 @@ draft: true
 ---
 
 ## {{{title}}}
+
+{{authors}}
+{{authorsUrl}}

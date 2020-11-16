@@ -40,7 +40,7 @@ interface Props {}
 
 export default function Navbar({}: Props): ReactElement {
 	const { colorMode, toggleColorMode } = useColorMode();
-	const [navVisible, { toggle: toggleNav }] = useToggle(true);
+	const [navVisible, { toggle: toggleNav }] = useToggle(false);
 	const headerBgColor = {
 		light: 'rgba(255, 255, 255, 0.8)',
 		dark: 'rgba(23, 25, 35, 0.8)',

@@ -7,17 +7,19 @@ export interface Question {
 		index: number;
 		date: string;
 	};
-	body?: string;
+	body: string;
 }
 
 export interface Answer {
 	attributes: {
-		title?: string;
+		category: string;
+		index: string;
+		title: string;
 		tags?: string[];
-		authors?: string[];
-		authorsLink?: string[];
+		authors: string[];
+		authorsUrl: string[];
 	};
-	body?: string;
+	body: string;
 }
 
 export interface Blog {
@@ -29,5 +31,5 @@ export interface Blog {
 		updatedAt: string;
 		draft: boolean;
 	};
-	body?: string;
+	body: string;
 }

@@ -42,8 +42,10 @@ module.exports = function (
 				title: data.title,
 				date,
 				tags,
-				slug: slugify(data.title),
+				slug: slugify(data.title) + getCategoryIndex(data.category) + 1,
 				index: getCategoryIndex(data.category) + 1,
+				authors: ['cuvii'],
+				authorsUrl: ['https://fei.kodin.fun'],
 			};
 
 			const actions = [

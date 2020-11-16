@@ -1,9 +1,9 @@
-import { Box, Collapse, Text, IconButton, Stack, Link } from '@chakra-ui/react';
+import { Box, Collapse, IconButton, Link, Stack, Text } from '@chakra-ui/react';
+import { AuthorsAsync } from '@components/Authors/async';
 import { MDXRenderAsync } from '@components/MDXRender/async';
 import React, { ReactElement } from 'react';
-import { AiFillCaretUp, AiFillCaretDown } from 'react-icons/ai';
+import { AiFillCaretDown, AiFillCaretUp } from 'react-icons/ai';
 import { GoLinkExternal } from 'react-icons/go';
-
 import { Answer } from 'service/types';
 
 interface Props {
@@ -29,7 +29,13 @@ export default function AnswerRender({ answer }: Props): ReactElement {
 					/>
 
 					<Collapse in={show}>
-						<Stack mt="4" spacing="8">
+						<Stack mt="4" spacing="8" mx={1}>
+							<AuthorsAsync
+								authors={answer.attributes.authors}
+								authorsUrl={answer.attributes.authorsUrl}
+								category={answer.attributes.category}
+								index={answer.attributes.index}
+							/>
 							<MDXRenderAsync mdx={answer?.body} />
 						</Stack>
 					</Collapse>
