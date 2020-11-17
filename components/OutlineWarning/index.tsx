@@ -2,6 +2,7 @@ import { Alert, Link } from '@chakra-ui/react';
 import { useRouter } from 'next/router';
 import React, { ReactElement } from 'react';
 import { getFolderNameByRoute } from 'service/category.config';
+import { VscGithubAlt } from 'react-icons/vsc';
 
 interface Props {}
 
@@ -20,7 +21,9 @@ export default function OutlineWarning({}: Props): ReactElement {
 	return (
 		<Link href={getGithubEditLink()} isExternal w="100%">
 			<Alert status="warning" variant="left-accent">
-				以下内容仅做参考，欢迎在Github上编辑
+				以下内容仅做参考，欢迎在Github
+				<VscGithubAlt />
+				上编辑
 			</Alert>
 		</Link>
 	);
