@@ -16,7 +16,6 @@ import PageLayout from '@layouts/page';
 import { GetStaticProps } from 'next';
 import { useRouter } from 'next/router';
 import React, { ReactElement } from 'react';
-import { AiFillCaretUp, AiFillCaretDown } from 'react-icons/ai';
 import CategoriesConfig from 'service/category.config';
 import { getFoldersByCategory, getQuestionAndAnswer } from 'service/question';
 import { Answer, Question } from 'service/types';

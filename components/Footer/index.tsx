@@ -1,14 +1,47 @@
-import { Flex, IconButton, Link, Text } from '@chakra-ui/react';
+import { Box, Flex, IconButton, Link, Text } from '@chakra-ui/react';
+import { IconVercel } from '@components/Icons';
 import NextLink from 'next/link';
-import React, { ReactElement } from 'react';
+import React, { ReactElement, useEffect, useState } from 'react';
 import { FiGithub } from 'react-icons/fi';
 import { MdMailOutline } from 'react-icons/md';
 
 interface Props {}
 
 export default function Footer({}: Props): ReactElement {
+	const [extraStyle, setExtraStyle] = useState({});
+
+	// 对于高度不够的页面，让footer使用绝对定位显示在底部
+	useEffect(() => {
+		const footer = document.querySelector('footer');
+		if (footer) {
+			if (
+				footer.getBoundingClientRect().top < document.body.clientHeight
+			) {
+				setExtraStyle({
+					pos: 'absolute',
+					bottom: 0,
+					left: '50%',
+					transform: 'translateX(-50%)',
+					zIndex: 1,
+				});
+			} else {
+				setExtraStyle({
+					zIndex: 1,
+				});
+			}
+		}
+	}, []);
+
 	return (
-		<Flex as="footer" align="center" direction="column" mt="5em">
+		<Flex
+			as="footer"
+			align="center"
+			direction="column"
+			mt="5em"
+			// 默认隐藏，避免闪烁效果
+			zIndex="-1"
+			sx={extraStyle}
+		>
 			<div>
 				<Link href="https://github.com/Xwil" title="GitHub" isExternal>
 					<IconButton
@@ -59,6 +92,14 @@ export default function Footer({}: Props): ReactElement {
 					灵感来源于
 					<Link isExternal href="https://leerob.io">
 						leerob.io
+					</Link>{' '}
+					{' | '}
+					部署于
+					<Link isExternal href="https://vercel.com">
+						Vercel
+						<Box as="span" verticalAlign="text-bottom" ml={1}>
+							<IconVercel />
+						</Box>
 					</Link>
 				</Text>
 			</div>

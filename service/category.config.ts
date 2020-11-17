@@ -108,6 +108,13 @@ export function getFolderNameByRoute(routeName: string) {
 	return result;
 }
 
+export function getIconByRoute(routeName: string) {
+	const category = getAvailableCategories().filter(
+		(config) => config.routeName === routeName
+	)[0];
+	return category.icon || null;
+}
+
 // 根据文件夹名获取路由名
 export function getRouterNameByFolder(folder: string) {
 	let result = folder;

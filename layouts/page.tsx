@@ -14,7 +14,7 @@ interface Props {}
 export default function PageLayout({
 	children,
 }: Props & React.HTMLAttributes<HTMLDivElement>): ReactElement {
-	const { colorMode, toggleColorMode } = useColorMode();
+	const { colorMode } = useColorMode();
 
 	const bgColor = {
 		light: 'white',
@@ -38,8 +38,9 @@ export default function PageLayout({
 			>
 				{children}
 				<FixedLogo />
-				<FooterAsync />
 			</Flex>
+
+			<FooterAsync />
 		</>
 	);
 }

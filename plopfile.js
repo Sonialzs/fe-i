@@ -31,7 +31,7 @@ module.exports = function (
 			},
 			{
 				type: 'input',
-				// BUG 如果命名为tags，会直接作为参数传到模板中，所以这里命名为tag
+				// ! 如果命名为tags，会直接作为参数传到模板中，所以这里命名为tag
 				name: 'tag',
 				message: '请输入标签，以";"分隔',
 			},

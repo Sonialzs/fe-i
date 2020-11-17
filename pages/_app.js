@@ -27,6 +27,12 @@ const GlobalStyle = ({ children }) => {
 						min-width: 360px;
 						scroll-behavior: smooth;
 					}
+
+					body {
+						font-family: 'Helvetica Neue', Helvetica, Arial,
+							'PingFang SC', 'Hiragino Sans GB', 'Heiti SC',
+							'Microsoft YaHei', 'WenQuanYi Micro Hei', sans-serif;
+					}
 					#__next {
 						display: flex;
 						flex-direction: column;
@@ -34,6 +40,10 @@ const GlobalStyle = ({ children }) => {
 						background: ${colorMode === 'light'
 							? 'white'
 							: '#171923'};
+					}
+
+					svg {
+						display: inline-block;
 					}
 				`}
 			/>

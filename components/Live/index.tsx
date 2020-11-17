@@ -49,7 +49,6 @@ export default function Live({ children }: Props): ReactElement {
 			<LiveProvider
 				code={children}
 				scope={{ ...MDXComponents }}
-				// @ts-ignore
 				// ! 一堆bug，暂时用全局样式渲染
 				// theme={liveTheme[colorMode]}
 			>
