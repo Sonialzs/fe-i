@@ -1,6 +1,5 @@
 import { Box, Flex, IconButton, Link, Text } from '@chakra-ui/react';
 import { IconVercel } from '@components/Icons';
-import NextLink from 'next/link';
 import React, { ReactElement, useEffect, useState } from 'react';
 import { FiGithub } from 'react-icons/fi';
 import { MdMailOutline } from 'react-icons/md';
@@ -65,7 +64,7 @@ export default function Footer({}: Props): ReactElement {
 					/>
 				</Link>
 			</div>
-			<div>
+			{/* <div>
 				<NextLink href="/uses" passHref>
 					<Link
 						fontSize="sm"
@@ -88,13 +87,13 @@ export default function Footer({}: Props): ReactElement {
 						/blog
 					</Link>
 				</NextLink>
-			</div>
+			</div> */}
 			<div>
 				<Text fontSize="xs" color="gray.500">
 					样式灵感来源于
 					<Link isExternal href="https://leerob.io">
 						leerob.io
-					</Link>{' '}
+					</Link>
 					{' | '}
 					部署于
 					<Link isExternal href="https://vercel.com">
