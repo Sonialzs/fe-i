@@ -4,6 +4,7 @@ import {
 	getFolderNameByRoute,
 	getRouterNameByFolder,
 } from 'service/category.config';
+import { getQuestionsByCategory } from './question';
 const basePath = process.env.BASE_PATH;
 if (!basePath) {
 	console.error('请设置basePath，例如："./content/"');
@@ -26,4 +27,10 @@ export function getCategoryIndex(category: string) {
 	} catch (err) {
 		console.error(`${category}目录下index.mdx文件缺失`);
 	}
+}
+
+// 获取分类问题数量
+export function getCategoryQuestionsCount(category: string) {
+	const folder = getQuestionsByCategory(category);
+	return folder.length;
 }

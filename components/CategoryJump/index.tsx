@@ -5,7 +5,7 @@ import React, { ReactElement } from 'react';
 import { getIconByRoute } from 'service/category.config';
 
 interface Props {
-	count: number | string;
+	total: number | string;
 }
 
 const borderColor = {
@@ -18,9 +18,7 @@ const textColor = {
 	dark: 'gray.300',
 };
 
-export default function CategoryJump({
-	count: questionCount,
-}: Props): ReactElement {
+export default function CategoryJump({ total }: Props): ReactElement {
 	const { colorMode } = useColorMode();
 	const router = useRouter();
 
@@ -48,8 +46,8 @@ export default function CategoryJump({
 					ml={4}
 					letterSpacing={1}
 				>
-					已整理{questionCount}
-					个知识点和问题，立即查看
+					已整理{total}
+					个知识点和问题
 				</Text>
 			</Flex>
 		</Link>

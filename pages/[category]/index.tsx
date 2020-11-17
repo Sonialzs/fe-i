@@ -6,14 +6,20 @@ import PageLayout from '@layouts/page';
 import { GetStaticProps } from 'next';
 import React, { ReactElement } from 'react';
 import CategoriesConfig from 'service/category.config';
-import { getCategoryIndex } from 'service/cateogry';
+import { getCategoryIndex, getCategoryQuestionsCount } from 'service/cateogry';
 
 interface Props {
 	attributes: any;
 	body: string;
+	// 当前分类问题的数量
+	total: number;
 }
 
-export default function Category({ attributes, body }: Props): ReactElement {
+export default function Category({
+	attributes,
+	body,
+	total,
+}: Props): ReactElement {
 	const { colorMode } = useColorMode();
 
 	const textColor = {
@@ -69,7 +75,7 @@ export default function Category({ attributes, body }: Props): ReactElement {
 						</Text>
 					</Flex>
 				</Flex>
-				<CategoryJumpAsync count="0" />
+				<CategoryJumpAsync total={total} />
 				<MDXRenderAsync mdx={body} />
 			</Stack>
 		</PageLayout>
@@ -78,12 +84,14 @@ export default function Category({ attributes, body }: Props): ReactElement {
 
 export const getStaticProps: GetStaticProps = async (context) => {
 	const category = context.params!.category as string;
-	const fm = await getCategoryIndex(category);
+	const fm = getCategoryIndex(category);
+	const total = getCategoryQuestionsCount(category);
 
 	return {
 		props: {
 			attributes: fm?.attributes,
 			body: fm?.body,
+			total,
 		},
 	};
 };

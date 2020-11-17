@@ -12,8 +12,8 @@ const StickyHeader = styled(Flex)`
 	position: sticky;
 	z-index: 10;
 	top: 0;
-	/* backdrop-filter: saturate(180%) blur(20px);
-	transition: background-color 0.1s ease-in-out; */
+	backdrop-filter: saturate(180%) blur(20px);
+	/* transition: background-color 0.1s ease-in-out; */
 
 	@media (max-width: 40em) {
 		.nav {
