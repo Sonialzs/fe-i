@@ -15,8 +15,8 @@ const Fixed = styled(Flex)`
 `;
 
 const Drag = styled(motion.div)`
-	width: 80px;
-	height: 30px;
+	width: 40px;
+	height: 15px;
 	& img {
 		pointer-events: none;
 	}
@@ -72,7 +72,12 @@ export default function FixedLogo({}: Props): ReactElement {
 	return (
 		<Fixed>
 			<Drag drag dragConstraints={constraints} dragElastic={1} ref={ref}>
-				<img src="/static/logo/logo_transparent_short.png" alt="" />
+				<img
+					width="45px"
+					height="15px"
+					src="/static/logo/logo_transparent_short.png"
+					alt=""
+				/>
 			</Drag>
 		</Fixed>
 	);

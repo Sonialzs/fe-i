@@ -1,3 +1,3 @@
 import dynamic from 'next/dynamic';
 
-export const AuthorsAsync = dynamic(() => import('./'));
+export const AuthorsAsync = dynamic(() => /* WebpackChunkName:Authors */import('./'));

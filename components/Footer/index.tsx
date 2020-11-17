@@ -39,6 +39,7 @@ export default function Footer({}: Props): ReactElement {
 			align="center"
 			direction="column"
 			mt="2em"
+			w="100%"
 			// 默认隐藏，避免闪烁效果
 			zIndex="-1"
 			sx={extraStyle}
@@ -90,7 +91,7 @@ export default function Footer({}: Props): ReactElement {
 			</div>
 			<div>
 				<Text fontSize="xs" color="gray.500">
-					灵感来源于
+					样式灵感来源于
 					<Link isExternal href="https://leerob.io">
 						leerob.io
 					</Link>{' '}

@@ -1,3 +1,5 @@
 import dynamic from 'next/dynamic';
 
-export const NavbarAsync = dynamic(() => import('./'));
+export const NavbarAsync = dynamic(
+	() => /* WebpackChunkName:NavBar */ import('./')
+);

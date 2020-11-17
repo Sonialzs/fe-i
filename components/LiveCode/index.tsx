@@ -26,7 +26,7 @@ const StyledEditor = styled(Box)`
 	}
 `;
 
-export default function Live({ children }: Props): ReactElement {
+export default function LiveCode({ children }: Props): ReactElement {
 	const ref = useRef<HTMLDivElement>();
 	const { colorMode } = useColorMode();
 
@@ -34,7 +34,7 @@ export default function Live({ children }: Props): ReactElement {
 		if (ref.current) {
 			const dom = ref.current! as HTMLDivElement;
 			dom.querySelector('div')!.style.fontFamily =
-				'SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace';
+				'FiraCode, SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace';
 
 			dom.querySelectorAll('.token-line').forEach((line) =>
 				line.removeAttribute('style')

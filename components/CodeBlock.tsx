@@ -1,7 +1,7 @@
 import { Box } from '@chakra-ui/react';
 import Highlight, { defaultProps } from 'prism-react-renderer';
 import React, { ReactElement } from 'react';
-import { LiveAsync } from './Live/async';
+import { LiveCodeAsync } from './LiveCode/async';
 
 interface Props {
 	children: any;
@@ -18,7 +18,7 @@ export default function CodeBlock({
 	const language = className?.replace(/language-/, '');
 
 	if (live) {
-		return <LiveAsync>{children}</LiveAsync>;
+		return <LiveCodeAsync>{children}</LiveCodeAsync>;
 	}
 
 	return (
