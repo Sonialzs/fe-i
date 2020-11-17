@@ -14,9 +14,10 @@ export default function Footer({}: Props): ReactElement {
 	useEffect(() => {
 		const footer = document.querySelector('footer');
 		if (footer) {
-			if (
-				footer.getBoundingClientRect().top < document.body.clientHeight
-			) {
+			const distanceToTop = footer.getBoundingClientRect().top;
+			const viewportHeight = window.innerHeight;
+
+			if (distanceToTop < viewportHeight) {
 				setExtraStyle({
 					pos: 'absolute',
 					bottom: 0,
@@ -37,7 +38,7 @@ export default function Footer({}: Props): ReactElement {
 			as="footer"
 			align="center"
 			direction="column"
-			mt="5em"
+			mt="2em"
 			// 默认隐藏，避免闪烁效果
 			zIndex="-1"
 			sx={extraStyle}

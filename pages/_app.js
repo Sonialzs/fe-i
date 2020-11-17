@@ -7,6 +7,7 @@ import { css, Global } from '@emotion/react';
 import { DefaultSeo } from 'next-seo';
 import SEO from 'next-seo.config';
 import Head from 'next/head';
+import NextNProgress from 'nextjs-progressbar';
 import React from 'react';
 import { prismDarkTheme, prismLightTheme } from 'styles/prism';
 import theme from 'styles/theme';
@@ -91,6 +92,7 @@ export default function App({ Component, pageProps }) {
 					</Head>
 					<DefaultSeo {...SEO} />
 					<Component {...pageProps} />
+					<NextNProgress height="1" color={theme.colors.teal[200]} />
 				</GlobalStyle>
 			</ChakraProvider>
 		</>
