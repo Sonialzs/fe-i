@@ -96,7 +96,10 @@ const allCategories: CategoryType[] = [
 	},
 ];
 
-// 根据路由名称获取文件夹名
+/**
+ * 根据路由名称获取文件夹名
+ * @param routeName 从路由中获取的分类名
+ */
 export function getFolderNameByRoute(routeName: string) {
 	let result = routeName;
 	const cateogry = allCategories.filter(
@@ -108,6 +111,10 @@ export function getFolderNameByRoute(routeName: string) {
 	return result;
 }
 
+/**
+ * 根据路由名称获取Icon
+ * @param routeName 从路由中获取的分类名
+ */
 export function getIconByRoute(routeName: string) {
 	const category = getAvailableCategories().filter(
 		(config) => config.routeName === routeName
@@ -115,7 +122,10 @@ export function getIconByRoute(routeName: string) {
 	return category.icon || null;
 }
 
-// 根据文件夹名获取路由名
+/**
+ * 根据文件夹名获取路由名
+ * @param folder 文件夹名称
+ */
 export function getRouterNameByFolder(folder: string) {
 	let result = folder;
 	const cateogry = allCategories.filter(
@@ -127,10 +137,16 @@ export function getRouterNameByFolder(folder: string) {
 	return result;
 }
 
+/**
+ * 获取状态为availabel的所有分类对象
+ */
 export function getAvailableCategories() {
 	return allCategories.filter((category) => category.available === true);
 }
 
+/**
+ * 获取所有分类对象的标题，忽略状态
+ */
 export function getAllTitles() {
 	return allCategories.map((category) => category.title);
 }

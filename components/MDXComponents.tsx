@@ -1,4 +1,5 @@
 import {
+	Alert,
 	Box,
 	Button,
 	Code,
@@ -106,9 +107,7 @@ const DocsHeading = (props) => (
 		css={{
 			scrollMarginTop: '100px',
 			scrollSnapMargin: '100px', // Safari
-			'&[id]': {
-				pointerEvents: 'none',
-			},
+
 			'&[id]:hover a': { opacity: 1 },
 		}}
 		{...props}
@@ -141,17 +140,43 @@ const sub = (props) => <Text as="sub">{props.children}</Text>;
 const sup = (props) => <Text as="sup">{props.children}</Text>;
 
 export default {
-	h1: (props) => <Heading as="h1" size="xl" my={4} {...props} />,
+	h1: (props) => <Heading as="h1" size="xl" my={4} ml={1} {...props} />,
 	h2: (props) => (
-		<DocsHeading as="h2" size="lg" fontWeight="bold" {...props} />
+		<DocsHeading
+			as="h2"
+			size="lg"
+			fontWeight="700"
+			sx={{ textIndent: '1rem' }}
+			{...props}
+		/>
 	),
 	h3: (props) => (
-		<DocsHeading as="h3" size="md" fontWeight="bold" {...props} />
+		<DocsHeading
+			as="h3"
+			size="md"
+			fontWeight="600"
+			sx={{ textIndent: '2rem' }}
+			{...props}
+		/>
 	),
 	h4: (props) => (
-		<DocsHeading as="h4" size="sm" fontWeight="bold" {...props} />
+		<DocsHeading
+			as="h4"
+			size="sm"
+			fontWeight="500"
+			sx={{ textIndent: '3rem' }}
+			{...props}
+		/>
 	),
-	h5: (props) => <DocsHeading as="h5" size="xs" {...props} />,
+	h5: (props) => (
+		<DocsHeading
+			as="h5"
+			fontWeight="400"
+			size="xs"
+			sx={{ textIndent: '4rem' }}
+			{...props}
+		/>
+	),
 	code: CodeBlock,
 	inlineCode: (props) => (
 		<Code colorScheme="yellow" fontSize="0.84em" {...props} />
@@ -183,7 +208,6 @@ export default {
 	ol: (props) => <Box as="ol" pt={2} pl={4} ml={2} {...props} />,
 	li: (props) => <Box as="li" pb={1} {...props} />,
 	blockquote: Quote,
-	Button,
 };
 
 export { CustomLink };

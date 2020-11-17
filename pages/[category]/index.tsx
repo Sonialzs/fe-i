@@ -1,6 +1,7 @@
-import { Flex, Stack, Text, useColorMode } from '@chakra-ui/react';
+import { Box, Flex, Stack, Text, useColorMode } from '@chakra-ui/react';
 import { CategoryJumpAsync } from '@components/CategoryJump/async';
 import { MDXRenderAsync } from '@components/MDXRender/async';
+import { OutlineWarningAsync } from '@components/OutlineWarning/async';
 import { ViewCounterAsync } from '@components/ViewCounter/async';
 import PageLayout from '@layouts/page';
 import { GetStaticProps } from 'next';
@@ -76,6 +77,7 @@ export default function Category({
 					</Flex>
 				</Flex>
 				<CategoryJumpAsync total={total} />
+				<OutlineWarningAsync />
 				<MDXRenderAsync mdx={body} />
 			</Stack>
 		</PageLayout>

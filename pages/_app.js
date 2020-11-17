@@ -59,6 +59,7 @@ export default function App({ Component, pageProps }) {
 			<ChakraProvider
 				theme={theme}
 				colorModeManager={localStorageManager}
+				resetCSS={true}
 			>
 				<GlobalStyle>
 					<Head>

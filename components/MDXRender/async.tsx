@@ -8,7 +8,7 @@ export const MDXRenderAsync = dynamic(
 		loading: () => (
 			<Skeleton
 				height="200px"
-				minW={['300px', '300px', '350px', '500px']}
+				minW={['300px', '300px', '350px', '100%']}
 			/>
 		),
 	}
