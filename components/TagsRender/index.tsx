@@ -10,7 +10,7 @@ interface Props {
 	tags?: string[];
 }
 
-export default function Tags({ tags }: Props): ReactElement {
+export default function TagsRender({ tags }: Props): ReactElement {
 	return (
 		<>
 			{tags?.map((tag) => (

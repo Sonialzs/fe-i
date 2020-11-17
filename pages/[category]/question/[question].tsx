@@ -7,10 +7,10 @@ import {
 	IconButton,
 	Stack,
 } from '@chakra-ui/react';
-import { AnswerRenderAsync } from '@components/Answer/async';
+import { AnswerRenderAsync } from '@components/AnswerRender/async';
 import { MDXRenderAsync } from '@components/MDXRender/async';
 import QuestionSEO from '@components/QuestionSEO';
-import { TagsAsync } from '@components/Tags/async';
+import { TagsAsync } from '@components/TagsRender/async';
 import { ViewCounterAsync } from '@components/ViewCounter/async';
 import PageLayout from '@layouts/page';
 import { GetStaticProps } from 'next';

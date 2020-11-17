@@ -1,5 +1,5 @@
 import { Box, Collapse, IconButton, Link, Stack, Text } from '@chakra-ui/react';
-import { AuthorsAsync } from '@components/Authors/async';
+import { AuthorsAsync } from '@components/AuthorsRender/async';
 import { MDXRenderAsync } from '@components/MDXRender/async';
 import React, { ReactElement } from 'react';
 import { AiFillCaretDown, AiFillCaretUp } from 'react-icons/ai';
