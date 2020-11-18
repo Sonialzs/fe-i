@@ -1,4 +1,4 @@
-import { Box, Flex, Stack, Text, useColorMode } from '@chakra-ui/react';
+import { Flex, Stack, Text, useColorMode } from '@chakra-ui/react';
 import { CategoryJumpAsync } from '@components/CategoryJump/async';
 import { MDXRenderAsync } from '@components/MDXRender/async';
 import { OutlineWarningAsync } from '@components/OutlineWarning/async';
