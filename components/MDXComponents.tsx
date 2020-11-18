@@ -125,19 +125,19 @@ const Hr = () => {
 	return <Divider borderColor={borderColor[colorMode]} my={4} w="100%" />;
 };
 
-const i = (props) => <Text as="i">{props.children}</Text>;
-const u = (props) => <Text as="u">{props.children}</Text>;
-const abbr = (props) => <Text as="abbr">{props.children}</Text>;
-const cite = (props) => <Text as="cite">{props.children}</Text>;
-const del = (props) => <Text as="del">{props.children}</Text>;
-const em = (props) => <Text as="em">{props.children}</Text>;
-const ins = (props) => <Text as="ins">{props.children}</Text>;
-const kbd = (props) => <Text as="kbd">{props.children}</Text>;
-const mark = (props) => <Text as="mark">{props.children}</Text>;
-const s = (props) => <Text as="s">{props.children}</Text>;
-const samp = (props) => <Text as="samp">{props.children}</Text>;
-const sub = (props) => <Text as="sub">{props.children}</Text>;
-const sup = (props) => <Text as="sup">{props.children}</Text>;
+const i = (props) => <Text as="i" {...props}></Text>;
+const u = (props) => <Text as="u" {...props}></Text>;
+const abbr = (props) => <Text as="abbr" {...props}></Text>;
+const cite = (props) => <Text as="cite" {...props}></Text>;
+const del = (props) => <Text as="del" {...props}></Text>;
+const em = (props) => <Text as="em" {...props}></Text>;
+const ins = (props) => <Text as="ins" {...props}></Text>;
+const kbd = (props) => <Text as="kbd" {...props}></Text>;
+const mark = (props) => <Text as="mark" {...props}></Text>;
+const s = (props) => <Text as="s" {...props}></Text>;
+const samp = (props) => <Text as="samp" {...props}></Text>;
+const sub = (props) => <Text as="sub" {...props}></Text>;
+const sup = (props) => <Text as="sup" {...props}></Text>;
 
 export default {
 	h1: (props) => <Heading as="h1" size="xl" my={4} ml={1} {...props} />,
