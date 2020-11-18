@@ -50,8 +50,15 @@ function loadFile(path: string) {
  */
 function memoizeResolver(...args) {
 	let cacheKey;
-	args.forEach((arg) => cacheKey + arg);
+	args.forEach((arg) => (cacheKey = cacheKey + arg));
 	return cacheKey;
 }
 
-export const memoize = (func) => _.memoize(func, memoizeResolver);
+export const memoize = (func) => {
+	// 开发环境不用memoize，会导致内容不更新的问题
+	if (process.env.NODE_ENV === 'development') {
+		return func;
+	} else {
+		return _.memoize(func, memoizeResolver);
+	}
+};
