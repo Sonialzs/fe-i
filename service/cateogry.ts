@@ -1,11 +1,11 @@
 import fm from 'front-matter';
 import fs from 'fs';
-import _ from 'lodash';
 import {
 	getFolderNameByRoute,
 	getRouterNameByFolder,
 } from 'service/category.config';
 import { getQuestionsByCategory } from './question';
+import { memoize, once } from './utils';
 
 const basePath = process.env.BASE_PATH;
 
@@ -16,22 +16,22 @@ if (!basePath) {
 /**
  * 获取所有分类
  */
-export const getCategories = _.once(_getCategories);
+export const getCategories = once(_getCategories);
 
 /**
  * 获取分类的index.mdx文件
  */
-export const getCategoryIndex = _.memoize(_getCategoryIndex);
+export const getCategoryIndex = memoize(_getCategoryIndex);
 
 /**
  * 获取分类问题数量
  */
-export const getCategoryQuestionsCount = _.memoize(_getCategoryQuestionsCount);
+export const getCategoryQuestionsCount = memoize(_getCategoryQuestionsCount);
 
 /**
  * 获取分类页面数量
  */
-export const getCategoryTotalPages = _.memoize(_getCategoryTotalPages);
+export const getCategoryTotalPages = memoize(_getCategoryTotalPages);
 
 function _getCategoryTotalPages(category: string) {
 	const questionPerPage = parseInt(process.env.QUESTION_PER_PAGE!);

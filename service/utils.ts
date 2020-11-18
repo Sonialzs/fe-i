@@ -62,3 +62,11 @@ export const memoize = (func) => {
 		return _.memoize(func, memoizeResolver);
 	}
 };
+
+export const once = (func) => {
+	if (process.env.NODE_ENV === 'development') {
+		return func;
+	} else {
+		once(func);
+	}
+};
