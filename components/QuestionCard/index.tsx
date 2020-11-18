@@ -1,4 +1,5 @@
 import { Box, Flex } from '@chakra-ui/react';
+import styled from '@emotion/styled';
 import Link from 'next/link';
 import React, { ReactElement } from 'react';
 import { Question } from 'service/types';
@@ -9,6 +10,13 @@ interface Props {
 	question: Question;
 	href?: string;
 }
+
+const ContentContainer = styled(Box)`
+	h2 {
+		text-indent: 0;
+		font-size: 1em;
+	}
+`;
 
 export default function QuestionCard({
 	question,
@@ -28,7 +36,7 @@ export default function QuestionCard({
 				{...props}
 			>
 				<Flex direction={['column', 'column', 'row', 'row']}>
-					<Box mr={[null, null, 4, 4]}>
+					<ContentContainer mr={[null, null, 4, 4]}>
 						{finalUrl ? (
 							<Link href={finalUrl || '#'}>
 								<a target="_blank">
@@ -42,7 +50,7 @@ export default function QuestionCard({
 								<MDXRenderAsync mdx={question?.body} />
 							</Box>
 						)}
-					</Box>
+					</ContentContainer>
 
 					<Box mt="0.3em" ml={[null, null, 'auto', 'auto']}>
 						{question?.attributes?.tags && (

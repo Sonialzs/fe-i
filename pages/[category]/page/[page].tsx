@@ -32,7 +32,7 @@ export default function Page({
 				{(!questions || questions.length === 0) && (
 					<div>一滴都没了</div>
 				)}
-				<Stack spacing={4}>
+				<Stack spacing={8}>
 					{questions &&
 						questions.map((question) => (
 							<QuestionCardAsync
