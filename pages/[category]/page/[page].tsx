@@ -69,6 +69,7 @@ export const getStaticProps: GetStaticProps = async (context) => {
 		category as string,
 		offset,
 		questionPerPage,
+		true,
 		true
 	);
 

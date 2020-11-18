@@ -27,6 +27,7 @@ const plugins = [
 			require('remark-autolink-headings'),
 			require('remark-slug'),
 			require('remark-code-titles'),
+			require('remark-emoji'),
 		],
 		usesSrc: false,
 		extendFrontMatter: {

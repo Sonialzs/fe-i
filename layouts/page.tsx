@@ -1,6 +1,9 @@
-import { Flex, useColorMode } from '@chakra-ui/react';
+import { Box, Flex, useColorMode } from '@chakra-ui/react';
 import { FooterAsync } from '@components/Footer/async';
 import { NavbarAsync } from '@components/Nav/async';
+import { css } from '@emotion/react';
+import styled from '@emotion/styled';
+
 import React, { ReactElement } from 'react';
 
 interface Props {}
@@ -25,12 +28,14 @@ export default function PageLayout({
 			<NavbarAsync />
 			<Flex
 				as="main"
-				justifyContent="center"
+				justifyContent="start"
 				flexDirection="column"
-				minH="70vh"
 				bg={bgColor[colorMode]}
 				color={primarytextColor[colorMode]}
 				px={2}
+				css={css`
+					min-height: calc(100vh - 255px);
+				`}
 			>
 				{children}
 			</Flex>

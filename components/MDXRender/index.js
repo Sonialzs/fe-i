@@ -13,6 +13,7 @@ export default function MDXRender(props) {
 							require('remark-autolink-headings'),
 							require('remark-slug'),
 							require('remark-code-titles'),
+							require('remark-emoji'),
 						]}
 					>
 						{props.mdx}

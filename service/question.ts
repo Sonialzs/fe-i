@@ -42,15 +42,20 @@ export function getFoldersByCategory(
  * @param category 分类的*路由*名称
  * @param offset 开始的索引
  * @param limit 数量限制
+ * @param reverse 是否翻转数组
  * @returns 筛选排序后的文件夹名
  */
 export function getQuestionsByCategory(
 	category: string,
 	offset = 0,
 	limit = 0,
-	draftOnly = true
+	draftOnly = true,
+	reverse = false
 ): number[] {
-	const folders = getFoldersByCategory(category, draftOnly);
+	let folders = getFoldersByCategory(category, draftOnly);
+	if (reverse) {
+		folders = folders.reverse();
+	}
 	if (limit) {
 		return folders.slice(offset, offset + limit);
 	}

@@ -1,18 +1,10 @@
-import {
-	Box,
-	Collapse,
-	Container,
-	Divider,
-	Flex,
-	IconButton,
-	Stack,
-} from '@chakra-ui/react';
+import { Box, Flex } from '@chakra-ui/react';
 import { AnswerRenderAsync } from '@components/AnswerRender/async';
 import { MDXRenderAsync } from '@components/MDXRender/async';
 import QuestionSEO from '@components/QuestionSEO';
 import { TagsAsync } from '@components/TagsRender/async';
 import { ViewCounterAsync } from '@components/ViewCounter/async';
-import styled from '@emotion/styled';
+import { css } from '@emotion/react';
 import PageLayout from '@layouts/page';
 import { GetStaticProps } from 'next';
 import { useRouter } from 'next/router';
@@ -25,13 +17,6 @@ interface Props {
 	question: Question;
 	answer: Answer;
 }
-
-const ContentContainer = styled(Box)`
-	h2 {
-		text-indent: 0;
-		font-size: 1.25em;
-	}
-`;
 
 export default function QuestionDetail({
 	question,
@@ -54,9 +39,16 @@ export default function QuestionDetail({
 				mx="auto"
 			>
 				<Box as="article" width={['20em', '30em', '40em', '50em']}>
-					<ContentContainer>
+					<Box
+						css={css`
+							h2 {
+								text-indent: 0;
+								font-size: 1.25em;
+							}
+						`}
+					>
 						<MDXRenderAsync mdx={question.body} />
-					</ContentContainer>
+					</Box>
 					<Flex mt={'1em'} justify={'space-between'}>
 						<Flex fontSize="xs" color="gray.500">
 							{question.attributes.date} /

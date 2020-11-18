@@ -1,4 +1,4 @@
-import { Box, Flex } from '@chakra-ui/react';
+import { Box, Divider, Flex } from '@chakra-ui/react';
 import styled from '@emotion/styled';
 import Link from 'next/link';
 import React, { ReactElement } from 'react';
@@ -28,7 +28,6 @@ export default function QuestionCard({
 	return (
 		<>
 			<Box
-				borderWidth="1px"
 				rounded="lg"
 				width={['20em', '25em', '32em', '50em']}
 				p={3}
@@ -59,6 +58,7 @@ export default function QuestionCard({
 					</Box>
 				</Flex>
 			</Box>
+			<Divider />
 		</>
 	);
 }
