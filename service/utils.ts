@@ -1,6 +1,7 @@
 import { getFolderNameByRoute } from 'service/category.config';
 import fm from 'front-matter';
 import fs from 'fs';
+import _ from 'lodash';
 const basePath = process.env.BASE_PATH;
 
 /**
@@ -42,3 +43,15 @@ export function getMDXByPath(path: string, draftOnly = true) {
 function loadFile(path: string) {
 	return fs.readFileSync(path, 'utf8');
 }
+
+/**
+ * 解决lodash memoize只将第一个参数作为cache key的bug，这里将所有参数+起来当做cache key
+ * @param args
+ */
+function memoizeResolver(...args) {
+	let cacheKey;
+	args.forEach((arg) => cacheKey + arg);
+	return cacheKey;
+}
+
+export const memoize = (func) => _.memoize(func, memoizeResolver);
