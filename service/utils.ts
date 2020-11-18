@@ -67,6 +67,6 @@ export const once = (func) => {
 	if (process.env.NODE_ENV === 'development') {
 		return func;
 	} else {
-		once(func);
+		_.once(func);
 	}
 };
