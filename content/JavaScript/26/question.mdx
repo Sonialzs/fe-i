@@ -1,0 +1,21 @@
+---
+title: '当点击按钮时，event.target是什么？'
+date: '2020-11-18'
+slug: 'dang-dian-ji-an-niu-shi-event.targetshi-shi-me251'
+index: 26
+source: 'https://github.com/lydiahallie/javascript-questions/blob/master/zh-CN/README-zh_CN.md#31-%E5%BD%93%E7%82%B9%E5%87%BB%E6%8C%89%E9%92%AE%E6%97%B6eventtarget%E6%98%AF%E4%BB%80%E4%B9%88'
+tags:
+    - 事件
+    - 事件对象
+draft: true
+---
+
+## 26. 当点击按钮时，event.target 是什么？
+
+```html:index.html
+<div onclick="console.log('first div')">
+	<div onclick="console.log('second div')">
+		<button onclick="console.log('button')">Click!</button>
+	</div>
+</div>
+```

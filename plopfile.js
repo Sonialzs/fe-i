@@ -42,7 +42,8 @@ module.exports = function (
 				title: data.title,
 				date,
 				tags,
-				slug: slugify(data.title) + getCategoryIndex(data.category) + 1,
+				slug:
+					slugify(data.title) + (getCategoryIndex(data.category) + 1),
 				index: getCategoryIndex(data.category) + 1,
 				authors: ['cuvii'],
 				authorsUrl: ['https://fei.kodin.fun'],
@@ -69,12 +70,7 @@ module.exports = function (
 
 			actions.push(function (data) {
 				const f = open(
-					getPathForNewFile(data.category, 'question.mdx'),
-					{
-						// ⚠️仅支持vscode打开
-						// ! windows下不支持自动打开
-						app: 'visual studio code',
-					}
+					getPathForNewFile(data.category, 'question.mdx')
 				);
 				if (data.withAnswer) {
 					open(getPathForNewFile(data.category, 'answer.mdx'), {
