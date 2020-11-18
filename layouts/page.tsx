@@ -27,6 +27,7 @@ export default function PageLayout({
 				as="main"
 				justifyContent="center"
 				flexDirection="column"
+				minH="70vh"
 				bg={bgColor[colorMode]}
 				color={primarytextColor[colorMode]}
 				px={2}
