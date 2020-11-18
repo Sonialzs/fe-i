@@ -1,0 +1,23 @@
+---
+title: '以下代码会输出什么'
+date: '2020-11-18'
+slug: 'yi-xia-dai-ma-hui-shu-chu-shi-me72'
+index: 72
+source: ''
+tags:
+    - 模块化
+draft: true
+---
+
+## 72. 以下代码会输出什么
+
+```js:module.js
+export default () => 'Hello world';
+export const name = 'Lydia';
+```
+
+```js:index.js
+import * as data from './module';
+
+console.log(data);
+```

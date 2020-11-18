@@ -1,0 +1,31 @@
+---
+title: '以下代码会输出什么'
+date: '2020-11-18'
+slug: 'yi-xia-dai-ma-hui-shu-chu-shi-me95'
+index: 95
+source: 'https://github.com/lydiahallie/javascript-questions/blob/master/zh-CN/README-zh_CN.md#139-%E8%BE%93%E5%87%BA%E4%BB%80%E4%B9%88'
+tags:
+    - Class
+draft: true
+---
+
+## 95. 以下代码会输出什么
+
+```js:index.js
+class Counter {
+	#number = 10;
+
+	increment() {
+		this.#number++;
+	}
+
+	getNum() {
+		return this.#number;
+	}
+}
+
+const counter = new Counter();
+counter.increment();
+
+console.log(counter.#number);
+```

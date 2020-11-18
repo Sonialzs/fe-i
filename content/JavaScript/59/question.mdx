@@ -1,0 +1,42 @@
+---
+title: ''
+date: '2020-11-18'
+slug: '59'
+index: 59
+source: 'https://github.com/lydiahallie/javascript-questions/blob/master/zh-CN/README-zh_CN.md#66-%E4%BD%BF%E7%94%A8%E5%93%AA%E4%B8%AA%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0%E5%8F%AF%E4%BB%A5%E6%88%90%E5%8A%9F%E7%BB%A7%E6%89%BFdog%E7%B1%BB'
+tags:
+    - 构造函数
+draft: true
+---
+
+## 59. 使用哪个构造函数可以成功继承`Dog`类?
+
+```js:index
+class Dog {
+	constructor(name) {
+		this.name = name;
+	}
+}
+
+class Labrador extends Dog {
+	// 1
+	constructor(name, size) {
+		this.size = size;
+	}
+	// 2
+	constructor(name, size) {
+		super(name);
+		this.size = size;
+	}
+	// 3
+	constructor(size) {
+		super(name);
+		this.size = size;
+	}
+	// 4
+	constructor(name, size) {
+		this.name = name;
+		this.size = size;
+	}
+}
+```

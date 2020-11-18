@@ -1,0 +1,24 @@
+---
+title: '以下代码会输出什么'
+date: '2020-11-18'
+slug: 'yi-xia-dai-ma-hui-shu-chu-shi-me78'
+index: 78
+source: ''
+tags:
+    - Set
+draft: true
+---
+
+## 78. 以下代码会输出什么
+
+```js:index.js
+const set = new Set();
+
+set.add(1);
+set.add('Lydia');
+set.add({ name: 'Lydia' });
+
+for (let item of set) {
+	console.log(item + 2);
+}
+```

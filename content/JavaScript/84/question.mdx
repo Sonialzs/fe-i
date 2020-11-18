@@ -1,0 +1,27 @@
+---
+title: ''
+date: '2020-11-18'
+slug: 'helloworld84'
+index: 84
+source: 'https://github.com/lydiahallie/javascript-questions/blob/master/zh-CN/README-zh_CN.md#115-%E5%93%AA%E4%B8%80%E4%B8%AA%E6%96%B9%E6%B3%95%E4%BC%9A%E8%BF%94%E5%9B%9E-hello-world-'
+tags:
+    - Map
+    - 集合类型
+draft: true
+---
+
+## 84. 哪个方法会返回 Hello world?
+
+```js:index.js
+const myMap = new Map();
+const myFunc = () => 'greeting';
+
+myMap.set(myFunc, 'Hello world!');
+
+//1
+myMap.get('greeting');
+//2
+myMap.get(myFunc);
+//3
+myMap.get(() => 'greeting');
+```

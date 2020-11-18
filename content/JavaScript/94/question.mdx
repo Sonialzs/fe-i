@@ -1,0 +1,23 @@
+---
+title: '以下代码会输出什么'
+date: '2020-11-18'
+slug: 'yi-xia-dai-ma-hui-shu-chu-shi-me94'
+index: 94
+source: 'https://github.com/lydiahallie/javascript-questions/blob/master/zh-CN/README-zh_CN.md#136-%E4%BB%A5%E4%B8%8B%E5%93%AA%E4%B8%80%E9%A1%B9%E4%BC%9A%E5%AF%B9%E5%AF%B9%E8%B1%A1-person-%E6%9C%89%E5%89%AF%E4%BD%9C%E7%94%A8'
+tags:
+    - 对象
+draft: true
+---
+
+## 94. 以下哪一项会对对象 `person` 有副作用
+
+```js:index.js
+const person = { name: 'Lydia Hallie' };
+
+Object.seal(person);
+
+// A: person.name = "Evan Bacon"
+// B: person.age = 21
+// C: delete person.name
+// D: Object.assign(person, { age: 21 })
+```

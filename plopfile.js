@@ -31,9 +31,22 @@ module.exports = function (
 			},
 			{
 				type: 'input',
-				// ! 如果命名为tags，会直接作为参数传到模板中，所以这里命名为tag
 				name: 'tag',
 				message: '请输入标签，以";"分隔',
+			},
+			{ type: 'input', name: 'sourceUrl', message: '请输入出处链接' },
+			{
+				type: 'list',
+				name: 'withCode',
+				message: '是否需要输入代码',
+				default: '不需要',
+				choices: ['需要', '不需要'],
+			},
+			{
+				type: 'editor',
+				name: 'code',
+				message: '请输入代码',
+				when: (data) => data.withCode === '需要',
 			},
 		],
 		actions: (data) => {
@@ -47,6 +60,7 @@ module.exports = function (
 				index: getCategoryIndex(data.category) + 1,
 				authors: ['cuvii'],
 				authorsUrl: ['https://fei.kodin.fun'],
+				codeType: getCodeTypeByCategory(data.category),
 			};
 
 			const actions = [
@@ -104,6 +118,19 @@ function getCategoryIndex(category) {
 		.slice(-1)
 		.pop();
 	return parseInt(index || 0);
+}
+
+function getCodeTypeByCategory(category) {
+	switch (category) {
+		case 'JavaScript':
+			return 'js:index.js';
+		case 'HTML':
+			return 'html:index.html';
+		case 'CSS':
+			return 'css:style.css';
+		case 'TypeScript':
+			return 'ts:index.ts';
+	}
 }
 
 function getCurrentDate() {

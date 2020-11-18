@@ -1,0 +1,23 @@
+---
+title: '哪些方法修改了原数组'
+date: '2020-11-18'
+slug: 'na-xie-fang-fa-xiu-gai-liao-yuan-shu-zu80'
+index: 80
+source: ''
+tags:
+    - 数组
+draft: true
+---
+
+## 80. 哪些方法修改了原数组
+
+```js:index.js
+const emojis = ['✨', '🥑', '😍'];
+
+emojis.map((x) => x + '✨');
+emojis.filter((x) => x !== '🥑');
+emojis.find((x) => x !== '🥑');
+emojis.reduce((acc, cur) => acc + '✨');
+emojis.slice(1, 2, '✨');
+emojis.splice(1, 2, '✨');
+```

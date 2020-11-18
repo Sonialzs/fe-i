@@ -1,0 +1,26 @@
+---
+title: '以下代码会输出什么'
+date: '2020-11-18'
+slug: 'yi-xia-dai-ma-hui-shu-chu-shi-me62'
+index: 62
+source: 'https://github.com/lydiahallie/javascript-questions/blob/master/zh-CN/README-zh_CN.md#71-%E5%A6%82%E4%BD%95%E8%83%BD%E6%89%93%E5%8D%B0%E5%87%BAconsolelog%E8%AF%AD%E5%8F%A5%E5%90%8E%E6%B3%A8%E9%87%8A%E6%8E%89%E7%9A%84%E5%80%BC'
+tags:
+    - 生成器
+draft: true
+---
+
+## 62. 如何才能打印出`console.log`语句后注释掉的值？
+
+```js:index.js
+function* startGame() {
+	const 答案 = yield 'Do you love JavaScript?';
+	if (答案 !== 'Yes') {
+		return "Oh wow... Guess we're gone here";
+	}
+	return 'JavaScript loves you back ❤️';
+}
+
+const game = startGame();
+console.log(/* 1 */); // Do you love JavaScript?
+console.log(/* 2 */); // JavaScript loves you back ❤️
+```

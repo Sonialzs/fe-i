@@ -3,7 +3,7 @@ title: "{{title}}"
 date: "{{date}}"
 slug: "{{slug}}"
 index: {{index}}
-source: "{{source}}"
+source: "{{sourceUrl}}"
 tags:
 {{#each tags}}
 - {{this}}
@@ -12,3 +12,8 @@ draft: true
 ---
 
 ## {{index}}. {{{title}}}
+{{#if code}}
+```{{codeType}}
+{{code}}
+```
+{{/if}}
