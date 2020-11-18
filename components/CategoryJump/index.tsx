@@ -2,6 +2,7 @@ import { Flex, Text, theme, useColorMode } from '@chakra-ui/react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React, { ReactElement } from 'react';
+import { BiLinkExternal } from 'react-icons/bi';
 import { getIconByRoute } from 'service/category.config';
 
 interface Props {
@@ -47,7 +48,8 @@ export default function CategoryJump({ total }: Props): ReactElement {
 					letterSpacing={1}
 				>
 					已整理{total}
-					个知识点和问题
+					个知识点和问题，立即查看
+					<BiLinkExternal />
 				</Text>
 			</Flex>
 		</Link>

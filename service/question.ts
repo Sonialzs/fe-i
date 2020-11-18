@@ -38,7 +38,7 @@ export function getFoldersByCategory(
 }
 
 /**
- * 查询分类中的文件夹，支持分页，不检查draft状态
+ * 查询分类中的文件夹，支持分页，检查draft状态
  * @param category 分类的*路由*名称
  * @param offset 开始的索引
  * @param limit 数量限制
@@ -51,7 +51,7 @@ export function getQuestionsByCategory(
 	draftOnly = true
 ): number[] {
 	const folders = getFoldersByCategory(category, draftOnly);
-	if (offset && limit) {
+	if (limit) {
 		return folders.slice(offset, offset + limit);
 	}
 

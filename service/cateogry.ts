@@ -5,7 +5,9 @@ import {
 	getRouterNameByFolder,
 } from 'service/category.config';
 import { getQuestionsByCategory } from './question';
+
 const basePath = process.env.BASE_PATH;
+
 if (!basePath) {
 	console.error('请设置basePath，例如："./content/"');
 }
@@ -34,4 +36,10 @@ export function getCategoryIndex(category: string) {
 export function getCategoryQuestionsCount(category: string) {
 	const folder = getQuestionsByCategory(category);
 	return folder.length;
+}
+
+// 获取分类页面数量
+export function getCategoryTotalPages(category: string) {
+	const questionPerPage = parseInt(process.env.QUESTION_PER_PAGE!);
+	return Math.ceil(getCategoryQuestionsCount(category)) / questionPerPage;
 }

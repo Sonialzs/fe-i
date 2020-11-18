@@ -1,21 +1,25 @@
 import { Flex, Stack } from '@chakra-ui/react';
+import { PaginationAsync } from '@components/Pagination/async';
 import { QuestionCardAsync } from '@components/QuestionCard/async';
 import PageLayout from '@layouts/page';
 import { GetStaticProps } from 'next';
 import React, { ReactElement } from 'react';
 import CategoriesConfig from 'service/category.config';
+import { getCategoryTotalPages } from 'service/cateogry';
 import { getQuestion, getQuestionsByCategory } from 'service/question';
 import { Question } from 'service/types';
 
-const questionPerPage = parseInt(process.env.QUESTION_PER_PAGE!);
-
 interface Props {
 	questions?: Question[];
-	categories: string[];
 	category: string;
+	totalPages: number;
 }
 
-export default function Page({ questions, category }: Props): ReactElement {
+export default function Page({
+	questions,
+	category,
+	totalPages,
+}: Props): ReactElement {
 	return (
 		<PageLayout>
 			<Flex
@@ -38,10 +42,13 @@ export default function Page({ questions, category }: Props): ReactElement {
 							/>
 						))}
 				</Stack>
+				<PaginationAsync totalPages={totalPages} />
 			</Flex>
 		</PageLayout>
 	);
 }
+
+const questionPerPage = parseInt(process.env.QUESTION_PER_PAGE!);
 
 // 当前页码渲染题目的起点，比如第一页应该是第0-第3个，
 export function getOffsetByPage(page: number) {
@@ -65,6 +72,8 @@ export const getStaticProps: GetStaticProps = async (context) => {
 		true
 	);
 
+	const totalPages = getCategoryTotalPages(category as string);
+
 	const result = questionFolders?.map((questionFolder) => {
 		const questionFm = getQuestion(category as string, questionFolder);
 
@@ -78,6 +87,7 @@ export const getStaticProps: GetStaticProps = async (context) => {
 		props: {
 			questions: result,
 			category,
+			totalPages,
 		},
 	};
 };
@@ -85,8 +95,7 @@ export const getStaticProps: GetStaticProps = async (context) => {
 // 获取路径，/[category]/page/[page]
 export const getStaticPaths = () => {
 	const routes = CategoriesConfig.available.map((category) => {
-		const questionFolders = getQuestionsByCategory(category.routeName);
-		const totalPages = Math.ceil(questionFolders!.length / questionPerPage);
+		const totalPages = getCategoryTotalPages(category.routeName);
 		const result: any[] = [];
 
 		for (let index = 1; index <= totalPages; index++) {
