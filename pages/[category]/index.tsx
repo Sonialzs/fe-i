@@ -77,8 +77,8 @@ export default function Category({
 					</Flex>
 				</Flex>
 				<CategoryJumpAsync total={total} />
-				<OutlineWarningAsync />
 				<MDXRenderAsync mdx={body} />
+				<OutlineWarningAsync />
 			</Stack>
 		</PageLayout>
 	);

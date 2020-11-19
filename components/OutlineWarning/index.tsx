@@ -19,12 +19,16 @@ export default function OutlineWarning({}: Props): ReactElement {
 	};
 
 	return (
-		<Link href={getGithubEditLink()} isExternal w="100%">
-			<Alert status="warning" variant="left-accent">
-				以下内容仅做参考，欢迎在Github
-				<VscGithubAlt />
-				上编辑
-			</Alert>
+		<Link
+			href={getGithubEditLink()}
+			isExternal
+			w="100%"
+			fontSize="sm"
+			color="gray.400"
+		>
+			欢迎在Github
+			<VscGithubAlt />
+			上编辑
 		</Link>
 	);
 }

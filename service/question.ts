@@ -1,4 +1,4 @@
-import { FrontMatterResult } from 'front-matter';
+import fm, { FrontMatterResult } from 'front-matter';
 import fs from 'fs';
 
 import { getFolderNameByRoute } from 'service/category.config';
@@ -22,6 +22,16 @@ export const getFoldersByCategory = memoize(_getFoldersByCategory);
  * @returns 筛选排序后的文件夹名
  */
 export const getQuestionsByCategory = memoize(_getQuestionsByCategory);
+
+/**
+ * 获取分类中包含该标签的所有问题文件夹
+ * @param category 分类
+ * @param tag 标签
+ * @returns 包含该标签的问题文件夹
+ */
+export const getQuestionsInCategoryByTag = memoize(
+	_getQuestionsInCategoryByTag
+);
 
 /**
  * 根据文件夹名称获取问题
@@ -108,6 +118,13 @@ function _getQuestionsByCategory(
 	}
 
 	return folders;
+}
+
+function _getQuestionsInCategoryByTag(category: string, tag: string) {
+	const questions = getQuestionsByCategory(category);
+	return questions.filter((question) =>
+		getQuestion(category, question)?.attributes.tags.includes(tag)
+	);
 }
 
 function _getQuestionAndAnswer(category, questionFolder, draftOnly = true) {

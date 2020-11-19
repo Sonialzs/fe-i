@@ -1,5 +1,6 @@
 import fm from 'front-matter';
 import fs from 'fs';
+import _ from 'lodash';
 import {
 	getFolderNameByRoute,
 	getRouterNameByFolder,
@@ -13,10 +14,7 @@ if (!basePath) {
 	console.error('请设置basePath，例如："./content/"');
 }
 
-/**
- * 获取所有分类
- */
-export const getCategories = once(_getCategories);
+export const getCategories = _.once(_getCategories);
 
 /**
  * 获取分类的index.mdx文件
@@ -38,6 +36,9 @@ function _getCategoryTotalPages(category: string) {
 	return Math.ceil(getCategoryQuestionsCount(category)) / questionPerPage;
 }
 
+/**
+ * 获取所有分类
+ */
 function _getCategories() {
 	const categories = fs.readdirSync(basePath!);
 	categories.forEach((category) => getRouterNameByFolder(category));
