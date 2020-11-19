@@ -1,5 +1,4 @@
 //@ts-nocheck
-// TODO 待优化
 
 const defaultSize = { width: '24px', height: '24px' };
 

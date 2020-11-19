@@ -19,7 +19,10 @@
 			"@components/*": ["./components/*"],
 			"@pages/*": ["./pages/*"],
 			"@layouts/*": ["./layouts/*"],
-			"@utils/*": ["./utils/*"]
+			"@utils/*": ["./utils/*"],
+			"@service/*": ["./service/*"],
+			"@api/*": ["./pages/api/*"],
+
 		},
 		"forceConsistentCasingInFileNames": true,
 		"esModuleInterop": true,
