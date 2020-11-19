@@ -1,3 +1,4 @@
+// ! 待优化
 import { getFolderNameByRoute } from './category.config';
 import {
 	getQuestion,
@@ -8,23 +9,34 @@ import { memoize } from './utils';
 import fs from 'fs';
 import _ from 'lodash';
 
-export const getAllTagsByCategory = memoize(_getAllTagsByCategory);
-
-interface TagsType {
-	title: string;
-	total: number;
-	folders: number[];
-	parent: TagsType;
-	childs: TagsType[];
-}
-
 interface TagRelationType {
 	title: string;
 	childs: string[];
 	routeName: string;
 }
 
-function _getAllTagsByCategory(category: string) {
+export interface TagConfigType extends TagRelationType {
+	questions?: number[];
+}
+
+export function buildTagConfig(category: string) {
+	generateTagConfig(category);
+	return getTagConfig(category);
+}
+
+export function getTagConfig(category: string): TagConfigType[] | undefined {
+	const path =
+		process.env.BASE_PATH + getFolderNameByRoute(category) + '/tags.json';
+	if (fs.existsSync(path)) {
+		return JSON.parse(fs.readFileSync(path, 'utf8'));
+	}
+}
+
+const generateTagConfig = memoize(_generateTagConfig);
+
+const getTagRelation = memoize(_getTagRelation);
+
+function _generateTagConfig(category: string) {
 	const questions = getQuestionsByCategory(category, 0, 0, true);
 
 	const tagsSet: Set<string> = new Set();
@@ -41,8 +53,7 @@ function _getAllTagsByCategory(category: string) {
 
 	const result = Array.from(tagsSet);
 
-	generateTagsList(category, result);
-	organizeTags(category, result);
+	_organizeTags(category, result);
 
 	return result;
 }
@@ -52,27 +63,29 @@ function _getAllTagsByCategory(category: string) {
  * @param category 分类
  * @param tags 所有标签
  */
-function organizeTags(category: string, tags: string[]) {
+function _organizeTags(category: string, tags: string[]) {
 	// 未设置标签关系的标签
 	const unsetTags = tags;
 	const relations = getTagRelation(category);
 	const result: any[] = [];
 
 	relations.forEach((relation) => {
-		const ques: number[] = [];
+		const allQuestions: Set<number> = new Set();
 
 		relation.childs.forEach((tag) => {
 			// 从unsetTags中移除
 			_.remove(unsetTags, (value) => value === tag);
 
-			const questions = getQuestionsInCategoryByTag(category, tag);
-			ques.push(...questions);
+			const childTagQuestions = getQuestionsInCategoryByTag(
+				category,
+				tag
+			);
+			childTagQuestions.forEach((question) => allQuestions.add(question));
 		});
 
 		result.push({
 			...relation,
-			total: ques.length,
-			questions: ques,
+			questions: Array.from(allQuestions),
 		});
 	});
 
@@ -93,7 +106,6 @@ function organizeTags(category: string, tags: string[]) {
 	}
 }
 
-const getTagRelation = memoize(_getTagRelation);
 /**
  * 获取分类下的标签关系配置
  * @param category 分类
