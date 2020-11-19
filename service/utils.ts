@@ -1,7 +1,8 @@
 import { getFolderNameByRoute } from 'service/category.config';
 import fm from 'front-matter';
 import fs from 'fs';
-import _ from 'lodash';
+import _once from 'lodash/once';
+import _memoize from 'lodash/memoize';
 const basePath = process.env.BASE_PATH;
 
 /**
@@ -59,7 +60,7 @@ export function memoize<T extends (...args: any) => any>(func: T) {
 	if (process.env.NODE_ENV === 'development') {
 		return func;
 	} else {
-		return _.memoize(func, memoizeResolver);
+		return _memoize(func, memoizeResolver);
 	}
 }
 
@@ -67,6 +68,6 @@ export function once(func) {
 	if (process.env.NODE_ENV === 'development') {
 		return func;
 	} else {
-		return _.once(func);
+		return _once(func);
 	}
 }

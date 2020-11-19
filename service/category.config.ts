@@ -11,6 +11,7 @@ import {
 	IconWebpack,
 } from '@components/Icons';
 import _ from 'lodash';
+import { memoize } from './utils';
 
 export interface CategoryType {
 	// 显示的名称
@@ -101,29 +102,29 @@ const allCategories: CategoryType[] = [
  * 根据路由名称获取文件夹名
  * @param routeName 从路由中获取的分类名
  */
-export const getFolderNameByRoute = _.memoize(_getFolderNameByRoute);
+export const getFolderNameByRoute = memoize(_getFolderNameByRoute);
 
 /**
  * 根据路由名称获取Icon
  * @param routeName 从路由中获取的分类名
  */
-export const getIconByRoute = _.memoize(_getIconByRoute);
+export const getIconByRoute = memoize(_getIconByRoute);
 
 /**
  * 根据文件夹名获取路由名
  * @param folder 文件夹名称
  */
-export const getRouterNameByFolder = _.memoize(_getRouterNameByFolder);
+export const getRouterNameByFolder = memoize(_getRouterNameByFolder);
 
 /**
  * 获取状态为availabel的所有分类对象
  */
-export const getAvailableCategories = _.memoize(_getAvailableCategories);
+export const getAvailableCategories = memoize(_getAvailableCategories);
 
 /**
  * 获取所有分类对象的标题，忽略状态
  */
-export const getAllTitles = _.memoize(_getAllTitles);
+export const getAllTitles = memoize(_getAllTitles);
 
 const CategoriesConfig = {
 	all: allCategories,

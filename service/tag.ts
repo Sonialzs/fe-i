@@ -13,6 +13,7 @@ interface TagRelationType {
 	title: string;
 	childs: string[];
 	routeName: string;
+	summary: string;
 }
 
 export interface TagConfigType extends TagRelationType {

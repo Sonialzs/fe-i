@@ -1,16 +1,10 @@
-import {
-	Box,
-	Flex,
-	Text,
-	Heading,
-	Stack,
-	useColorMode,
-} from '@chakra-ui/react';
+import { Flex, Heading, Stack, Text, useColorMode } from '@chakra-ui/react';
+import { IconRenderAsync } from '@components/IconRender/async';
 import { QuestionCardAsync } from '@components/QuestionCard/async';
 import PageLayout from '@layouts/page';
 import { GetStaticProps } from 'next';
 import React, { ReactElement } from 'react';
-import { getIconByRoute, getRouterNameByFolder } from 'service/category.config';
+import { getRouterNameByFolder } from 'service/category.config';
 import { getCategories } from 'service/cateogry';
 import { getQuestion } from 'service/question';
 import { buildTagConfig, getTagConfig, TagConfigType } from 'service/tag';
@@ -50,19 +44,14 @@ export default function Tag({
 					mb={16}
 				>
 					<div>
-						{React.createElement(getIconByRoute(category), {
-							width: '10em',
-							height: '10em',
-						})}
+						<IconRenderAsync category={category} size="10em" />
 					</div>
 					<div className="intro">
 						<Heading as="h2" fontSize="xl" mt="1em">
 							{config.title}
 						</Heading>
-						<Text fz="sm" color="gray.500">
-							Lorem ipsum dolor sit amet consectetur adipisicing
-							elit. Necessitatibus minus nisi unde soluta autem ut
-							corrupti accusamus aperiam numquam architecto!
+						<Text fontSize="sm" color="gray.500">
+							{config.summary}
 						</Text>
 					</div>
 				</Flex>
