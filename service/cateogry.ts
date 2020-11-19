@@ -1,5 +1,6 @@
 import fm from 'front-matter';
 import fs from 'fs';
+import _ from 'lodash';
 import {
 	getFolderNameByRoute,
 	getRouterNameByFolder,
@@ -16,7 +17,7 @@ if (!basePath) {
 /**
  * 获取所有分类
  */
-export const getCategories = once(_getCategories);
+export const getCategories = _.once(_getCategories);
 
 /**
  * 获取分类的index.mdx文件

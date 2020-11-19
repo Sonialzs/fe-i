@@ -54,19 +54,19 @@ function memoizeResolver(...args) {
 	return cacheKey;
 }
 
-export const memoize = (func) => {
+export function memoize<T extends (...args: any) => any>(func: T) {
 	// 开发环境不用memoize，会导致内容不更新的问题
 	if (process.env.NODE_ENV === 'development') {
 		return func;
 	} else {
 		return _.memoize(func, memoizeResolver);
 	}
-};
+}
 
-export const once = (func) => {
+export function once(func) {
 	if (process.env.NODE_ENV === 'development') {
 		return func;
 	} else {
-		_.once(func);
+		return _.once(func);
 	}
-};
+}
