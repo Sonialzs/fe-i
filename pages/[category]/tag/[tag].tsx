@@ -11,12 +11,16 @@ export default function Tag({}: Props): ReactElement {
 }
 
 export const getStaticPaths = () => {
-    const categories = getCategories();
-    
-    categories.
+	const categories = getCategories();
+	const result: { params: { category: string; tag: string } }[] = [];
+
+	categories.map((category) => {
+		const tags = getAllTagsByCategory(category);
+		result.push({ params: { category, tag: 'hello' } });
+	});
 
 	return {
-		paths: [{ params: {} }],
+		paths: result,
 		fallback: false,
 	};
 };

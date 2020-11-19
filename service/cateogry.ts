@@ -14,9 +14,6 @@ if (!basePath) {
 	console.error('请设置basePath，例如："./content/"');
 }
 
-/**
- * 获取所有分类
- */
 export const getCategories = _.once(_getCategories);
 
 /**
@@ -39,6 +36,9 @@ function _getCategoryTotalPages(category: string) {
 	return Math.ceil(getCategoryQuestionsCount(category)) / questionPerPage;
 }
 
+/**
+ * 获取所有分类
+ */
 function _getCategories() {
 	const categories = fs.readdirSync(basePath!);
 	categories.forEach((category) => getRouterNameByFolder(category));
