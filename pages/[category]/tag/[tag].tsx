@@ -1,11 +1,4 @@
-import {
-	Box,
-	Flex,
-	Text,
-	Heading,
-	Stack,
-	useColorMode,
-} from '@chakra-ui/react';
+import { Flex, Heading, Stack, Text, useColorMode } from '@chakra-ui/react';
 import { QuestionCardAsync } from '@components/QuestionCard/async';
 import PageLayout from '@layouts/page';
 import { GetStaticProps } from 'next';
