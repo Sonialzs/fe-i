@@ -1,4 +1,11 @@
-import { Flex, Heading, Stack, Text, useColorMode } from '@chakra-ui/react';
+import {
+	Box,
+	Flex,
+	Heading,
+	Stack,
+	Text,
+	useColorMode,
+} from '@chakra-ui/react';
 import { IconRenderAsync } from '@components/IconRender/async';
 import { QuestionCardAsync } from '@components/QuestionCard/async';
 import PageLayout from '@layouts/page';
@@ -38,19 +45,23 @@ export default function Tag({
 			>
 				<Flex
 					w="100%"
-					height="10em"
+					height={['5em', '10em']}
 					backgroundColor={titleBoxColor[colorMode]}
 					borderRadius={8}
 					mb={16}
 				>
-					<div>
-						<IconRenderAsync category={category} size="10em" />
-					</div>
+					<Box w={['5em', '10em']} h={['5em', '10em']}>
+						<IconRenderAsync category={category} size="100%" />
+					</Box>
 					<div className="intro">
-						<Heading as="h2" fontSize="xl" mt="1em">
+						<Heading
+							as="h2"
+							fontSize={['md', 'xl']}
+							mt={['0.2em', '1em']}
+						>
 							{config.title}
 						</Heading>
-						<Text fontSize="sm" color="gray.500">
+						<Text fontSize={['xs', 'sm']} color="gray.500">
 							{config.summary}
 						</Text>
 					</div>

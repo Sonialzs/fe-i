@@ -40,6 +40,7 @@ export default function Category({
 				m="0 auto 4rem auto"
 				maxWidth="700px"
 				w="100%"
+				p={['0 1em', null, null, '0']}
 			>
 				<Flex
 					flexDirection="column"

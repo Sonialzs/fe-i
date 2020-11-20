@@ -9,10 +9,6 @@ interface Props {
 	total: number | string;
 }
 
-const borderColor = {
-	light: theme.colors.gray[50],
-	dark: theme.colors.gray[800],
-};
 
 const textColor = {
 	light: 'gray.500',
@@ -25,7 +21,6 @@ export default function CategoryJump({ total }: Props): ReactElement {
 
 	return (
 		<Flex
-			border={`1px solid ${borderColor[colorMode]}`}
 			boxShadow={' rgba(149, 157, 165, 0.2) 0px 8px 24px;'}
 			borderRadius={4}
 			w="100%"
