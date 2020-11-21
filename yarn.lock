@@ -3477,6 +3477,16 @@ code-point-at@^1.0.0:
   resolved "https://registry.npmjs.org/code-point-at/-/code-point-at-1.1.0.tgz#0d070b4d043a5bea33a2f1a40e2edb3d9a4ccf77"
   integrity sha1-DQcLTQQ6W+ozovGkDi7bPZpMz3c=
 
+codemirror@5.21.0:
+  version "5.21.0"
+  resolved "https://registry.npm.taobao.org/codemirror/download/codemirror-5.21.0.tgz?cache=0&sync_timestamp=1605775229112&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fcodemirror%2Fdownload%2Fcodemirror-5.21.0.tgz#9ec4caeda50807575b2115226bf12414f85d2246"
+  integrity sha1-nsTK7aUIB1dbIRUia/EkFPhdIkY=
+
+codemirror@^5.58.3:
+  version "5.58.3"
+  resolved "https://registry.npm.taobao.org/codemirror/download/codemirror-5.58.3.tgz?cache=0&sync_timestamp=1605775229112&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fcodemirror%2Fdownload%2Fcodemirror-5.58.3.tgz#3f0689854ecfbed5d4479a98b96148b2c3b79796"
+  integrity sha1-PwaJhU7PvtXUR5qYuWFIssO3l5Y=
+
 collapse-white-space@^1.0.2:
   version "1.0.6"
   resolved "https://registry.npmjs.org/collapse-white-space/-/collapse-white-space-1.0.6.tgz#e63629c0016665792060dbbeb79c42239d2c5287"
@@ -6001,6 +6011,13 @@ kind-of@^6.0.0, kind-of@^6.0.2:
   version "6.0.3"
   resolved "https://registry.npmjs.org/kind-of/-/kind-of-6.0.3.tgz#07c05034a6c349fa06e24fa35aa76db4580ce4dd"
   integrity sha512-dcS1ul+9tmeD95T+x28/ehLgd9mENa3LsvDTtzm3vyBEO7RPptvAD+t44WVXaUjTBRcrpFeFlC8WCruUR456hw==
+
+klipse@^7.10.5:
+  version "7.10.5"
+  resolved "https://registry.npm.taobao.org/klipse/download/klipse-7.10.5.tgz#90a134d2fa51d9fe4bacca4583574406cd6278e9"
+  integrity sha1-kKE00vpR2f5LrMpFg1dEBs1ieOk=
+  dependencies:
+    codemirror "5.21.0"
 
 klona@^2.0.3:
   version "2.0.4"

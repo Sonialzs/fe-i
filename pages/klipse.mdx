@@ -1,0 +1,25 @@
+---
+title: 'live-runner测试'
+draft: false
+layout: 'blog'
+---
+
+```js run
+[1, 2, 3].map(function (x) {
+	return x + 1;
+});
+```
+
+```js run
+function Person(firstName, lastName) {
+	this.firstName = firstName;
+	this.lastName = lastName;
+}
+
+const member = new Person('Lydia', 'Hallie');
+Person.getFullName = function () {
+	return `${this.firstName} ${this.lastName}`;
+};
+
+console.log(member.getFullName());
+```

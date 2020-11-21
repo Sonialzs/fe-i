@@ -6,7 +6,8 @@ const prismBaseTheme = css`
 		white-space: pre;
 	}
 	code[class*='language-'],
-	pre[class*='language-'] {
+	pre[class*='language-'],
+	.CodeMirror {
 		color: ${theme.colors.gray[800]};
 		background: none;
 		font-family: ${theme.fonts.mono};
@@ -38,7 +39,8 @@ const prismBaseTheme = css`
 		white-space: pre;
 	}
 	:not(pre) > code[class*='language-'],
-	pre[class*='language-'] {
+	pre[class*='language-'],
+	.CodeMirror {
 		background: ${theme.colors.gray[50]};
 		border: 1px solid ${theme.colors.gray[200]};
 		border-radius: ${theme.radii.lg};
