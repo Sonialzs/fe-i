@@ -29,10 +29,7 @@ export default function KlipseRender({
 			s.id = id;
 			document.body.appendChild(s);
 		}
-		addScript(
-			'https://storage.googleapis.com/app.klipse.tech/plugin_prod/js/klipse_plugin.min.js',
-			'klipse-script'
-		);
+		addScript('/js/klipse_plugin.min.js', 'klipse-script');
 		// @ts-ignore
 		window.klipse_settings = {
 			selector_eval_js: '.language-klipse-eval-js', // css selector for the html elements you want to klipsify
