@@ -39,32 +39,33 @@ export default function QuestionDetail({
 				maxWidth="900px"
 				mx="auto"
 			>
-				<Box as="article" width={['20em', '30em', '40em', '50em']}>
-					<Box
-						css={css`
-							h2 {
-								text-indent: 0;
-								font-size: 1.25em;
-							}
-						`}
-					>
+				<Box
+					css={css`
+						h2 {
+							text-indent: 0;
+							font-size: 1.25em;
+						}
+					`}
+				>
+					<Box as="article" width={['20em', '30em', '40em', '50em']}>
 						<MDXRenderAsync mdx={question.body} />
-					</Box>
-					<Flex mt={'1em'} justify={'space-between'}>
-						<Flex fontSize="xs" color="gray.500">
-							{question.attributes.date} /
-							<ViewCounterAsync
-								fontSize="xs"
-								ml="0.5em"
-								slug={question.attributes.slug}
-							/>
-							<EditLink.Question ml={4} />
+
+						<Flex mt={'1em'} justify={'space-between'}>
+							<Flex fontSize="xs" color="gray.500">
+								{question.attributes.date} /
+								<ViewCounterAsync
+									fontSize="xs"
+									ml="0.5em"
+									slug={question.attributes.slug}
+								/>
+								<EditLink.Question ml={4} />
+							</Flex>
+							<Box>
+								<TagsAsync tags={question.attributes.tags} />
+							</Box>
 						</Flex>
-						<Box>
-							<TagsAsync tags={question.attributes.tags} />
-						</Box>
-					</Flex>
-					<AnswerRenderAsync answer={answer} />
+						<AnswerRenderAsync answer={answer} />
+					</Box>
 				</Box>
 			</Flex>
 		</PageLayout>

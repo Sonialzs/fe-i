@@ -24,10 +24,10 @@ const plugins = [
 		defaultLayout: true,
 		fileExtensions: ['mdx'],
 		remarkPlugins: [
-			require('@components/metrics/MDXRender/node_modules/remark-autolink-headings'),
-			require('@components/metrics/MDXRender/node_modules/remark-slug'),
-			require('@components/metrics/MDXRender/node_modules/remark-code-titles'),
-			require('@components/metrics/MDXRender/node_modules/remark-emoji'),
+			require('remark-autolink-headings'),
+			require('remark-slug'),
+			require('remark-code-titles'),
+			require('remark-emoji'),
 		],
 		usesSrc: false,
 		extendFrontMatter: {
