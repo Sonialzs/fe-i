@@ -30,6 +30,7 @@ export default function BlogLayout({
 				m="0 auto 4rem auto"
 				maxWidth="700px"
 				w="100%"
+				px={4}
 			>
 				<Flex
 					flexDirection="column"
