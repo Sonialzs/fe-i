@@ -1,3 +1,7 @@
+import { GetStaticProps } from 'next';
+import { NextSeo } from 'next-seo';
+import { useRouter } from 'next/router';
+import React, { ReactElement } from 'react';
 import { Flex, Stack, Text, useColorMode } from '@chakra-ui/react';
 import { CategoryJumpAsync } from '@components/CategoryJump/async';
 import { SystemRenderAsync } from '@components/SystemRender/async';
@@ -9,10 +13,6 @@ import CategoriesConfig, {
 } from '@service/category.config';
 import { getCategoryIndex, getCategoryQuestionsCount } from '@service/cateogry';
 import { getTagConfig, TagConfigType } from '@service/tag';
-import { GetStaticProps } from 'next';
-import { NextSeo } from 'next-seo';
-import { useRouter } from 'next/router';
-import React, { ReactElement } from 'react';
 
 interface Props {
 	attributes: any;

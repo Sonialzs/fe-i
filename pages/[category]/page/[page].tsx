@@ -2,13 +2,10 @@ import { Flex, Stack } from '@chakra-ui/react';
 import { PaginationAsync } from '@components/Pagination/async';
 import { QuestionCardAsync } from '@components/QuestionCard/async';
 import PageLayout from '@layouts/page';
+import CategoriesConfig from '@service/category.config';
 import { GetStaticProps } from 'next';
-import { NextSeo } from 'next-seo';
 import { useRouter } from 'next/router';
 import React, { ReactElement } from 'react';
-import CategoriesConfig, {
-	getFolderNameByRoute,
-} from 'service/category.config';
 import { getCategoryTotalPages } from 'service/cateogry';
 import { getQuestion, getQuestionsByCategory } from 'service/question';
 import { Question } from 'service/types';
@@ -25,15 +22,9 @@ export default function Page({
 	totalPages,
 }: Props): ReactElement {
 	const router = useRouter();
-	const folderName = getFolderNameByRoute(router.query.category as string);
 
 	return (
 		<>
-			<NextSeo
-				title={`${folderName}面试题 | FE.i前端知识库`}
-				description={`${folderName}面试题, FE.i前端知识库`}
-				canonical={router.asPath}
-			/>
 			<PageLayout>
 				<Flex
 					justifyContent="center"
