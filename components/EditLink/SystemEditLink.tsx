@@ -1,4 +1,4 @@
-import { Alert, Link } from '@chakra-ui/react';
+import { Alert, Link, LinkProps } from '@chakra-ui/react';
 import { useRouter } from 'next/router';
 import React, { ReactElement } from 'react';
 import { getFolderNameByRoute } from 'service/category.config';
@@ -6,8 +6,10 @@ import { VscGithubAlt } from 'react-icons/vsc';
 
 interface Props {}
 
-// 大纲页面的提醒
-export default function OutlineWarning({}: Props): ReactElement {
+// 大纲页面编辑链接
+export default function SystemEditLink({
+	...props
+}: Props & LinkProps): ReactElement {
 	const router = useRouter();
 
 	const getGithubEditLink = () => {
@@ -25,6 +27,7 @@ export default function OutlineWarning({}: Props): ReactElement {
 			w="100%"
 			fontSize="sm"
 			color="gray.400"
+			{...props}
 		>
 			欢迎在Github
 			<VscGithubAlt />

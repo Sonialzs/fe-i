@@ -3,7 +3,7 @@ import dynamic from 'next/dynamic';
 import React from 'react';
 
 export const MDXRenderAsync = dynamic(
-	() => /* WebpackChunkName:MDXRender */ import('./'),
+	() => /* WebpackChunkName:MDXRender */ import('.'),
 	{
 		loading: () => (
 			<Skeleton

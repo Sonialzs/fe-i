@@ -1,8 +1,8 @@
 import { Box, Collapse, IconButton, Link, Stack, Text } from '@chakra-ui/react';
 import { AuthorsAsync } from '@components/AuthorsRender/async';
-import { MDXRenderAsync } from '@components/MDXRender/async';
+import { MDXRenderAsync } from '@components/metrics/MDXRender/async';
 import { useRouter } from 'next/router';
-import React, { ReactElement } from 'react';
+import React, { ReactElement, useState } from 'react';
 import { AiFillCaretDown, AiFillCaretUp } from 'react-icons/ai';
 import { GoLinkExternal } from 'react-icons/go';
 import { getFolderNameByRoute } from 'service/category.config';
@@ -13,7 +13,7 @@ interface Props {
 }
 
 export default function AnswerRender({ answer }: Props): ReactElement {
-	const [show, setShow] = React.useState(false);
+	const [show, setShow] = useState(false);
 
 	const handleToggle = () => setShow(!show);
 
@@ -43,8 +43,6 @@ export default function AnswerRender({ answer }: Props): ReactElement {
 							<AuthorsAsync
 								authors={answer.attributes.authors}
 								authorsUrl={answer.attributes.authorsUrl}
-								category={answer.attributes.category}
-								index={answer.attributes.index}
 							/>
 							<MDXRenderAsync mdx={answer?.body} />
 						</Stack>

@@ -1,6 +1,6 @@
 // TODO 待优化
 import { Box, theme, useColorMode } from '@chakra-ui/react';
-import MDXComponents from '@components/MDXComponents';
+import MDXComponents from '@components/metrics/MDXComponents';
 import styled from '@emotion/styled';
 import React, { ReactElement, useEffect, useRef } from 'react';
 import { LiveEditor, LiveError, LivePreview, LiveProvider } from 'react-live';

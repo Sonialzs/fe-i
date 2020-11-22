@@ -1,6 +1,6 @@
 import { useDisclosure, Button, Collapse, Stack } from '@chakra-ui/react';
-import { MDXRenderAsync } from '@components/MDXRender/async';
-import { OutlineWarningAsync } from '@components/OutlineWarning/async';
+import EditLink from '@components/EditLink';
+import { MDXRenderAsync } from '@components/metrics/MDXRender/async';
 import React, { ReactElement } from 'react';
 import { BsCaretDownFill } from 'react-icons/bs';
 
@@ -20,7 +20,7 @@ export default function SystemRender({ mdx }: Props): ReactElement {
 			<Collapse in={isOpen} animateOpacity>
 				<Stack spacing={8}>
 					<MDXRenderAsync mdx={mdx} />
-					<OutlineWarningAsync />
+					<EditLink.System />
 				</Stack>
 			</Collapse>
 		</>

@@ -1,5 +1,5 @@
-import { KlipseRenderAsync } from '@components/KlipseRender/async';
-import { LiveCodeAsync } from '@components/LiveCode/async';
+import { KlipseRenderAsync } from '@components/metrics/KlipseRender/async';
+import { LiveCodeAsync } from '@components/metrics/LiveCode/async';
 import React, { ReactElement } from 'react';
 import Highlighter from './highlighter';
 
