@@ -1,6 +1,7 @@
 import { Box, Flex } from '@chakra-ui/react';
 import { AnswerRenderAsync } from '@components/AnswerRender/async';
-import { MDXRenderAsync } from '@components/MDXRender/async';
+import EditLink from '@components/EditLink';
+import { MDXRenderAsync } from '@components/metrics/MDXRender/async';
 import QuestionSEO from '@components/SEO/QuestionSEO';
 import { TagsAsync } from '@components/TagsRender/async';
 import { ViewCounterAsync } from '@components/ViewCounter/async';
@@ -57,6 +58,7 @@ export default function QuestionDetail({
 								ml="0.5em"
 								slug={question.attributes.slug}
 							/>
+							<EditLink.Question ml={4} />
 						</Flex>
 						<Box>
 							<TagsAsync tags={question.attributes.tags} />

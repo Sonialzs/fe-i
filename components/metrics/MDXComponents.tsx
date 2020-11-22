@@ -12,7 +12,7 @@ import {
 } from '@chakra-ui/react';
 import NextLink from 'next/link';
 import React from 'react';
-import CodeBlock from './CodeBlock';
+import CodeBlock from '../CodeBlock';
 
 // TODO 滚动条深色适配
 const Table = (props) => (
