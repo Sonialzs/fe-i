@@ -4,7 +4,6 @@ import { QuestionCardAsync } from '@components/QuestionCard/async';
 import PageLayout from '@layouts/page';
 import CategoriesConfig from '@service/category.config';
 import { GetStaticProps } from 'next';
-import { useRouter } from 'next/router';
 import React, { ReactElement } from 'react';
 import { getCategoryTotalPages } from 'service/cateogry';
 import { getQuestion, getQuestionsByCategory } from 'service/question';
@@ -21,8 +20,6 @@ export default function Page({
 	category,
 	totalPages,
 }: Props): ReactElement {
-	const router = useRouter();
-
 	return (
 		<>
 			<PageLayout>

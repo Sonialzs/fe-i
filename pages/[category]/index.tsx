@@ -2,15 +2,14 @@ import { GetStaticProps } from 'next';
 import { NextSeo } from 'next-seo';
 import { useRouter } from 'next/router';
 import React, { ReactElement } from 'react';
+
 import { Flex, Stack, Text, useColorMode } from '@chakra-ui/react';
 import { CategoryJumpAsync } from '@components/CategoryJump/async';
 import { SystemRenderAsync } from '@components/SystemRender/async';
 import { TagsSummaryAsync } from '@components/TagsSummary/async';
 import { ViewCounterAsync } from '@components/ViewCounter/async';
 import PageLayout from '@layouts/page';
-import CategoriesConfig, {
-	getFolderNameByRoute,
-} from '@service/category.config';
+import CategoriesConfig from '@service/category.config';
 import { getCategoryIndex, getCategoryQuestionsCount } from '@service/cateogry';
 import { getTagConfig, TagConfigType } from '@service/tag';
 
@@ -20,6 +19,7 @@ interface Props {
 	// 当前分类问题的数量
 	total: number;
 	tagsConfig: TagConfigType[];
+	folderName: string;
 }
 
 export default function Category({
@@ -27,10 +27,12 @@ export default function Category({
 	body,
 	total,
 	tagsConfig,
+	folderName,
 }: Props): ReactElement {
 	const { colorMode } = useColorMode();
 	const router = useRouter();
-	const folderName = getFolderNameByRoute(router.query.category as string);
+	// ! 这行代码会使First Load JS增加59kb，why？
+	// const folderName = getFolderNameByRoute(router.query.category as string);
 
 	const textColor = {
 		light: 'gray.700',
@@ -112,6 +114,7 @@ export const getStaticProps: GetStaticProps = async (context) => {
 	const fm = getCategoryIndex(category);
 	const total = getCategoryQuestionsCount(category);
 	const tagsConfig = getTagConfig(category);
+	const folderName = CategoriesConfig.getFolderNameByRoute(category);
 
 	return {
 		props: {
@@ -119,6 +122,7 @@ export const getStaticProps: GetStaticProps = async (context) => {
 			body: fm?.body,
 			total,
 			tagsConfig,
+			folderName,
 		},
 	};
 };
