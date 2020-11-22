@@ -38,6 +38,8 @@ export default function KlipseRender({
 			selector_eval_js: '.language-klipse-eval-js', // css selector for the html elements you want to klipsify
 			// ! 因为无法修改CodeMirror生成的样式，所以暂时弃用CodeMirror
 			editor_type: 'dom',
+			// 禁止从github加载pretty_format.js，会导致阻塞
+			no_dynamic_scripts: true,
 		};
 	}, []);
 
