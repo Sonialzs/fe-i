@@ -4,10 +4,14 @@ import { SystemRenderAsync } from '@components/SystemRender/async';
 import { TagsSummaryAsync } from '@components/TagsSummary/async';
 import { ViewCounterAsync } from '@components/ViewCounter/async';
 import PageLayout from '@layouts/page';
-import CategoriesConfig from '@service/category.config';
+import CategoriesConfig, {
+	getFolderNameByRoute,
+} from '@service/category.config';
 import { getCategoryIndex, getCategoryQuestionsCount } from '@service/cateogry';
 import { getTagConfig, TagConfigType } from '@service/tag';
 import { GetStaticProps } from 'next';
+import { NextSeo } from 'next-seo';
+import { useRouter } from 'next/router';
 import React, { ReactElement } from 'react';
 
 interface Props {
@@ -25,68 +29,81 @@ export default function Category({
 	tagsConfig,
 }: Props): ReactElement {
 	const { colorMode } = useColorMode();
+	const router = useRouter();
+	const folderName = getFolderNameByRoute(router.query.category as string);
 
 	const textColor = {
 		light: 'gray.700',
 		dark: 'gray.400',
 	};
 	return (
-		<PageLayout>
-			<Stack
-				as="article"
-				spacing={8}
-				justifyContent="center"
-				alignItems="flex-start"
-				m="0 auto 4rem auto"
-				maxWidth="700px"
-				w="100%"
-				px={[' 1em', '0']}
-			>
-				<Flex
-					flexDirection="column"
-					justifyContent="flex-start"
+		<>
+			<NextSeo
+				title={`${folderName}知识大纲 | FE.i 前端知识库`}
+				description={`${folderName}知识体系大纲`}
+				canonical={router.asPath}
+			/>
+
+			<PageLayout>
+				<Stack
+					as="article"
+					spacing={8}
+					justifyContent="center"
 					alignItems="flex-start"
+					m="0 auto 4rem auto"
 					maxWidth="700px"
 					w="100%"
+					px={[' 1em', '0']}
 				>
 					<Flex
-						justify="space-between"
-						align={['initial', 'center']}
-						direction={['column', 'row']}
-						mt={2}
+						flexDirection="column"
+						justifyContent="flex-start"
+						alignItems="flex-start"
+						maxWidth="700px"
 						w="100%"
-						mb={4}
 					>
-						<Flex align="center">
-							<Text fontSize="sm" color={textColor[colorMode]}>
-								{attributes.authors.map(
-									(author) => author + ' '
-								)}
-								{/* {format(
+						<Flex
+							justify="space-between"
+							align={['initial', 'center']}
+							direction={['column', 'row']}
+							mt={2}
+							w="100%"
+							mb={4}
+						>
+							<Flex align="center">
+								<Text
+									fontSize="sm"
+									color={textColor[colorMode]}
+								>
+									{attributes.authors.map(
+										(author) => author + ' '
+									)}
+									{/* {format(
 									parseISO(frontMatter.publishedAt),
 									'MMMM dd, yyyy'
 								)} */}
-								{' / ' + attributes.date}
+									{' / ' + attributes.date}
+								</Text>
+							</Flex>
+							<Text
+								fontSize="xs"
+								color="gray.500"
+								minWidth="100px"
+								mt={[2, 0]}
+							>
+								<ViewCounterAsync
+									fontSize="xs"
+									slug={attributes.slug}
+								/>
 							</Text>
 						</Flex>
-						<Text
-							fontSize="xs"
-							color="gray.500"
-							minWidth="100px"
-							mt={[2, 0]}
-						>
-							<ViewCounterAsync
-								fontSize="xs"
-								slug={attributes.slug}
-							/>
-						</Text>
 					</Flex>
-				</Flex>
-				<CategoryJumpAsync total={total} />
-				<TagsSummaryAsync tagsConfig={tagsConfig} />
-				<SystemRenderAsync mdx={body} />
-			</Stack>
-		</PageLayout>
+					<CategoryJumpAsync total={total} />
+					<TagsSummaryAsync tagsConfig={tagsConfig} />
+					<SystemRenderAsync mdx={body} />
+				</Stack>
+			</PageLayout>
+		</>
 	);
 }
 

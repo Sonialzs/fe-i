@@ -10,6 +10,8 @@ import { IconRenderAsync } from '@components/IconRender/async';
 import { QuestionCardAsync } from '@components/QuestionCard/async';
 import PageLayout from '@layouts/page';
 import { GetStaticProps } from 'next';
+import { NextSeo } from 'next-seo';
+import { useRouter } from 'next/router';
 import React, { ReactElement } from 'react';
 import { getRouterNameByFolder } from 'service/category.config';
 import { getCategories } from 'service/cateogry';
@@ -29,55 +31,63 @@ export default function Tag({
 	questions,
 }: Props): ReactElement {
 	const { colorMode } = useColorMode();
+	const router = useRouter();
 	const titleBoxColor = {
 		light: 'gray.50',
 		dark: 'gray.800',
 	};
 
 	return (
-		<PageLayout>
-			<Flex
-				justifyContent="center"
-				alignItems="center"
-				flexDirection="column"
-				maxWidth="900px"
-				mx="auto"
-			>
+		<>
+			<NextSeo
+				title={`${config.title}相关问题 | FE.i前端知识库`}
+				description={config.summary}
+				canonical={router.asPath}
+			/>
+			<PageLayout>
 				<Flex
-					w="100%"
-					height={['5em', '10em']}
-					backgroundColor={titleBoxColor[colorMode]}
-					borderRadius={8}
-					mb={16}
+					justifyContent="center"
+					alignItems="center"
+					flexDirection="column"
+					maxWidth="900px"
+					mx="auto"
 				>
-					<Box w={['5em', '10em']} h={['5em', '10em']}>
-						<IconRenderAsync category={category} size="100%" />
-					</Box>
-					<div className="intro">
-						<Heading
-							as="h2"
-							fontSize={['md', 'xl']}
-							mt={['0.2em', '1em']}
-						>
-							{config.title}
-						</Heading>
-						<Text fontSize={['xs', 'sm']} color="gray.500">
-							{config.summary}
-						</Text>
-					</div>
+					<Flex
+						w="100%"
+						height={['5em', '10em']}
+						backgroundColor={titleBoxColor[colorMode]}
+						borderRadius={8}
+						mb={16}
+					>
+						<Box w={['5em', '10em']} h={['5em', '10em']}>
+							<IconRenderAsync category={category} size="100%" />
+						</Box>
+						<div className="intro">
+							<Heading
+								as="h2"
+								fontSize={['md', 'xl']}
+								mt={['0.2em', '1em']}
+							>
+								{config.title}
+							</Heading>
+							<Text fontSize={['xs', 'sm']} color="gray.500">
+								{config.summary}
+							</Text>
+						</div>
+					</Flex>
+					<Stack spacing={8}>
+						{questions &&
+							questions.map((question) => (
+								<QuestionCardAsync
+									question={question}
+									href={`/${category}/question/${question.attributes.index}`}
+									key={question.attributes.slug}
+								/>
+							))}
+					</Stack>
 				</Flex>
-				<Stack spacing={8}>
-					{questions &&
-						questions.map((question) => (
-							<QuestionCardAsync
-								question={question}
-								href={`/${category}/question/${question.attributes.index}`}
-								key={question.attributes.slug}
-							/>
-						))}
-				</Stack>
-			</Flex>
-		</PageLayout>
+			</PageLayout>
+		</>
 	);
 }
 

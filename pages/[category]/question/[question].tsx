@@ -1,7 +1,7 @@
 import { Box, Flex } from '@chakra-ui/react';
 import { AnswerRenderAsync } from '@components/AnswerRender/async';
 import { MDXRenderAsync } from '@components/MDXRender/async';
-import QuestionSEO from '@components/QuestionSEO';
+import QuestionSEO from '@components/SEO/QuestionSEO';
 import { TagsAsync } from '@components/TagsRender/async';
 import { ViewCounterAsync } from '@components/ViewCounter/async';
 import { css } from '@emotion/react';

@@ -3,8 +3,12 @@ import { PaginationAsync } from '@components/Pagination/async';
 import { QuestionCardAsync } from '@components/QuestionCard/async';
 import PageLayout from '@layouts/page';
 import { GetStaticProps } from 'next';
+import { NextSeo } from 'next-seo';
+import { useRouter } from 'next/router';
 import React, { ReactElement } from 'react';
-import CategoriesConfig from 'service/category.config';
+import CategoriesConfig, {
+	getFolderNameByRoute,
+} from 'service/category.config';
 import { getCategoryTotalPages } from 'service/cateogry';
 import { getQuestion, getQuestionsByCategory } from 'service/question';
 import { Question } from 'service/types';
@@ -20,31 +24,41 @@ export default function Page({
 	category,
 	totalPages,
 }: Props): ReactElement {
+	const router = useRouter();
+	const folderName = getFolderNameByRoute(router.query.category as string);
+
 	return (
-		<PageLayout>
-			<Flex
-				justifyContent="center"
-				alignItems="center"
-				flexDirection="column"
-				maxWidth="900px"
-				mx="auto"
-			>
-				{(!questions || questions.length === 0) && (
-					<div>一滴都没了</div>
-				)}
-				<Stack spacing={8}>
-					{questions &&
-						questions.map((question) => (
-							<QuestionCardAsync
-								question={question}
-								href={`/${category}/question/${question.attributes.index}`}
-								key={question.attributes.slug}
-							/>
-						))}
-				</Stack>
-				<PaginationAsync totalPages={totalPages} />
-			</Flex>
-		</PageLayout>
+		<>
+			<NextSeo
+				title={`${folderName}面试题 | FE.i前端知识库`}
+				description={`${folderName}面试题, FE.i前端知识库`}
+				canonical={router.asPath}
+			/>
+			<PageLayout>
+				<Flex
+					justifyContent="center"
+					alignItems="center"
+					flexDirection="column"
+					maxWidth="900px"
+					mx="auto"
+				>
+					{(!questions || questions.length === 0) && (
+						<div>一滴都没了</div>
+					)}
+					<Stack spacing={8}>
+						{questions &&
+							questions.map((question) => (
+								<QuestionCardAsync
+									question={question}
+									href={`/${category}/question/${question.attributes.index}`}
+									key={question.attributes.slug}
+								/>
+							))}
+					</Stack>
+					<PaginationAsync totalPages={totalPages} />
+				</Flex>
+			</PageLayout>
+		</>
 	);
 }
 
