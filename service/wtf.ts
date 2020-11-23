@@ -1,6 +1,7 @@
-import { memoize } from './utils';
+import fm from 'front-matter';
 import fs from 'fs';
-import fm, { FrontMatterResult } from 'front-matter';
+import { WTFType } from './types';
+import { memoize } from './utils';
 
 const basePath = process.env.BASE_PATH;
 
@@ -13,15 +14,15 @@ function _getWTFbyCategory(categoryFolder: string) {
 	const files = fs
 		.readdirSync(path)
 		.map((fileName) => getWTFByFileName(categoryFolder, fileName))
-		.filter((fm) => !fm?.attributes.draft)
-		.sort((a, b) => a?.attributes.index - b?.attributes.index);
+		.filter((fm) => !fm!.attributes.draft)
+		.sort((a, b) => a!.attributes.index - b!.attributes.index);
 	return files;
 }
 
 function _getWTFByFileName(
 	categoryFolder: string,
 	fileName: string
-): FrontMatterResult<any> | null {
+): WTFType | null {
 	if (!fileName.endsWith('.mdx')) {
 		fileName = fileName + '.mdx';
 	}

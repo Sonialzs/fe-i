@@ -7,10 +7,10 @@ import { GetStaticProps } from 'next';
 import React, { ReactElement } from 'react';
 import { getCategoryTotalPages } from 'service/cateogry';
 import { getQuestion, getQuestionsByCategory } from 'service/question';
-import { Question } from 'service/types';
+import { QuestionType } from 'service/types';
 
 interface Props {
-	questions?: Question[];
+	questions?: QuestionType[];
 	category: string;
 	totalPages: number;
 }

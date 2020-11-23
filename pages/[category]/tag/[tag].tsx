@@ -16,12 +16,12 @@ import React, { ReactElement } from 'react';
 import CategoriesConfig from 'service/category.config';
 import { getQuestion } from 'service/question';
 import { buildTagConfig, getTagConfig, TagConfigType } from 'service/tag';
-import { Question } from 'service/types';
+import { QuestionType } from 'service/types';
 
 interface Props {
 	category: string;
 	config: TagConfigType;
-	questions: Question[];
+	questions: QuestionType[];
 }
 
 export default function Tag({

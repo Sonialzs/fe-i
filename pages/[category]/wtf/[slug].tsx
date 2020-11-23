@@ -3,7 +3,7 @@ import WTFLayout from '@layouts/wtf';
 import CategoriesConfig, {
 	getFolderNameByRoute,
 } from '@service/category.config';
-import { getReadingTime, getWordCount } from '@service/mdx';
+import { getReadingTime } from '@service/mdx';
 import { getWTFByCategory, getWTFByFileName } from '@service/wtf';
 import { GetStaticProps } from 'next';
 import React, { ReactElement } from 'react';
@@ -26,7 +26,6 @@ export const getStaticProps: GetStaticProps = async (context) => {
 	const folderName = getFolderNameByRoute(category as string);
 	const fm = getWTFByFileName(folderName, slug as string);
 
-	fm!.attributes.wordCount = getWordCount(fm?.body);
 	fm!.attributes.readingTime = getReadingTime(fm?.body);
 
 	return {
@@ -46,11 +45,12 @@ export function getStaticPaths() {
 			paths.push({
 				params: {
 					category: categoryConfig.routeName,
-					slug: wtf?.attributes.slug,
+					slug: wtf!.attributes.slug,
 				},
 			});
 		});
 	});
+	console.log(paths);
 
 	return {
 		paths,

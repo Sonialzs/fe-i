@@ -1,4 +1,4 @@
-export interface Question {
+export interface QuestionType {
 	attributes: {
 		title: string;
 		tags?: string[];
@@ -10,7 +10,7 @@ export interface Question {
 	body: string;
 }
 
-export interface Answer {
+export interface AnswerType {
 	attributes: {
 		category: string;
 		index: string;
@@ -22,15 +22,40 @@ export interface Answer {
 	body: string;
 }
 
-export interface Blog {
+export interface BlogType {
 	attributes: {
 		title: string;
 		summary: string;
 		tags?: string[];
 		slug: string;
-		publishAt: string;
-		updatedAt: string;
+		date: string;
 		draft: boolean;
+		authors: string[];
+		authorsUrl: string[];
+		readingTime?: ReadingTime;
 	};
 	body: string;
+}
+
+export interface WTFType {
+	attributes: {
+		title: string;
+		summary?: string;
+		index: number;
+		tags?: string[];
+		slug: string;
+		date: string;
+		draft: boolean;
+		authors: string[];
+		authorsUrl: string[];
+		readingTime?: ReadingTime;
+	};
+	body: string;
+}
+
+interface ReadingTime {
+	text: string;
+	minutes: number;
+	time: number;
+	words: number;
 }
