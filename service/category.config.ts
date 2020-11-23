@@ -130,6 +130,7 @@ const CategoriesConfig = {
 	all: allCategories,
 	available: getAvailableCategories(),
 	titles: getAllTitles(),
+	getFolderNameByRoute,
 };
 
 export default CategoriesConfig;
