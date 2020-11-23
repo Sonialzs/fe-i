@@ -1,4 +1,5 @@
 import { Box, Button, Flex, IconButton, useColorMode } from '@chakra-ui/react';
+import IconRender from '@components/IconRender';
 import styled from '@emotion/styled';
 import { useToggle } from 'ahooks';
 import NextLink from 'next/link';
@@ -84,8 +85,7 @@ export default function Navbar({}: Props): ReactElement {
 								variant="ghost"
 								p={[1, 4]}
 								leftIcon={
-									category.icon &&
-									React.createElement(category.icon)
+									<IconRender iconName={category.routeName} />
 								}
 							>
 								{category.title}

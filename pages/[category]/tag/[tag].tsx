@@ -6,17 +6,14 @@ import {
 	Text,
 	useColorMode,
 } from '@chakra-ui/react';
-import { IconRenderAsync } from '@components/IconRender/async';
+import IconRender from '@components/IconRender';
 import { QuestionCardAsync } from '@components/QuestionCard/async';
 import PageLayout from '@layouts/page';
 import { GetStaticProps } from 'next';
 import { NextSeo } from 'next-seo';
 import { useRouter } from 'next/router';
 import React, { ReactElement } from 'react';
-import CategoriesConfig, {
-	getRouterNameByFolder,
-} from 'service/category.config';
-import { getCategories } from 'service/cateogry';
+import CategoriesConfig from 'service/category.config';
 import { getQuestion } from 'service/question';
 import { buildTagConfig, getTagConfig, TagConfigType } from 'service/tag';
 import { Question } from 'service/types';
@@ -62,7 +59,10 @@ export default function Tag({
 						mb={16}
 					>
 						<Box w={['5em', '10em']} h={['5em', '10em']}>
-							<IconRenderAsync category={category} size="100%" />
+							<IconRender
+								iconName={router.query.category as string}
+								size="100%"
+							/>
 						</Box>
 						<div className="intro">
 							<Heading

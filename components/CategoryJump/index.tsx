@@ -1,14 +1,13 @@
-import { Flex, Link, Text, theme, useColorMode } from '@chakra-ui/react';
+import { Flex, Link, Text, useColorMode } from '@chakra-ui/react';
+import IconRender from '@components/IconRender';
 import NextLink from 'next/link';
 import { useRouter } from 'next/router';
 import React, { ReactElement } from 'react';
 import { BiLinkExternal } from 'react-icons/bi';
-import { getIconByRoute } from 'service/category.config';
 
 interface Props {
 	total: number | string;
 }
-
 
 const textColor = {
 	light: 'gray.500',
@@ -24,16 +23,10 @@ export default function CategoryJump({ total }: Props): ReactElement {
 			boxShadow={' rgba(149, 157, 165, 0.2) 0px 8px 24px;'}
 			borderRadius={4}
 			w="100%"
-			p={6}
+			p={2}
 			alignItems="center"
 		>
-			{React.createElement(
-				getIconByRoute(router.query.category as string),
-				{
-					width: '42px',
-					height: '42px',
-				}
-			)}
+			<IconRender iconName={router.query.category as string} size="6em" />
 			<Text
 				fontSize="sm"
 				color={textColor[colorMode]}

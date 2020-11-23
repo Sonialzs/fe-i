@@ -1,6 +1,5 @@
 import {
 	ChakraProvider,
-	cookieStorageManager,
 	localStorageManager,
 	useColorMode,
 } from '@chakra-ui/react';
@@ -59,7 +58,7 @@ export default function App({ Component, pageProps }) {
 		<>
 			<ChakraProvider
 				theme={theme}
-				colorModeManager={cookieStorageManager}
+				colorModeManager={localStorageManager}
 				resetCSS={true}
 			>
 				<GlobalStyle>

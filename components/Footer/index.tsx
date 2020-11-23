@@ -1,5 +1,6 @@
 import { Box, Flex, IconButton, Link, Text } from '@chakra-ui/react';
-import { IconVercel } from '@components/Icons';
+import IconRender from '@components/IconRender';
+import { css } from '@emotion/react';
 import React, { ReactElement } from 'react';
 import { FiGithub } from 'react-icons/fi';
 import { MdMailOutline } from 'react-icons/md';
@@ -71,8 +72,18 @@ export default function Footer({}: Props): ReactElement {
 					部署于
 					<Link isExternal href="https://vercel.com">
 						Vercel
-						<Box as="span" verticalAlign="text-bottom" ml={1}>
-							<IconVercel />
+						<Box
+							as="span"
+							css={css`
+								margin-left: 2px;
+								vertical-align: text-bottom;
+
+								img {
+									display: inline-block;
+								}
+							`}
+						>
+							<IconRender iconName="vercel" size="1em" />
 						</Box>
 					</Link>
 				</Text>

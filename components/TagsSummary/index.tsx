@@ -23,7 +23,7 @@ export default function TagsSummary({ tagsConfig }: Props): ReactElement {
 							<Tag
 								fontWeight="500"
 								cursor="pointer"
-								color="gray.600"
+								color="gray.500"
 							>
 								{tags.title}
 								<Box ml="2">{tags.childs.length}</Box>

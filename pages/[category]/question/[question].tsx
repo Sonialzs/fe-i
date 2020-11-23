@@ -5,7 +5,6 @@ import { MDXRenderAsync } from '@components/metrics/MDXRender/async';
 import QuestionSEO from '@components/SEO/QuestionSEO';
 import { TagsAsync } from '@components/TagsRender/async';
 import { ViewCounterAsync } from '@components/ViewCounter/async';
-import { css } from '@emotion/react';
 import PageLayout from '@layouts/page';
 import { GetStaticProps } from 'next';
 import { useRouter } from 'next/router';
