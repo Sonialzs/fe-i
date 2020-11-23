@@ -6,10 +6,10 @@ import React, { ReactElement, useState } from 'react';
 import { AiFillCaretDown, AiFillCaretUp } from 'react-icons/ai';
 import { GoLinkExternal } from 'react-icons/go';
 import { getFolderNameByRoute } from 'service/category.config';
-import { Answer } from 'service/types';
+import { AnswerType } from 'service/types';
 
 interface Props {
-	answer?: Answer;
+	answer?: AnswerType;
 }
 
 export default function AnswerRender({ answer }: Props): ReactElement {

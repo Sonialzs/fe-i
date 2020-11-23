@@ -14,7 +14,7 @@ export default function QuestionEditLink({
 
 	return (
 		<Link
-			href={`https://github.com/Xwil/fe-i/edit/master/content/${category}/${index}/question.mdx`}
+			href={`https://github.com/Xwil/fe-i/edit/master/content/${category}/questions/${index}/question.mdx`}
 			isExternal
 			{...props}
 		>

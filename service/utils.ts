@@ -12,7 +12,7 @@ const basePath = process.env.BASE_PATH;
  */
 export function buildPath(category, questionFolder) {
 	const categoryFolder = getFolderNameByRoute(category);
-	const path = basePath + categoryFolder + '/' + questionFolder;
+	const path = basePath + categoryFolder + '/questions/' + questionFolder;
 	return path;
 }
 

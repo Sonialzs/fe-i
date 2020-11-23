@@ -1,15 +1,3 @@
-import {
-	IconBrowser,
-	IconCSS,
-	IconHTML,
-	IconHTTP,
-	IconJavaScript,
-	IconNode,
-	IconReact,
-	IconTypescript,
-	IconVue,
-	IconWebpack,
-} from '@components/Icons';
 import _ from 'lodash';
 import { memoize } from './utils';
 
@@ -33,62 +21,52 @@ const allCategories: CategoryType[] = [
 		title: 'HTML',
 		folder: 'HTML',
 		routeName: 'html',
-		icon: IconHTML,
 	},
 	{
 		title: 'CSS',
 		folder: 'CSS',
 		routeName: 'css',
-		icon: IconCSS,
 	},
 	{
 		title: 'JavaScript',
 		folder: 'JavaScript',
 		routeName: 'js',
 		available: true,
-		icon: IconJavaScript,
 	},
 	{
 		title: 'TypeScript',
 		folder: 'TypeScript',
 		routeName: 'ts',
-		icon: IconTypescript,
 	},
 	{
 		title: 'Node.js',
 		folder: 'Node',
 		routeName: 'node',
-		icon: IconNode,
 	},
 	{
 		title: 'React',
 		folder: 'React',
 		routeName: 'react',
-		icon: IconReact,
 	},
 	{
 		title: 'Vue',
 		folder: 'Vue',
 		routeName: 'vue',
-		icon: IconVue,
 	},
 	{
 		title: 'Webpack',
 		folder: 'Webpack',
 		routeName: 'webpack',
-		icon: IconWebpack,
 	},
 	{
 		title: '网络',
 		folder: 'Network',
 		routeName: 'network',
-		icon: IconHTTP,
 	},
 	{
 		title: '浏览器',
 		folder: 'Browser',
 		routeName: 'browser',
-		icon: IconBrowser,
 	},
 	{
 		title: '其他',

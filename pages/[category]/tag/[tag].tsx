@@ -6,23 +6,22 @@ import {
 	Text,
 	useColorMode,
 } from '@chakra-ui/react';
-import { IconRenderAsync } from '@components/IconRender/async';
+import IconRender from '@components/IconRender';
 import { QuestionCardAsync } from '@components/QuestionCard/async';
 import PageLayout from '@layouts/page';
 import { GetStaticProps } from 'next';
 import { NextSeo } from 'next-seo';
 import { useRouter } from 'next/router';
 import React, { ReactElement } from 'react';
-import { getRouterNameByFolder } from 'service/category.config';
-import { getCategories } from 'service/cateogry';
+import CategoriesConfig from 'service/category.config';
 import { getQuestion } from 'service/question';
 import { buildTagConfig, getTagConfig, TagConfigType } from 'service/tag';
-import { Question } from 'service/types';
+import { QuestionType } from 'service/types';
 
 interface Props {
 	category: string;
 	config: TagConfigType;
-	questions: Question[];
+	questions: QuestionType[];
 }
 
 export default function Tag({
@@ -60,7 +59,10 @@ export default function Tag({
 						mb={16}
 					>
 						<Box w={['5em', '10em']} h={['5em', '10em']}>
-							<IconRenderAsync category={category} size="100%" />
+							<IconRender
+								iconName={router.query.category as string}
+								size="180"
+							/>
 						</Box>
 						<div className="intro">
 							<Heading
@@ -113,16 +115,15 @@ export const getStaticProps: GetStaticProps = async (context) => {
 };
 
 export const getStaticPaths = () => {
-	const categories = getCategories();
 	const result: { params: { category: string; tag: string } }[] = [];
 
-	categories.map((category) => {
-		const tagConfigs = buildTagConfig(category);
+	CategoriesConfig.available.map((category) => {
+		const tagConfigs = buildTagConfig(category.routeName);
 		tagConfigs?.forEach((config) => {
 			if (config.questions && config.childs.length > 0) {
 				result.push({
 					params: {
-						category: getRouterNameByFolder(category),
+						category: category.routeName,
 						tag: config.routeName,
 					},
 				});

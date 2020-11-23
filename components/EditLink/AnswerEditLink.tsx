@@ -15,7 +15,7 @@ export default function AnswerEditLink({
 
 	return (
 		<Link
-			href={`https://github.com/Xwil/fe-i/edit/master/content/${category}/${index}/answer.mdx`}
+			href={`https://github.com/Xwil/fe-i/edit/master/content/${category}/questions/${index}/answer.mdx`}
 			isExternal
 			{...props}
 		>

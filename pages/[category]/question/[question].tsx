@@ -11,11 +11,11 @@ import { useRouter } from 'next/router';
 import React, { ReactElement } from 'react';
 import CategoriesConfig from 'service/category.config';
 import { getFoldersByCategory, getQuestionAndAnswer } from 'service/question';
-import { Answer, Question } from 'service/types';
+import { AnswerType, QuestionType } from 'service/types';
 
 interface Props {
-	question: Question;
-	answer: Answer;
+	question: QuestionType;
+	answer: AnswerType;
 }
 
 export default function QuestionDetail({

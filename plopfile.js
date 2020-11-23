@@ -12,7 +12,6 @@ module.exports = function (
 ) {
 	plop.setWelcomeMessage('请选择要添加的文件');
 
-	// plop generator code
 	plop.setGenerator('question', {
 		description: '添加一个问题',
 		prompts: [
@@ -65,7 +64,7 @@ module.exports = function (
 			const actions = [
 				{
 					type: 'add',
-					path: getPathForNewFile(
+					path: getPathForNewQuestion(
 						data.category,
 						'question.mdx',
 						true
@@ -75,7 +74,11 @@ module.exports = function (
 				},
 				{
 					type: 'add',
-					path: getPathForNewFile(data.category, 'answer.mdx', true),
+					path: getPathForNewQuestion(
+						data.category,
+						'answer.mdx',
+						true
+					),
 					templateFile: './templates/answer.hbs',
 					data: parameters,
 				},
@@ -83,14 +86,69 @@ module.exports = function (
 
 			actions.push(function (data) {
 				const f = open(
-					getPathForNewFile(data.category, 'question.mdx')
+					getPathForNewQuestion(data.category, 'question.mdx')
 				);
 				if (data.withAnswer) {
-					open(getPathForNewFile(data.category, 'answer.mdx'), {
+					open(getPathForNewQuestion(data.category, 'answer.mdx'), {
 						// ⚠️仅支持vscode打开
 						app: 'visual studio code',
 					});
 				}
+				if (f) {
+					return '已打开文件';
+				} else {
+					return '仅支持vscode自动打开文件';
+				}
+			});
+
+			return actions;
+		},
+	});
+
+	plop.setGenerator('wtf', {
+		description: '添加一个wtf',
+		prompts: [
+			{
+				type: 'input',
+				name: 'title',
+				message: '请填写标题',
+			},
+			{
+				type: 'input',
+				name: 'inputSlug',
+				message: '请输入slug',
+			},
+			{
+				type: 'list',
+				name: 'category',
+				message: '请选择wtf分类',
+				choices: categories,
+				loop: false,
+				default: categories.indexOf('JavaScript'),
+			},
+		],
+		actions: (data) => {
+			const slug = data.inputSlug;
+			const parameters = {
+				title: data.title,
+				date: getCurrentDate(),
+				slug,
+				index: getWTFIndex(data.category) + 1,
+				authors: ['cuvii'],
+				authorsUrl: ['https://fei.kodin.fun'],
+			};
+
+			const actions = [
+				{
+					type: 'add',
+					path: getPathForWTF(data.category, slug),
+					templateFile: './templates/wtf.hbs',
+					data: parameters,
+				},
+			];
+
+			actions.push(function (data) {
+				const f = open(getPathForWTF(data.category, slug));
 				if (f) {
 					return '已打开文件';
 				} else {
@@ -110,7 +168,7 @@ function getAllCategories() {
 
 function getCategoryIndex(category) {
 	const index = fs
-		.readdirSync('./content/' + category, { withFileTypes: true })
+		.readdirSync(BASE_PATH + category, { withFileTypes: true })
 		.filter((dirent) => dirent.isDirectory())
 		.map((dirent) => dirent.name)
 		.sort((a, b) => a - b)
@@ -141,9 +199,20 @@ function getCurrentDate() {
 }
 
 // 是否获取索引+1的路径
-function getPathForNewFile(category, fileName, increment = false) {
+function getPathForNewQuestion(category, fileName, increment = false) {
 	const index = getCategoryIndex('JavaScript');
 	return (
 		BASE_PATH + `${category}/${increment ? index + 1 : index}/${fileName}`
 	);
+}
+
+function getWTFIndex(category) {
+	const files = fs.readdirSync(BASE_PATH + category + '/wtf/', {
+		withFileTypes: true,
+	});
+	return files.length;
+}
+
+function getPathForWTF(category, fileName) {
+	return BASE_PATH + `${category}/wtf/` + fileName + '.mdx';
 }

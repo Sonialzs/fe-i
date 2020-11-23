@@ -2,12 +2,12 @@ import { Box, Divider, Flex } from '@chakra-ui/react';
 import styled from '@emotion/styled';
 import Link from 'next/link';
 import React, { ReactElement } from 'react';
-import { Question } from 'service/types';
+import { QuestionType } from 'service/types';
 import { MDXRenderAsync } from '../metrics/MDXRender/async';
 import { TagsAsync } from '../TagsRender/async';
 
 interface Props {
-	question: Question;
+	question: QuestionType;
 	href?: string;
 }
 
