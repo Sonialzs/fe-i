@@ -61,7 +61,7 @@ export default function Tag({
 						<Box w={['5em', '10em']} h={['5em', '10em']}>
 							<IconRender
 								iconName={router.query.category as string}
-								size="100%"
+								size="180"
 							/>
 						</Box>
 						<div className="intro">

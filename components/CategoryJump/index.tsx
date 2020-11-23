@@ -26,7 +26,7 @@ export default function CategoryJump({ total }: Props): ReactElement {
 			p={2}
 			alignItems="center"
 		>
-			<IconRender iconName={router.query.category as string} size="6em" />
+			<IconRender iconName={router.query.category as string} size="90" />
 			<Text
 				fontSize="sm"
 				color={textColor[colorMode]}
