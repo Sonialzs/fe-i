@@ -90,7 +90,7 @@ const Quote = (props) => {
 			variant="left-accent"
 			status="info"
 			css={{
-				'> *:first-of-type': {
+				p: {
 					marginTop: 0,
 					marginLeft: 8,
 				},

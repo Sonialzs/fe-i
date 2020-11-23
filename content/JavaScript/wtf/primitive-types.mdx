@@ -1,0 +1,118 @@
+---
+title: '原始类型'
+slug: 'primitive-types'
+date: '2020-11-23'
+category: 'JavaScript'
+index: 1
+authors:
+    - cuvii
+authorsUrl:
+    - https://fei.kodin.fun
+draft: false
+---
+
+## 7 + 1
+
+JavaScript 中有**7**种值类型和**1**种引用类型。
+
+其中值类型包括：
+
+1.  `number`
+2.  `string`
+3.  `boolean`
+4.  `null`
+5.  `undefined`
+6.  `symbol`
+
+ES6 中引入
+
+7.  `bigInt`
+
+引用类型只有一种：
+
+1. `object`
+
+## boolean
+
+todo trusy 和 falsy
+
+## null，undefined，void 0
+
+### null 和 undefined
+
+在平时使用中，我们通常会同时使用`null`和`undefined`来表示空值。在 JS 中，二者有什么区别，或者说究竟何时应该使用`null`，何时应该使用`undefined`呢？
+
+从使用层面来讲。**`undefined`表示变量已经声明，但是没有赋值**。
+
+```js run
+var name;
+console.log(name);
+```
+
+这个代码片段中，使用`var name`声明了变量，但是没有进行赋值，此时`name`的值为`undefined`。
+
+而`null`和`number`、`string`、`boolean`一样，是一个合理合法的**值**，不过它表示空，也就是空值。
+
+### undefined 和 void 0
+
+在有些代码中，会使用 `void 0` 作为返回值：
+
+```js run
+function func() {
+	return void 0;
+}
+
+console.log(typeof func());
+console.log(void 0 === undefined);
+```
+
+从这个代码片段中可以看到 ` void 0`` 是完全等于  `undefined `的。
+
+实际上 `void` 在 JavaScript 中是一个运算符，和`+`/`-`一样。区别在于，使用`void`进行任何运算，返回值都会是 undefined，不管是`void 0`还是`void 12345`。
+
+那为什么不直接用 `undefined` 呢？
+
+看看下面这段代码，会输出什么？
+
+```js run
+function fn() {
+	var undefined = 123;
+	return undefined;
+}
+
+console.log(fn());
+```
+
+在 JavaScript 中，`undefined` 是一个全局属性，并不是关键字，是可以声明同名变量的，所以可以声明名为 `undefined` 的变量，导致预料之外的错误。
+
+而 `void` 是一个运算符，不会被声明同名变量，更加安全。
+
+如果对以上代码做出改动，去掉`var`关键字：
+
+```js
+function fn2() {
+	undefined = 123;
+	return undefined;
+}
+
+console.log(fn());
+```
+
+此时会输出 `undefined`。因为在现代浏览器中，`undefined`是不可写的。
+
+> 在现代浏览器（JavaScript 1.8.5/Firefox 4+），自 ECMAscript5 标准以来 undefined 是一个不能被配置（non-configurable），不能被重写（non-writable）的属性。
+>
+> ——引用自[MDN](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/undefined#Description)
+
+### 总结
+
+-   `undefined `表示已声明但未定义，`null` 表示空值。函数默认返回值是 `undefined`。
+-   早些版本浏览器中，可以声明名为 `undefined` 的变量，会引起不可预料的错误，所以会使用 `void 0 `代替。
+
+## Symbol
+
+TODO
+
+## BigInt
+
+TODO
