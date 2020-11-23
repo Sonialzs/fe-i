@@ -1,8 +1,3 @@
-import { GetStaticProps } from 'next';
-import { NextSeo } from 'next-seo';
-import { useRouter } from 'next/router';
-import React, { ReactElement } from 'react';
-
 import { Flex, Stack, Text, useColorMode } from '@chakra-ui/react';
 import { CategoryJumpAsync } from '@components/CategoryJump/async';
 import { SystemRenderAsync } from '@components/SystemRender/async';
@@ -12,6 +7,10 @@ import PageLayout from '@layouts/page';
 import CategoriesConfig from '@service/category.config';
 import { getCategoryIndex, getCategoryQuestionsCount } from '@service/cateogry';
 import { getTagConfig, TagConfigType } from '@service/tag';
+import { GetStaticProps } from 'next';
+import { NextSeo } from 'next-seo';
+import { useRouter } from 'next/router';
+import React, { ReactElement } from 'react';
 
 interface Props {
 	attributes: any;
@@ -31,8 +30,6 @@ export default function Category({
 }: Props): ReactElement {
 	const { colorMode } = useColorMode();
 	const router = useRouter();
-	// ! 这行代码会使First Load JS增加59kb，why？
-	// const folderName = getFolderNameByRoute(router.query.category as string);
 
 	const textColor = {
 		light: 'gray.700',
