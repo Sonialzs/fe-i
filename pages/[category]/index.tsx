@@ -43,7 +43,7 @@ export default function Category({
 			<NextSeo
 				title={`${folderName}知识大纲 | FE.i 前端知识库`}
 				description={`${folderName}知识体系大纲`}
-				canonical={router.asPath}
+				canonical={process.env.SITE_URL + router.asPath}
 			/>
 
 			<PageLayout>

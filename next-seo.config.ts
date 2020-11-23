@@ -5,7 +5,7 @@ const description =
 const SEO = {
 	title,
 	description,
-	canonical: 'https://fei.kodin.fun',
+	canonical: process.env.SITE_URL,
 };
 
 export default SEO;

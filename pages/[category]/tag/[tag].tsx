@@ -42,7 +42,7 @@ export default function Tag({
 			<NextSeo
 				title={`${config.title}相关问题 | FE.i前端知识库`}
 				description={config.summary}
-				canonical={router.asPath}
+				canonical={process.env.SITE_URL + router.asPath}
 			/>
 			<PageLayout>
 				<Flex
