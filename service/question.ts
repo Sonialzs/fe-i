@@ -1,6 +1,5 @@
-import fm, { FrontMatterResult } from 'front-matter';
-import fs from 'fs';
-
+import { FrontMatterResult } from 'front-matter';
+import fs from 'fs'
 import { getFolderNameByRoute } from 'service/category.config';
 import { buildPath, getMDXByPath, isDraft, memoize } from './utils';
 
@@ -64,7 +63,7 @@ function _getFoldersByCategory(category: string, draftOnly = true): number[] {
 	// 根据配置将路由名转换为文件名
 	const categoryFolder = getFolderNameByRoute(category);
 
-	const path = basePath + categoryFolder;
+	const path = basePath + categoryFolder + '/questions';
 
 	const folders = fs
 		// 筛选出文件夹，忽略index.mdx

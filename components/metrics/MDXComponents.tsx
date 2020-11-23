@@ -1,7 +1,5 @@
 import {
-	Alert,
 	Box,
-	Button,
 	Code,
 	Divider,
 	Heading,

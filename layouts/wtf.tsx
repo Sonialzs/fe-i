@@ -40,6 +40,7 @@ export default function WTFLayout({
 					alignItems="flex-start"
 					maxWidth="700px"
 					w="100%"
+					mt={0}
 				>
 					<Heading mb={2} as="h1" size="2xl">
 						{frontMatter.title}
@@ -78,7 +79,7 @@ export default function WTFLayout({
 						</Text>
 					</Flex>
 				</Flex>
-				<MDXProvider>{children}</MDXProvider>
+				{children}
 			</Stack>
 		</PageLayout>
 	);
