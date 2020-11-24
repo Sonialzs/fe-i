@@ -1,17 +1,16 @@
 ---
-date: "2020-11-18"
-category: "JavaScript"
+date: '2020-11-18'
+category: 'JavaScript'
 index: 4
 authors:
-- cuvii
+    - cuvii
 authorsUrl:
-- https://fei.kodin.fun
+    - https://fei.kodin.fun
 tags:
-- 引用类型
-draft: true
+    - 引用类型
+draft: false
 ---
 
-## 以下代码会输出什么
+这道题很简单，基本是送分题。考察的是引用类型传值的问题。
 
-cuvii
-https://fei.kodin.fun
+在执行`d = c`之后，由于 c 的值是**引用类型**，**d 和 c 指向同一个对象**。所以会输出`Hello`
