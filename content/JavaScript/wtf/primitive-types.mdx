@@ -40,18 +40,25 @@ todo trusy 和 falsy
 
 ### null 和 undefined
 
-在平时使用中，我们通常会同时使用`null`和`undefined`来表示空值。在 JS 中，二者有什么区别，或者说究竟何时应该使用`null`，何时应该使用`undefined`呢？
-
-从使用层面来讲。**`undefined`表示变量已经声明，但是没有赋值**。
+从语法上来说，undefined 是一个全局属性，表示声明但未定义，比如：
 
 ```js run
 var name;
-console.log(name);
 ```
 
-这个代码片段中，使用`var name`声明了变量，但是没有进行赋值，此时`name`的值为`undefined`。
+JavaScript 中，所有已声明但未赋值(或者说定义/初始化)的变量，值默认都是 undefined。同时函数的默认返回值也是 undefined。
 
-而`null`和`number`、`string`、`boolean`一样，是一个合理合法的**值**，不过它表示空，也就是空值。
+而 null 是一个字面量值，表示空指针，也就是没有指向任何对象。
+
+通常在函数需要返回一个对象，但是值还不确定时使用。
+
+```js
+function fn() {
+	let result = null;
+	// ... 一系列运算
+	return result;
+}
+```
 
 ### undefined 和 void 0
 
@@ -100,6 +107,17 @@ console.log(fn());
 
 此时会输出 `undefined`。因为在现代浏览器中，`undefined`是不可写的。
 
+但是在块级作用域中，依然可以使用 undefined 作为变量名创建变量：
+
+```js run
+function fn3() {
+	let undefined = 123;
+	return undefined;
+}
+
+fn3();
+```
+
 > 在现代浏览器（JavaScript 1.8.5/Firefox 4+），自 ECMAscript5 标准以来 undefined 是一个不能被配置（non-configurable），不能被重写（non-writable）的属性。
 >
 > ——引用自[MDN](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/undefined#Description)
@@ -116,3 +134,9 @@ TODO
 ## BigInt
 
 TODO
+
+### 参考资料
+
+> -   [undefined —— MDN ](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/undefined#Description)
+> -   [null —— MDN](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/null)
+> -   [What is the difference between null and undefined in JavaScript? —— Stackoverflow](https://stackoverflow.com/questions/5076944/what-is-the-difference-between-null-and-undefined-in-javascript)

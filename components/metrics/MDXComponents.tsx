@@ -85,6 +85,7 @@ const Quote = (props) => {
 			w="98%"
 			pt={4}
 			pb={4}
+			px={2}
 			fontSize="sm"
 			bg={bgColor[colorMode]}
 			variant="left-accent"
@@ -93,6 +94,7 @@ const Quote = (props) => {
 				p: {
 					marginTop: 0,
 					marginLeft: 8,
+					// wordBreak: 'break-all',
 				},
 			}}
 			{...props}
