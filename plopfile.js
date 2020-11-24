@@ -1,6 +1,5 @@
 const fs = require('fs');
 const open = require('open');
-const { slugify } = require('transliteration');
 const BASE_PATH = './content/';
 
 const categories = getAllCategories();
@@ -90,7 +89,6 @@ module.exports = function (
 				);
 				if (data.withAnswer) {
 					open(getPathForNewQuestion(data.category, 'answer.mdx'), {
-						// ⚠️仅支持vscode打开
 						app: 'visual studio code',
 					});
 				}
@@ -148,7 +146,9 @@ module.exports = function (
 			];
 
 			actions.push(function (data) {
-				const f = open(getPathForWTF(data.category, slug));
+				const f = open(getPathForWTF(data.category, slug), {
+					app: 'visual studio code',
+				});
 				if (f) {
 					return '已打开文件';
 				} else {
@@ -207,6 +207,10 @@ function getPathForNewQuestion(category, fileName, increment = false) {
 }
 
 function getWTFIndex(category) {
+	const folder = BASE_PATH + `${category}/wtf/`;
+	if (!fs.existsSync(folder)) {
+		fs.mkdirSync(folder);
+	}
 	const files = fs.readdirSync(BASE_PATH + category + '/wtf/', {
 		withFileTypes: true,
 	});
@@ -214,5 +218,6 @@ function getWTFIndex(category) {
 }
 
 function getPathForWTF(category, fileName) {
-	return BASE_PATH + `${category}/wtf/` + fileName + '.mdx';
+	const folder = BASE_PATH + `${category}/wtf/`;
+	return folder + fileName + '.mdx';
 }

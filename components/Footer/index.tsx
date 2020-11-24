@@ -1,5 +1,4 @@
 import { Flex, IconButton, Link, Text } from '@chakra-ui/react';
-import IconRender from '@components/IconRender';
 import React, { ReactElement } from 'react';
 import { FiGithub } from 'react-icons/fi';
 import { MdMailOutline } from 'react-icons/md';
@@ -27,7 +26,7 @@ export default function Footer({}: Props): ReactElement {
 					/>
 				</Link>
 
-				<Link href="mailto:xw5427@gmail.com" title="Email" isExternal>
+				<Link href="mailto:hi@kodin.fun" title="Email" isExternal>
 					<IconButton
 						aria-label="Email"
 						icon={<MdMailOutline />}
@@ -63,16 +62,16 @@ export default function Footer({}: Props): ReactElement {
 			</div> */}
 			<div>
 				<Text fontSize="xs" color="gray.500">
-					样式灵感来源于
+					{/* 样式灵感来源于
 					<Link isExternal href="https://leerob.io">
 						leerob.io
 					</Link>
-					{' | '}
+					{' | '} */}
 					部署于
 					<Link isExternal href="https://vercel.com">
 						Vercel
-						<IconRender iconName="vercel" size="12" />
 					</Link>
+					{/* <IconRender iconName="vercel" size="12" /> */}
 				</Text>
 			</div>
 		</Flex>

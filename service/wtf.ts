@@ -11,6 +11,9 @@ export const getWTFByFileName = memoize(_getWTFByFileName);
 
 function _getWTFbyCategory(categoryFolder: string) {
 	const path = basePath + categoryFolder + '/wtf';
+	if (!fs.existsSync(path)) {
+		return [];
+	}
 	const files = fs
 		.readdirSync(path)
 		.map((fileName) => getWTFByFileName(categoryFolder, fileName))

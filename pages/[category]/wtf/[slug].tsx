@@ -50,7 +50,6 @@ export function getStaticPaths() {
 			});
 		});
 	});
-	console.log(paths);
 
 	return {
 		paths,

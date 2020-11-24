@@ -1,18 +1,123 @@
 ---
-date: "2020-11-18"
-category: "JavaScript"
+date: '2020-11-18'
+category: 'JavaScript'
 index: 2
 authors:
-- cuvii
+    - cuvii
 authorsUrl:
-- https://fei.kodin.fun
+    - https://fei.kodin.fun
 tags:
-- 事件循环
-- 作用域
-draft: true
+    - 事件循环
+    - 作用域
+draft: false
 ---
 
 ## 以下代码会输出什么
 
-cuvii
-https://fei.kodin.fun
+先看第一个 for 循环。
+
+```js run
+for (var i = 0; i < 3; i++) {
+	setTimeout(() => console.log(i), 1);
+}
+```
+
+虽然 `for` 循环是块级作用域，但是 `var` 不会受块级作用域影响，所以相当于：
+
+```js
+var i;
+for (i = 0; i < 3; i++) {
+	setTimeout(() => console.log(i), 1);
+}
+```
+
+由于事件循环，`setTimeout` 中的回调函数会在主线程执行完之后再执行，**在每次循环中都只是把`()=>console.log(i)`压入回调队列中**，并不会立即执行回调函数。循环完成后，`var` 的值为 `3`。
+
+接下来会直接执行第二个 `for` 循环。
+
+```js run
+for (let i = 0; i < 3; i++) {
+	setTimeout(() => console.log(i), 1);
+}
+```
+
+`let` 受块级作用域影响，不会发生提升，会绑定在当前块级作用域中，每次 `for` 循环都会创建新的块级作用域。
+
+此时回调队列中需要执行的代码如下。
+
+-   `console.log(i)` // 第一个 for 循环中的回调 1
+-   `console.log(i)` // 第一个 for 循环中的回调 2
+-   `console.log(i)` // 第一个 for 循环中的回调 3
+-   `console.log(i)` // 第二个 for 循环中的回调 1
+-   `console.log(i)` // 第二个 for 循环中的回调 2
+-   `console.log(i)` // 第二个 for 循环中的回调 3
+
+因为作用域，前面三个 `i` 的取自 `var`（值为 3）。
+第二个 `for` 循环由于块级作用域，回调函数可以捕捉到正确的 `i` 值，会输出 `0，1，2`。
+所以输出结果为：
+
+```
+3
+3
+3
+1
+2
+3
+```
+
+## 拓展问题
+
+对于使用 var 的 for 循环，可能会有拓展问题。比如如何修改 for 循环使其输出预想的值：0，1，2。
+
+第一种方法就是将 var 修改为 let。
+
+面试官还可能要求：不修改 for 循环体，只允许修改花括号内部，该如何修改呢？
+
+### IIFE
+
+IIFE 也有块级作用域，借助这个特性，我们可以在循环体中执行一个 IIFE，并将 i 的值作为参数传递进去，也能捕获到正确的 i 值。
+
+```js run
+for (var i = 0; i < 3; i++) {
+	(function (j) {
+		setTimeout(() => console.log(j), 1);
+	})(i);
+}
+```
+
+### 闭包
+
+还可以通过闭包的特性，在循环体中声明一个 let 变量，再传入 setTimeout 的回调函数中
+
+```js run
+for (var i = 0; i < 3; i++) {
+	let j = i;
+	setTimeout(() => console.log(j), 1);
+}
+```
+
+### setTimeout 的第三个参数
+
+其实 setTimeout()方法除了回调函数和延迟之外，还可以将参数传入内部。比如
+
+```js
+setTimeout(()=>{},1, 参数1，参数2...)
+```
+
+通过这种方法，也可以捕获到正确的 i 值。
+
+```js run
+for (var i = 0; i < 3; i++) {
+	setTimeout(
+		function () {
+			console.log(arguments[0]);
+		},
+		1,
+		i
+	);
+}
+```
+
+## 推荐阅读
+
+> -   [破解前端面试（80% 应聘者不及格系列）：从闭包说起](https://juejin.cn/post/6844903474212143117)

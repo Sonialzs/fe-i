@@ -1,18 +1,30 @@
 ---
-date: "2020-11-18"
-category: "JavaScript"
+date: '2020-11-18'
+category: 'JavaScript'
 index: 9
 authors:
-- cuvii
+    - cuvii
 authorsUrl:
-- https://fei.kodin.fun
-tags:
-- 原型
-- 构造函数
-draft: true
+    - https://fei.kodin.fun
+
+draft: false
 ---
 
-## 以下代码会输出什么
+会报错。
 
-cuvii
-https://fei.kodin.fun
+执行`memeber.getFullName()`时，会根据原型链来查找 `getFullName()`这个方法。
+
+也就是：
+
+1. `member.getFullName`
+2. `member.__proto__.getFullName`
+   `member.__proto__`是一个对象，包含一个 `constructor` 属性，指向创建 `member` 的函数。根据原型链查找规则，`member.__proto__`中没有找到`getFullName`时，会继续到`member.__proto__.__proto__`中继续找，直到原型链顶部。
+3. 由于 `getFullName` 是 `Person` 的属性，而不是 `Person.prototype` 的属性，所以实例 `member` 并不能找到 `getFullName` 方法，会报错。
+
+如果希望代码正常运行，需要改为在 Person.prototype 上添加 getFullName 方法。
+
+```js
+Person.prototype.getFullName = function () {
+	return `${this.firstName} ${this.lastName}`;
+};
+```
