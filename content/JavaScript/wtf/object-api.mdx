@@ -15,7 +15,7 @@ draft: false
 
 `Object()`当作构造函数使用时，有以下几种情况：
 
-1.  如果参数是 null 或者 undefined 或者不传入参数，会返回一个空对象。
+1.  如果参数是 `null` 或者 `undefined` 或者不传入参数，会返回一个空对象。
 
 ```js
 Object(null); // {}
@@ -48,15 +48,173 @@ console.log(Object(obj) === obj);
 
 ### `Object.assign()`
 
+`Object.assign()`方法将两个对象的**可遍历**、**自身属性**合并。
+
+通过 `Object.prototype.propertyIsEnumerable()`来检测属性是不是可遍历的。
+
+通过 `Object.prototype.hasOwnProperty()`来检测是不是自身属性。
+
+```js run
+const o1 = {
+	name: 'cuvii',
+	age: 23,
+};
+
+const o2 = {
+	count: 2,
+	sum: 3,
+};
+
+Object.defineProperty(o2, 'total', {
+	enumerable: false,
+	value: 666,
+});
+
+console.log(Object.assign(o1, o2));
+```
+
+👆 上面这段代码中，设置 enumerable 的属性 total 就没有合并到新的对象中去。
+
 ### `Object.create()`
+
+`Object.create()`方法会创建一个**新的对象**，新对象会将参数作为原型。
+
+```js run
+const cuvii = { name: 'cuvii', age: 23 };
+person.sayHi = function () {
+	console.log(`Hi, i'm ${this.name}`);
+};
+
+const lilith = Object.create(cuvii);
+
+console.log(lilith);
+console.log(lilith.__proto__ === cuvii);
+```
+
+👆 代码中可以看到，`lilith` 是一个空对象，且`__proto__`直接指向了 `cuvii`。
+
+如果不传入参数或者传入 undefined，是会报错的嗷！不过可以将 null 作为参数，新对象会没有`__proto__`属性，也就是没有原型。
+
+```js run
+const obj = Object.create(null);
+
+console.log(obj.__proto__ === undefined); // true
+```
 
 ### `Object.defineProperty()`
 
+`Object.defineProperty`方法可以在对象上定义一个新属性，或者修改已有的属性。和直接在对象上添加属性不同，这个方法可以对属性进行配置。
+
+```js run
+const o = {
+	name: 'cuvii',
+};
+
+// 将o.name变为不可写
+Object.defineProperty(o, 'name', {
+	writable: false,
+});
+
+// 这行代码不会修改name的值，也不会报错。
+o.name = 'lilith';
+
+console.log(o.name); // "cuvii"
+
+// 添加一个o.age属性，值为23
+Object.defineProperty(o, 'age', {
+	writable: false,
+	value: 23,
+});
+
+console.log(o.age); // 23
+```
+
+除了 4 个可配置特性`configurable`,`enumerable`,`wrtiable`,`value`之外，还可以配置 `getter` 和 `setter`。
+Vue 2 中的响应式就是通过 `getter` 和 `setter` 实现的。顺带一提，Vue3 是使用`Proxy`。
+
+```js run
+const bank = {
+	_money: 80,
+};
+
+Object.defineProperty(bank, 'account', {
+	get() {
+		return `余额是${bank._money}`;
+	},
+	set(value) {
+		const result = this.money + value;
+		bank._money = result >= 0 ? result : 0;
+	},
+});
+
+console.log(bank.account);
+bank.account = -1;
+console.log(bank.account);
+```
+
+👆 代码中，为 `bank` 对象定义了一个 `account` 属性，并设置了 `getter`，调用时会返回一段字符串，在 `setter` 中限制 `money` 最小为 0。
+
 ### `Object.defineProperties()`
+
+`Object.defineProperties()`方法支持定义多个属性。
+
+```js
+const o = {};
+
+Object.defineProperties(o, {
+	name: {
+		value: 'lilith',
+		writable: false,
+	},
+
+	age: {
+		value: 18,
+		writable: false,
+	},
+});
+```
 
 ### `Object.entires()`
 
+`Object.entires()`会以数组形式返回对象自身的所有可遍历键值对，不保证顺序。
+
+> for...in 循环也可以遍历对象的键，但会包括原型链上的所有键。
+
+```js
+const book = {
+	name: '三国演义',
+	author: '罗贯中',
+	summary: '历史小说',
+	rate: 5.0,
+};
+
+console.log(Object.entries(book));
+```
+
+输出结果为：
+
+```js
+[
+	['name', '三国演义'],
+	['author', '罗贯中'],
+	['summary', '历史小说'],
+	['rate', 5],
+];
+```
+
 ### `Object.freeze()`
+
+```js run
+const obj = {
+	price: 15,
+};
+
+Object.freeze(obj);
+
+obj.price = 10;
+obj.id = '1';
+console.log(obj);
+```
 
 ### `Object.fromEntries()`
 
@@ -74,6 +232,8 @@ console.log(Object(obj) === obj);
 
 ### `Object.isExtensible()`
 
+TODO
+
 ### `Object.isFrozen()`
 
 ### `Object.isSealed()`
@@ -81,6 +241,8 @@ console.log(Object(obj) === obj);
 ### `Object.keys()`
 
 ### `Object.preventExtensions()`
+
+TODO
 
 ### `Object.seal()`
 
@@ -92,11 +254,19 @@ console.log(Object(obj) === obj);
 
 ### `Object.prototype.__defineGetter__()`
 
+TODO
+
 ### `Object.prototype.__defineSetter__()`
+
+TODO
 
 ### `Object.prototype.__lookupGetter__()`
 
+TODO
+
 ### `Object.prototype.__lookupSetter__()`
+
+TODO
 
 ### `Object.prototype.hasOwnProperty()`
 
@@ -114,4 +284,4 @@ console.log(Object(obj) === obj);
 
 ### `Object.prototype.watch()`
 
-> -[Object —— MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object)
+> -   [Object —— MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object)
