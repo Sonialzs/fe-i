@@ -155,7 +155,7 @@ export default {
 	),
 	code: CodeBlock,
 	inlineCode: (props) => (
-		<Code colorScheme="yellow" fontSize="0.84em" {...props} />
+		<Code colorScheme="red" fontSize="0.84em" {...props} />
 	),
 	i,
 	u,

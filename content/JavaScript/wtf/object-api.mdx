@@ -1,0 +1,117 @@
+---
+title: '对象 API'
+slug: 'object-api'
+date: '2020-11-25'
+category: 'JavaScript'
+index: 9
+authors:
+    - cuvii
+authorsUrl:
+    - https://fei.kodin.fun
+draft: false
+---
+
+## 构造函数
+
+`Object()`当作构造函数使用时，有以下几种情况：
+
+1.  如果参数是 null 或者 undefined 或者不传入参数，会返回一个空对象。
+
+```js
+Object(null); // {}
+Object(undefined); // {}
+Object(); // {}
+```
+
+2.  否则返回一个参数相同类型的对象。或者说包装后的对象。
+
+```js
+Object(1); // Number(1)
+Object(NaN); // Number(NaN) NaN也是数字嗷
+Object('str'); // String('str')
+Object(true); // Boolean(true)
+```
+
+1.  如果参数就是一个对象，那直接返回参数。
+
+```js run
+const arr = [1, 2, 3];
+const fn = function () {};
+const obj = {};
+
+console.log(Object(arr) === arr);
+console.log(Object(fn) === fn);
+console.log(Object(obj) === obj);
+```
+
+## 静态方法
+
+### `Object.assign()`
+
+### `Object.create()`
+
+### `Object.defineProperty()`
+
+### `Object.defineProperties()`
+
+### `Object.entires()`
+
+### `Object.freeze()`
+
+### `Object.fromEntries()`
+
+### `Object.getOwnPropertyDescriptor()`
+
+### `Object.getOwnPropertyDescriptors()`
+
+### `Object.getOwnPropertyNames()`
+
+### `Object.getOwnPropertySymbols()`
+
+### `Object.getPrototypeOf()`
+
+### `Object.is()`
+
+### `Object.isExtensible()`
+
+### `Object.isFrozen()`
+
+### `Object.isSealed()`
+
+### `Object.keys()`
+
+### `Object.preventExtensions()`
+
+### `Object.seal()`
+
+### `Object.setPrototypeOf()`
+
+### `Object.values()`
+
+## 实例方法
+
+### `Object.prototype.__defineGetter__()`
+
+### `Object.prototype.__defineSetter__()`
+
+### `Object.prototype.__lookupGetter__()`
+
+### `Object.prototype.__lookupSetter__()`
+
+### `Object.prototype.hasOwnProperty()`
+
+### `Object.prototype.isPrototypeOf()`
+
+### `Object.prototype.propertyIsEnumerable()`
+
+### `Object.prototype.toLocaleString()`
+
+### `Object.prototype.toString()`
+
+### `Object.prototype.unwatch()`
+
+### `Object.prototype.valueOf()`
+
+### `Object.prototype.watch()`
+
+> -[Object —— MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object)
