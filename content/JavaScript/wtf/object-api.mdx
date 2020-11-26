@@ -46,7 +46,7 @@ console.log(Object(obj) === obj);
 
 ## 静态方法
 
-### `Object.assign()`
+### 🔥`Object.assign()`
 
 `Object.assign()`方法将两个对象的**可遍历**、**自身属性**合并。
 
@@ -75,15 +75,12 @@ console.log(Object.assign(o1, o2));
 
 👆 上面这段代码中，设置 enumerable 的属性 total 就没有合并到新的对象中去。
 
-### `Object.create()`
+### 🔥`Object.create()`
 
 `Object.create()`方法会创建一个**新的对象**，新对象会将参数作为原型。
 
 ```js run
 const cuvii = { name: 'cuvii', age: 23 };
-person.sayHi = function () {
-	console.log(`Hi, i'm ${this.name}`);
-};
 
 const lilith = Object.create(cuvii);
 
@@ -101,7 +98,7 @@ const obj = Object.create(null);
 console.log(obj.__proto__ === undefined); // true
 ```
 
-### `Object.defineProperty()`
+### 🔥`Object.defineProperty()`
 
 `Object.defineProperty`方法可以在对象上定义一个新属性，或者修改已有的属性。和直接在对象上添加属性不同，这个方法可以对属性进行配置。
 
@@ -174,7 +171,7 @@ Object.defineProperties(o, {
 });
 ```
 
-### `Object.entires()`
+### 🔥`Object.entires()`
 
 `Object.entires()`会以数组形式返回对象自身的所有可遍历键值对，不保证顺序。
 
@@ -216,19 +213,115 @@ obj.id = '1';
 console.log(obj);
 ```
 
-### `Object.fromEntries()`
+### 🔥`Object.fromEntries()`
 
-### `Object.getOwnPropertyDescriptor()`
+`Object.fromEntries()`方法将可迭代的键值对集合转换成对象。
+
+可迭代的键值对集合可以是数组、Map 或其他实现了 `iterable` 接口的对象。
+
+```js run
+const arr = [
+	['id', 1],
+	['name', 'car'],
+	['category', 'unknown'],
+];
+
+console.log(Object.fromEntries(arr));
+```
+
+### 🔥`Object.getOwnPropertyDescriptor()`
+
+`Object.getOwnPropertyDescriptor()`方法获取某个属性的特性。
+
+```js run
+const obj = {
+	id: 1,
+};
+
+console.log(Object.getOwnPropertyDescriptor(obj, 'id'));
+```
 
 ### `Object.getOwnPropertyDescriptors()`
 
+`Object.getOwnpropertyDescriptors()`方法获取对象上所有属性的特性。
+
+```js run
+const obj = {
+	id: 1,
+	type: 2,
+};
+
+console.log(Object.getOwnPropertyDescriptors(obj));
+```
+
 ### `Object.getOwnPropertyNames()`
 
-### `Object.getOwnPropertySymbols()`
+TODO
+
+### 🔥`Object.getOwnPropertySymbols()`
+
+`Object.getOwnPropertySymbols()`返回对象中的所有 `Symbol` 属性。
+
+```js run
+const s1 = Symbol();
+
+const o = {
+	id: 0,
+};
+
+o[s1] = '1';
+
+// 没有返回o.id
+console.log(Object.getOwnPropertySymbols(o));
+```
 
 ### `Object.getPrototypeOf()`
 
-### `Object.is()`
+`Object.getPrototypeOf()`方法用于获取对象的原型。
+
+```js run
+const prototype = {};
+
+const o1 = Object.create(prototype);
+
+console.log(Object.getPrototypeOf(o1) === prototype);
+console.log(Object.getPrototypeOf(o1) === o1.__proto__);
+```
+
+### 🔥`Object.is()`
+
+`Object.is()`用于比较两个值是否相等。
+
+```js run
+const o1 = {
+	p1: true,
+	p2: null,
+	p3: 1,
+	p4: 'str',
+};
+
+const o2 = {
+	p1: true,
+	p2: null,
+	p3: 1,
+	p4: 'str',
+};
+
+console.log(Object.is(o1, o2));
+console.log(Object.is(o1.p1, o2.p1));
+```
+
+`Object.is()`和`==`不同，`==`会先尝试将两个值转换为相同类型，比如`"" == false`结果为 `true`。`Object.is()`不会进行类型转换。
+
+`Object.is()`和`===`也不同。`===`会将`-0` 和`+0` 相等，`NaN` 不等于 `NaN`。
+
+```js run
+console.log(Object.is(NaN, NaN)); //true
+console.log(NaN === NaN); // false
+
+console.log(Object.is(-0, +0)); // false
+console.log(-0 === +0); //true
+```
 
 ### `Object.isExtensible()`
 

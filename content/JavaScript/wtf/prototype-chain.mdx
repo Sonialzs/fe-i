@@ -1,14 +1,96 @@
 ---
-title: "原型链"
-slug: "prototype-chain"
-date: "2020-11-25"
-category: "JavaScript"
+title: '原型链'
+slug: 'prototype-chain'
+date: '2020-11-25'
+category: 'JavaScript'
 index: 10
 authors:
-- cuvii
+    - cuvii
 authorsUrl:
-- https://fei.kodin.fun
-draft: true
+    - https://fei.kodin.fun
+draft: false
 ---
 
+涉及知识点：
+
+-   `new`
+-   `constructor`
+-   `prototype`
+-   `__proto__`
+-   原型链
+
+## 构造函数
+
+在[创建对象](/js/wtf/objects-creation)中，有提到过可以通过构造函数来创建新的对象。
+
+先不管构造函数，看看通过工厂函数创建一个对象的例子。
+
+```js run
+function Book(name) {
+	const result = {};
+	result.name = name;
+	return result;
+}
+
+const book1 = Book('三国演义');
+```
+
+如果通过构造函数改写，那么代码会简单一些：
+
+```js run
+function Movie(name) {
+	this.name = name;
+}
+
+const movie1 = new Movie('铁人');
+```
+
+回顾一下，通过 new 关键字调用函数时，会自动做以下几件事：
+
+1. 创建一个空对象。
+2. 将函数内的 this 指向空对象。
+3. 执行函数内部的代码。
+4. 如果函数没有设置返回值，就返回第一步创建的对象。
+
+其实在第二步之前，还会为空对象设置原型，在上面例子中就是`movie1.__proto__ = Movie.prototype`。
+
+我们先看看`Movie.prototype`到底是个啥。
+
+## Prototype
+
+在 Chrome 浏览器调试工具中，输入 `console.dir(Movie)`可以看到，`Movie` 函数上有以下这些属性。
+
+> 需要先在调试工具中创建 Movie 函数
+
+```js
+// console.dir(Movie)
+arguments: null
+caller: null
+length: 1
+name: "Movie"
+prototype: {constructor: ƒ}
+__proto__: ƒ ()
+[[FunctionLocation]]: VM1677:1
+[[Scopes]]: Scopes[2]
+```
+
+可以看到 Movie 函数是有一个 prototype 属性的。继续展开 prototype 属性。
+
+```js run
+// Movie.prototype
+constructor: ƒ Movie(name)
+__proto__: Object
+```
+
+
+
+## `__proto__`
+
+## 关系梳理
+
 ## 原型链
+
+> -   🔥[图解原型和原型链 —— JS 菌](https://juejin.cn/post/6844903797039300615)
+> -   [JS 原型与原型链 —— jsliang](https://juejin.cn/post/6844903782229213197)
+> -   [原型与原型链 2 —— jsliang](https://juejin.cn/post/6890716797436166152)
+> -   [js 原型及原型链 —— 菜鸡小前端](https://juejin.cn/post/6844904093828251662)
