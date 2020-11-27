@@ -21,6 +21,12 @@ draft: false
 
 ## 构造函数
 
+> Each constructor is a function that has a property named "prototype" that is used to implement prototype-based inheritance and shared properties.
+>
+> 构造函数是一个有 prototype 属性的函数，prototype 属性可以用来实现基于原型的继承和进行属性共享。
+>
+> [ECMA-262 4.2.1 Objects](https://www.ecma-international.org/ecma-262/11.0/index.html#sec-objects)
+
 在[创建对象](/js/wtf/objects-creation)中，有提到过可以通过构造函数来创建新的对象。
 
 先不管构造函数，看看通过工厂函数创建一个对象的例子。
@@ -54,9 +60,12 @@ const movie1 = new Movie('铁人');
 
 其实在第二步之前，还会为空对象设置原型，在上面例子中就是`movie1.__proto__ = Movie.prototype`。
 
-我们先看看`Movie.prototype`到底是个啥。
+实际上，构造函数本身就是一个普通的函数，让它和普通函数产生区别的原因在于调用方式。
 
-## Prototype
+-   通过`new`调用，它就是构造函数，JavaScript 会自动处理上面提到的 5 件事。例如第二个代码片段中，movie1 的原型被设置为`Movei.prototype`。
+-   直接调用，那它就是个普通函数。
+
+## `prototype` 和`__proto__`
 
 在 Chrome 浏览器调试工具中，输入 `console.dir(Movie)`可以看到，`Movie` 函数上有以下这些属性。
 
@@ -82,15 +91,144 @@ constructor: ƒ Movie(name)
 __proto__: Object
 ```
 
+可以看到`Moive.prototype`是一个对象，有`constructor`和`__proto__`两个属性。
 
+在 JavaScript 中，**每个函数都会有一个 `prototype` 属性，指向一个对象。**
 
-## `__proto__`
+而每个对象都会有`__proto__`属性。
 
 ## 关系梳理
 
+ECMA-262 规范中，对于函数`prototype`属性的解释（或者说规范）是：一个提供了共享属性的对象。
+
+> When a constructor creates an object, that object implicitly references the constructor's "prototype" property for the purpose of resolving property references. The constructor's "prototype" property can be referenced by the program expression constructor.prototype, and properties added to an object's prototype are shared, through inheritance, by all objects sharing the prototype. Alternatively, a new object may be created with an explicitly specified prototype by using the Object.create built-in function.
+>
+> [ECMA262 4.3.5 prototype](https://www.ecma-international.org/ecma-262/11.0/index.html#sec-terms-and-definitions-prototype)
+>
+> ---
+>
+> 当通过构造函数创建对象时，新对象会(隐式)引用构造函数的`prototype`属性，通过这种方式可以解决属性引用(共享)问题。
+> 构造函数的`prototype`属性可以通过`constructor.prototype`访问。
+> 通过继承机制，对象原型上的属性都是共享的。
+> 也可以通过 Objec.create()方法显示指定对象的原型。
+
+所以，构造函数-原型(`prototype`)-对象之间的关系是这样的：
+
+-   构造函数有一个`prototype`属性。实际上 JavaScript 中每一个函数都有 prototype 属性，因为每个函数都可以当做构造函数使用：`new FunctionName()`。
+-   `prototype`属性指向一个对象，这个对象上的所有属性的是*共享*的。
+-   对象上有一个`__proto__`属性，指向它的构造函数的`prototype`。
+
 ## 原型链
 
+> a prototype may have a non-null implicit reference to its prototype, and so on; this is called the prototype chain. When a reference is made to a property in an object, that reference is to the property of that name in the first object in the prototype chain that contains a property of that name. In other words, first the object mentioned directly is examined for such a property; if that object contains the named property, that is the property to which the reference refers; if that object does not contain the named property, the prototype for that object is examined next; and so on.
+>
+> [ECMA-262 4.2.1 Objects](https://www.ecma-international.org/ecma-262/11.0/index.html#sec-objects)
+
+原型链简单概况就是：一个原型对象引用（或者说指向）其他原型对象。
+
+因为原型对象也是对象，有`__proto__`属性。
+
+举个栗子。
+
+```js run
+function Music() {}
+
+const music1 = new Music();
+
+console.log(music1.toString()); // [object Object]
+```
+
+这个栗子中，成功调用了`music1.toString()`，但是`music1`对象和`Music`函数上都没有这个方法啊，哪来的？
+
+答案是：原型链。当访问对象上的属性时，JavaScript 会根据对象的原型链进行查找。
+
+在上面的例子中，过程如下：
+
+1. 在 `music1` 对象上找 `toString()`方法。由于 `music1` 是空对象，没有 `toString()`方法，进入下一步。
+2. 检查 `music1` 是否有`__proto__`属性。如果没有就停止查找，报错`music1.toString is not a function`。如果只是查找 music1 的某个属性，而不是方法调用，例如`music1.name`，则是返回 undefined。如果有`__proto__`属性，进入下一步。
+3. `music1.__proto__`是指向`Music.prototype`。由于`Music.prototype`也是个空对象，没有`toString()`方法。所以继续去`Music.prototype.__proto__`找。
+4. `Music.prototype.__proto__`指向的是`Object.prototype`，有 `toString()`方法，于是就调用了。
+
+转换成代码就是：
+
+```js
+music1.__proto__.__proto__.toString();
+```
+
+### 属性遮蔽
+
+和作用域相似，原型链也会发生遮蔽现象。
+
+先举个栗子。
+
+```js run
+function Music() {}
+Music.prototype.toString = function () {
+	console.log('我是Music');
+};
+
+const music1 = new Music();
+music1.toString = function () {
+	console.log('我是music1');
+};
+
+music1.toString();
+```
+
+会输出`我是music1`。
+
+因为直接在 `music1` 上找到了 `toString` 属性。如果 `music1` 上没有 `toString` 属性，那么会调用 `Music.prototype` 上的 `toString` 方法，输出`我是Music`。
+
+## 其他情况
+
+### 原型链的顶层
+
+前面提到过`Object.prototype`。
+
+`Object.prototype` 会出现在所有对象的原型链上。但是 `Object.prototype` 的`__proto__`属性为 `null`。
+
+```js run
+Object.prototype.__proto__ === null;
+```
+
+所以严格来说，**原型链的最顶层是 null**。
+
+### 原型对象指向问题
+
+```js run
+var A = function () {};
+A.prototype.n = 1;
+var b = new A();
+A.prototype = {
+	n: 2,
+	m: 3,
+};
+var c = new A();
+
+console.log(b.n);
+console.log(b.m);
+
+console.log(c.n);
+console.log(c.m);
+
+// 作者：jsliang
+// 链接：https://juejin.cn/post/6844903782229213197
+// 来源：掘金
+// 著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
+```
+
+这道题看上去是原型链的题目，实际上主要是引用对象赋值问题。
+
+假设最开始 A.prototype 指向的对象地址为`X001`。
+
+那`var b = new A()`时，由于引用对象赋值的关系，`b.__proto__`也指向了`X001`。
+
+随后又将另一个对象赋值给 A.prototype，此时 A.prototype 指向的对象地址可能为`X002`。
+
+要注意不管`A.prototype`指向谁，`b.__proto__`都指向`X001`地址的对象。
+
+当执行`var c = new A()`时，`c.__proto__`指向`X002`。
+
 > -   🔥[图解原型和原型链 —— JS 菌](https://juejin.cn/post/6844903797039300615)
-> -   [JS 原型与原型链 —— jsliang](https://juejin.cn/post/6844903782229213197)
-> -   [原型与原型链 2 —— jsliang](https://juejin.cn/post/6890716797436166152)
+> -   [原型与原型链 —— jsliang](https://juejin.cn/post/6890716797436166152)
 > -   [js 原型及原型链 —— 菜鸡小前端](https://juejin.cn/post/6844904093828251662)

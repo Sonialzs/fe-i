@@ -118,8 +118,8 @@
 						escapeRegex
 					) {
 						if (val === true || val === false) return '' + val;
-						
-						// if (val === undefined) return 'undefined';
+
+						if (val === undefined) return 'undefined';
 						if (val === null) return 'null';
 
 						const typeOf = typeof val;
