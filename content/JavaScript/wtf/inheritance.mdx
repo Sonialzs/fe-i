@@ -150,7 +150,7 @@ s1.whoami() // 我是lilith，今年20
 
 ## 组合继承
 
-组合继承=原型链继承+盗用继承
+组合继承=原型链继承+盗用构造函数
 
 原型链继承可以实现访问父类原型的方法，而盗用继承可以解决子类向父类传参的问题。组合继承就是将这两点结合起来。
 
@@ -230,7 +230,41 @@ console.log(person2.friends); // ["daisy", "kelly", "taylor"]
 
 ## 寄生式继承
 
+寄生式继承类似于工厂模式：创建一个实现继承的函数，增强新对象，然后返回该对象。
+
+```js
+function createObj(o) {
+	const clone = Object.create(o);
+	o.sayHi = function () {
+		console.log('hi');
+	};
+	return clone;
+}
+```
+
+寄生式继承最大问题还是每次创建对象都会创建一遍方法。
+
 ## 寄生组合式继承
+
+在组合式继承中，通过对构造函数的两次调用，分别实现属性和函数的继承。
+
+```js
+function Student(name, age) {
+	// 继承属性
+	People.call(this, name, age);
+}
+
+// 继承方法
+Student.prototype = new People();
+```
+
+在继承方法时，调用 `new People()`时会创建一个 `People` 的实例，将该实例作为 `Student.prototype` 的原型。此时 `Student.prototype` 中除了 `whoami` 方法之外，还会有 `name`和`age`属性。
+
+需要对这一步进行优化。
+
+思路是，让 `Student.prototype = People.prototype`。
+
+TODO
 
 > -   [JavaScript 深入之继承的多种方式和优缺点](https://github.com/mqyqingfeng/Blog/issues/16)
 > -   [JavaScript 高级程序设计 第四版 8.3 继承](https://www.ituring.com.cn/book/2472)
