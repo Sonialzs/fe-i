@@ -29,14 +29,15 @@ export default function KlipseRender({
 			s.id = id;
 			document.body.appendChild(s);
 		}
-		addScript('/js/klipse_plugin.min.js', 'klipse-script');
+		addScript('/js/klipse/klipse_plugin.min.js', 'klipse-script');
 		// @ts-ignore
 		window.klipse_settings = {
 			selector_eval_js: '.language-klipse-eval-js', // css selector for the html elements you want to klipsify
 			// ! 因为无法修改CodeMirror生成的样式，所以暂时弃用CodeMirror
 			editor_type: 'dom',
 			// 禁止从github加载pretty_format.js，会导致阻塞
-			no_dynamic_scripts: true,
+			no_dynamic_scripts: false,
+			scripts_root: '/js/klipse',
 		};
 	}, []);
 
